@@ -1,6 +1,8 @@
 downloaded_files/
 latest_logs/
 test-artifacts/
+SurVigilance/ui/pages/data
+SurVigilance/ui/pages/downloaded_files
 
 # OS
 .DS_Store
