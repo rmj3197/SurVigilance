@@ -1,11 +1,11 @@
-import streamlit as st
 import importlib
-import re
 import os
+import re
+import sys
+from pathlib import Path
 from typing import Optional
 
-from pathlib import Path
-import sys
+import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -75,7 +75,7 @@ st.session_state.setdefault(
 _progress_state = {"value": 0.0}  # Track progress across events in a simple dict
 
 
-def streamlit_callback(event: dict) -> None:
+def streamlit_callback(event: dict) -> None:  # pragma: no cover
     """Simple callback used by the scraper to update the UI.
 
     It handles progress updates, logs, and errors in a user-friendly way.

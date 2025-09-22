@@ -5,10 +5,11 @@ Scraper for FAERS using SeleniumBase.
 import os
 import warnings
 from typing import Any, Callable, Optional
-import pandas as pd
-from seleniumbase import SB
-import requests
 from urllib.parse import urlparse
+
+import pandas as pd
+import requests
+from seleniumbase import SB
 
 warnings.filterwarnings("ignore")
 

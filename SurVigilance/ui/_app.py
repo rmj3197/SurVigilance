@@ -2,12 +2,13 @@
 This script is the entry point of the streamlit application. 
 """
 
-import streamlit as st
-import time
 import os
 import platform
-import subprocess
 import shutil
+import subprocess
+import time
+
+import streamlit as st
 
 st.set_page_config(
     page_title="SurVigilance: The Pharmacovigilance Data Mart", layout="wide"

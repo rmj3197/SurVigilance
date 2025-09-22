@@ -1,9 +1,9 @@
-import streamlit as st
 import importlib
 import os
-
-from pathlib import Path
 import sys
+from pathlib import Path
+
+import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -141,7 +141,7 @@ if selected:
 
         for y in selected_years_sorted:
             fname = f"{y}VAERSData.zip"
-            with st.status(f"Preparing {fname}...", expanded=True) as st_status:
+            with st.status(f"Preparing {fname}", expanded=True) as st_status:
                 pbar = st.progress(0)
                 st.session_state["_vaers_download_progress"] = 0
                 try:
@@ -150,7 +150,7 @@ if selected:
                         et = evt.get("type")
                         if et == "download_start":
                             st_status.update(
-                                label=f"Downloading {fname}...", state="running"
+                                label=f"Downloading {fname}", state="running"
                             )
                             st.session_state["_vaers_current_file_percent"] = 0
                         elif et == "download_progress":

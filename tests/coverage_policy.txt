@@ -6,3 +6,4 @@ Coverage Policy for using # pragma: no cover and other details
 - Therefore, we exclude specific lines of code from coverage where executing them meaningfully requires live sites/GUI. 
 - Additionally, for scenarios where button for switching streamlit pages are present, we use # pragma: no cover, as streamlit testing (AppTest) only supports testing a single page of an app per instance. For multipage apps, each page will need to be tested separately. 
   AppTest is not yet compatible with multipage apps using st.navigation and st.Page. For details please see https://docs.streamlit.io/develop/api-reference/app-testing/st.testing.v1.apptest. 
+- streamlit_callback is also excluded as failure status cannot be replicated here. 

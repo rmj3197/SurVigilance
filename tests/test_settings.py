@@ -1,5 +1,5 @@
-# test_ui.py
 from unittest.mock import patch
+
 from SurVigilance.ui import UI
 
 

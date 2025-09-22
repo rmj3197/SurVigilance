@@ -1,6 +1,7 @@
-from pathlib import Path
 import re
-from setuptools import setup, find_packages
+from pathlib import Path
+
+from setuptools import find_packages, setup
 
 NAME = "SurVigilance"
 DESCRIPTION = "SurVigilance: An application to collect pharmacovigilance data from multiple safety databases."

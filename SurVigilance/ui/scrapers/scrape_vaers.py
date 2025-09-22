@@ -5,8 +5,9 @@ Downloader for VAERS yearly ZIPs.
 import os
 import shutil
 from typing import Any, Callable, Optional
-from seleniumbase import SB
+
 import requests
+from seleniumbase import SB
 
 
 def vaers_intermediate_url(year: int) -> str:  # pragma: no cover

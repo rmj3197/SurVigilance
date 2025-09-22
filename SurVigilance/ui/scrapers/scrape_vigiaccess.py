@@ -2,12 +2,12 @@
 Scraper for VigiAccess using SeleniumBase.
 """
 
-from seleniumbase import SB
-
 import os
 import warnings
 from typing import Any, Callable, Optional
+
 import pandas as pd
+from seleniumbase import SB
 
 warnings.filterwarnings("ignore")
 

@@ -1,9 +1,9 @@
-import streamlit as st
 import importlib
 import os
-
-from pathlib import Path
 import sys
+from pathlib import Path
+
+import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -63,7 +63,7 @@ table_box = st.empty()
 _progress_state = {"value": 0.0}
 
 
-def streamlit_callback(event: dict) -> None:
+def streamlit_callback(event: dict) -> None:  # pragma: no cover
     etype = event.get("type")
     if etype == "progress":
         delta = float(event.get("delta", 0.0))
