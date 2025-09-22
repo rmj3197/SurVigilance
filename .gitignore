@@ -38,3 +38,14 @@ venv/
 
 # Misc
 scripts/*
+docs/build/*
+ 
+# Docs (Sphinx-generated)
+docs/_build/
+docs/build/
+docs/source/_build/
+docs/source/_autosummary/
+docs/_autosummary/
+docs/source/api_reference/generated/
+docs/.doctrees/
+docs/source/.doctrees/
