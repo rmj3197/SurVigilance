@@ -1,0 +1,7 @@
+[run]
+branch = True
+source =
+    SurVigilance
+omit =
+    SurVigilance/ui/scrapers/scrape_vaers.py
+    SurVigilance/ui/pages/search_page_vaers.py

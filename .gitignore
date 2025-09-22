@@ -1,0 +1,38 @@
+downloaded_files/
+latest_logs/
+test-artifacts/
+
+# OS
+.DS_Store
+
+# Python caches and artifacts
+__pycache__/
+*.pyc
+.ruff_cache
+.pytest_cache/
+.pycache_temp
+*.egg-info/
+
+# Build outputs
+build/*
+dist/*
+*.spec
+
+# Data
+data/*
+
+# Coverage reports
+.coverage
+.coverage.*
+coverage.xml
+
+# Editor and env
+.vscode/
+.idea/
+.venv/
+venv/
+.env
+.env.*
+
+# Misc
+scripts/*
