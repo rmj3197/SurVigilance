@@ -27,29 +27,29 @@ def download_vaers_zip_sb(
 
     Parameters
     -----------
-        year: int
-            Year of the VAERS data
+    year: int
+        Year of the VAERS data
 
-        download_dir: str
-            Directory to save the ZIP (default "data/vaers")
+    download_dir: str
+        Directory to save the ZIP (default "data/vaers")
 
-        timeout: int
-            Max seconds for the file download request (default 600s or 10 mins).
+    timeout: int
+        Max seconds for the file download request (default 600s or 10 mins).
 
-        callback: callable, optional
-            Callable to receive UI/status events, called with a dict.
-            This is essential to show progress to user.
+    callback: callable, optional
+        Callable to receive UI/status events, called with a dict.
+        This is essential to show progress to user.
 
-        headless: bool
-            Run the browser in headless mode (default True).
+    headless: bool
+        Run the browser in headless mode (default True).
 
-        fallback_wait: Seconds to wait for a browser-initiated download to
-            complete in browser default folder if the "Download File" button
-            isn't found in time.
+    fallback_wait: Seconds to wait for a browser-initiated download to
+        complete in browser default folder if the "Download File" button
+        isn't found in time.
 
     Returns
     --------
-        The full path of the downloaded ZIP file.
+    The full path of the downloaded ZIP file.
     """
 
     if requests is None:

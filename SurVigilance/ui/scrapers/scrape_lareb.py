@@ -19,25 +19,26 @@ def scrape_lareb_sb(
     headless: bool = True,
 ) -> pd.DataFrame:
     """
-    Scrapes Preferred Terms and counts for a given medicine.
+    Scrapes the reported MedDRA Preferred Terms and counts for a given medicine.
 
     Parameters
     -----------
-        medicine : str
-            Drug/medicine name to search.
+    medicine : str
+        Drug/medicine name to search.
 
-        output_dir : str
-            Directory to save CSV (default "data/lareb").
+    output_dir : str
+        Directory to save CSV (default "data/lareb").
 
-        callback : callable
-            Callable to receive UI/status events, called with a dict.
-            This is essential to show progress to user.
+    callback : callable
+        Callable to receive UI/status events, called with a dict.
+        This is essential to show progress to user.
 
-        headless: bool
-            Run the browser in headless mode (default True).
+    headless: bool
+        Run the browser in headless mode (default True).
 
-    Returns:
-        pd.DataFrame: A dataframe with columns ["PT", "Count"].
+    Returns
+    --------
+    A dataframe with columns ["PT", "Count"].
     """
 
     def _emit(event_type: str, **kw: Any) -> None:  # pragma: no cover

@@ -20,24 +20,25 @@ def scrape_faers_sb(
     callback: Optional[Callable[[dict], None]] = None,
 ) -> pd.DataFrame:
     """
-    Scrapes all available years and their quarters from the FAERS dashboard.
+    Scrapes all available years and associated quarters from the FAERS 
+    website for which data is available.
 
     Parameters
-    ----------
-        output_dir: Directory to save CSV (default "data/faers").
-            headless: Run the browser in headless mode (default True).
+    -----------
+    output_dir: Directory to save CSV (default "data/faers").
+        headless: Run the browser in headless mode (default True).
 
-        headless: bool
-            Run the browser in headless mode (default True).
+    headless: bool
+        Run the browser in headless mode (default True).
 
-        callback : callable
-            Callable to receive UI/status events, called with a dict.
-            This is essential to show progress to user.
+    callback : callable
+        Callable to receive UI/status events, called with a dict.
+        This is essential to show progress to user.
 
     Returns
     --------
-        DataFrame with columns ["Year", "Quarter"], representing the
-        quarters in each year for which data is available.
+    A DataFrame with columns ["Year", "Quarter"], representing the
+    quarters in each year for which data is available.
     """
 
     def _emit(event_type: str, **kw: Any) -> None:  # pragma: no cover

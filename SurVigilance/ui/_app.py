@@ -1,5 +1,5 @@
 """
-This script is the entry point of the streamlit application. 
+This script is the entry point of the streamlit application.
 """
 
 import os

@@ -23,21 +23,22 @@ def scrape_vigiaccess_sb(
 
     Parameters
     -----------
-        medicine : str
-            Drug/medicine name to search.
+    medicine : str
+        Drug/medicine name to search.
 
-        output_dir : str
-            Directory to save CSV (default "data/vigiaccess").
+    output_dir : str
+        Directory to save CSV (default "data/vigiaccess").
 
-        callback : callable
-            Callable to receive UI/status events, called with a dict.
-            This is essential to show progress to user.
+    callback : callable
+        Callable to receive UI/status events, called with a dict.
+        This is essential to show progress to user.
 
-        headless: bool
-            Run the browser in headless mode (default True).
+    headless: bool
+        Run the browser in headless mode (default True).
 
-    Returns:
-        pd.DataFrame: A dataframe with columns ["ADR", "Count"].
+    Returns
+    --------
+    pd.DataFrame: A dataframe with columns ["ADR", "Count"].
     """
 
     def _emit(event_type: str, **kw: Any) -> None:  # pragma: no cover

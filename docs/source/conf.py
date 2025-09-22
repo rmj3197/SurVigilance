@@ -90,6 +90,7 @@ latex_documents = [
     )
 ]
 
+
 # Version warning to display on Read the Docs, this is taken from
 # https://github.com/qucontrol/krotov/blob/969fc980346e6411903de854118c48c51208a810/docs/conf.py#L321
 # Krotov Package

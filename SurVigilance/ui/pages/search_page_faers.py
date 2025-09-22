@@ -210,10 +210,6 @@ if df is not None:
                         if qlab.lower() in label_lower:
                             return int(qnum)
 
-                    for qnum, months in QUARTER_MONTHS.items():
-                        for mn in months:
-                            if mn.lower() in label_lower:
-                                return int(qnum)
                 except Exception:  # pragma: no cover
                     pass
                 return None
@@ -332,7 +328,7 @@ if df is not None:
                                 )  # Small confirmation after download is complete
                             except Exception:  # pragma: no cover
                                 pass
-                        if failures:
+                        if failures:  # pragma: no cover
                             st.error(f"Failed {len(failures)} file(s)")
                             for fname, msg in failures:
                                 st.error(f"{fname}: {msg}")
