@@ -13,7 +13,7 @@ if str(ROOT) not in sys.path:
 try:
     vaers_module = importlib.import_module("scrapers.scrape_vaers")
     download_vaers_zip_sb = vaers_module.download_vaers_zip_sb
-except Exception:
+except Exception:  # pragma: no cover
     download_vaers_zip_sb = None
 
 
@@ -156,7 +156,7 @@ if selected:
                         elif et == "download_progress":
                             try:
                                 pct = int(evt.get("percent", 0))
-                            except Exception:
+                            except Exception:  # pragma: no cover
                                 pct = st.session_state.get(
                                     "_vaers_download_progress", 0
                                 )
@@ -216,7 +216,7 @@ if selected:
                         int(st.session_state.get("_vaers_completed_files", 0)) + 1
                     )
                     st.session_state["_vaers_current_file_percent"] = 0
-                except Exception as e:
+                except Exception as e:  # pragma: no cover
                     st_status.update(label=f"Failed {fname}", state="error")
                     st.error(f"{fname}: {e}")
                     failures.append((fname, str(e)))
@@ -229,11 +229,11 @@ if selected:
             st.success(f"Downloaded {len(successes)} file(s) to {vaers_dir}")
             try:
                 st.toast("VAERS download(s) complete")
-            except Exception:
+            except Exception:  # pragma: no cover
                 pass
             try:
                 overall_bar.progress(100)
-            except Exception:
+            except Exception:  # pragma: no cover
                 pass
         if failures:
             st.error(f"Failed {len(failures)} file(s)")
@@ -242,6 +242,6 @@ if selected:
 
         st.session_state["_vaers_downloading"] = False
 
-
-if st.button("Go Back to Homepage", width="stretch"):
+# not limited support in streamlit testing to switch pages in a multipage app, causes issues
+if st.button("Go Back to Homepage", width="stretch"):  # pragma: no cover
     st.switch_page("_app.py")

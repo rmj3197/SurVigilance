@@ -44,7 +44,7 @@ def scrape_vigiaccess_sb(
         if callback:
             try:
                 callback({"type": event_type, **kw})
-            except Exception:
+            except Exception:  # pragma: no cover
                 pass
 
     os.makedirs(output_dir, exist_ok=True)
@@ -57,7 +57,7 @@ def scrape_vigiaccess_sb(
             _emit("log", message="Parsing vigiaccess.org")
             try:
                 sb.open("https://www.vigiaccess.org/")
-            except Exception as e:
+            except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed to open site: {e}")
                 raise
 
@@ -68,7 +68,7 @@ def scrape_vigiaccess_sb(
 
                 sb.type(".input", medicine)
                 sb.click(".button")
-            except Exception as e:
+            except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Search actions failed: {e}")
                 raise
 
@@ -77,14 +77,14 @@ def scrape_vigiaccess_sb(
                 sb.click("td")
 
                 sb.click_if_visible('//*[contains(text(), "Ok")]')
-            except Exception as e:
+            except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed entering results view: {e}")
                 raise
 
             groups_xpath = '//*[@id="elmish-app"]/div/section[2]/div/div[2]/ul/li'
             try:
                 sb.wait_for_element(groups_xpath, timeout=20)
-            except Exception as e:
+            except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Reaction groups list not found: {e}")
                 raise
 
@@ -93,7 +93,7 @@ def scrape_vigiaccess_sb(
                 total_groups = len(group_items)
                 if total_groups == 0:
                     _emit("log", message="No reaction groups found.")
-            except Exception:
+            except Exception:  # pragma: no cover
                 total_groups = 0
 
             for i in range(1, MAX_GROUPS + 1):
@@ -128,7 +128,7 @@ def scrape_vigiaccess_sb(
                     sb.hover(title_span)
                     sb.click(title_span)
 
-                except Exception as e:
+                except Exception as e:  # pragma: no cover
                     _emit("log", message=f"Group {i}: skipping due to error: {e}")
 
                 _emit("progress", delta=100.0 / MAX_GROUPS)
@@ -142,7 +142,7 @@ def scrape_vigiaccess_sb(
                 adr = line.rsplit("(", 1)[0].strip()
                 count = int(line.rsplit("(", 1)[1].split(")")[0])
                 data_map[adr] = count
-            except Exception:
+            except Exception:  # pragma: no cover
 
                 continue
 
@@ -154,12 +154,12 @@ def scrape_vigiaccess_sb(
         try:
             df.to_csv(output_csv_path, index=False)
             _emit("log", message=f"Data saved to: {output_csv_path}")
-        except Exception as e:
+        except Exception as e:  # pragma: no cover
             _emit("error", message=f"Failed to save CSV: {e}")
 
         _emit("done")
         return df
 
-    except Exception as e:
+    except Exception as e:  # pragma: no cover
         _emit("error", message=f"Fatal scraping error: {e}")
         raise

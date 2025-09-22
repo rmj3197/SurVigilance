@@ -43,7 +43,7 @@ def scrape_faers_sb(
         if callback:
             try:
                 callback({"type": event_type, **kw})
-            except Exception:
+            except Exception:  # pragma: no cover
 
                 pass
 
@@ -84,7 +84,7 @@ def scrape_faers_sb(
                         first_col.append(cell)
                 q_new[year] = first_col
                 _emit("progress", delta=delta_new)
-            except Exception:
+            except Exception:  # pragma: no cover
 
                 pass
 
@@ -123,7 +123,7 @@ def scrape_faers_sb(
                         first_col2.append(cell)
                 q_old[year] = first_col2
                 _emit("progress", delta=delta_old)
-            except Exception:
+            except Exception:  # pragma: no cover
 
                 pass
 
@@ -157,7 +157,7 @@ def scrape_faers_sb(
     try:
         df.attrs["faers_years_new_count"] = len(years_new)
         df.attrs["faers_years_old_count"] = len(years_old)
-    except Exception:
+    except Exception:  # pragma: no cover
 
         pass
 
@@ -201,7 +201,7 @@ def download_file(
         if callback:
             try:
                 callback(evt)
-            except Exception:
+            except Exception:  # pragma: no cover
                 pass
 
     u = str(url)
@@ -220,7 +220,7 @@ def download_file(
                     or r.headers.get("content-length")
                     or 0
                 )
-            except Exception:
+            except Exception:  # pragma: no cover
                 total_bytes = 0
 
             _emit(
@@ -256,6 +256,6 @@ def download_file(
         _emit({"type": "download_complete", "path": file_path, "filename": filename})
         return file_path
 
-    except Exception as e:
+    except Exception as e:  # pragma: no cover
         _emit({"type": "error", "message": str(e), "url": u})
         raise

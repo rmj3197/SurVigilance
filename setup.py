@@ -3,9 +3,7 @@ import re
 from setuptools import setup, find_packages
 
 NAME = "SurVigilance"
-DESCRIPTION = (
-    "SurVigilance: An application to collect pharmacovigilance data from multiple safety databases."
-)
+DESCRIPTION = "SurVigilance: An application to collect pharmacovigilance data from multiple safety databases."
 
 
 def read_version() -> str:

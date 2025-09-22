@@ -44,7 +44,7 @@ class UI:
         ]
         try:
             runpy.run_module("streamlit", run_name="__main__")
-        except SystemExit as e: # pragma: no cover
+        except SystemExit as e:  # pragma: no cover
             if e.code == 0:
                 pass
             else:

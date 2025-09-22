@@ -44,7 +44,7 @@ def scrape_lareb_sb(
         if callback:
             try:
                 callback({"type": event_type, **kw})
-            except Exception:
+            except Exception:  # pragma: no cover
                 pass
 
     os.makedirs(output_dir, exist_ok=True)
@@ -54,7 +54,7 @@ def scrape_lareb_sb(
             _emit("log", message="Parsing lareb.nl")
             try:
                 sb.open("https://www.lareb.nl/en")
-            except Exception as e:
+            except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed to open site: {e}")
                 raise
 
@@ -63,7 +63,7 @@ def scrape_lareb_sb(
                     sb.type("input.input-search", medicine)
                 else:
                     sb.type('[class*="input-search"]', medicine)
-            except Exception as e:
+            except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Error enountered while searching: {e}")
                 raise
 
@@ -71,7 +71,7 @@ def scrape_lareb_sb(
                 sb.wait_for_element_visible(
                     'div.autocomplete-suggestion[data-index="0"]', timeout=30
                 )
-            except Exception as e:
+            except Exception as e:  # pragma: no cover
                 _emit(
                     "error",
                     message=(
@@ -85,19 +85,19 @@ def scrape_lareb_sb(
 
             try:
                 sb.click("#search")
-            except Exception as e:
+            except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Couldn't click search button: {e}")
                 raise
 
             try:
                 sb.wait_for_element_visible("#registrationsTab", timeout=25)
-            except Exception as e:
+            except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Results area didn't load in time: {e}")
                 raise
 
             try:
                 rows = sb.find_elements('//*[@id="registrationsTab"]/table[2]/tbody/tr')
-            except Exception as e:
+            except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Couldn't find table: {e}")
                 raise
 
@@ -126,7 +126,7 @@ def scrape_lareb_sb(
                     if total_rows:
                         _emit("progress", delta=100.0 / total_rows)
 
-                except Exception as e:
+                except Exception as e:  # pragma: no cover
                     msg = f"Row {i}: expand failed: {e}"
                     _emit("error", message=msg)
                     expanded_texts.append("")
@@ -141,7 +141,7 @@ def scrape_lareb_sb(
                         data.append(
                             {"PT": condition.strip(), "Count": int(count.strip())}
                         )
-                    except ValueError:
+                    except ValueError:  # pragma: no cover
                         _emit(
                             "log",
                             message=f"Skipping malformed line in group {idx + 1}: {line}",
@@ -153,12 +153,12 @@ def scrape_lareb_sb(
             try:
                 df.to_csv(output_csv_path, index=False)
                 _emit("log", message=f"Data saved to: {output_csv_path}")
-            except Exception as e:
+            except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed to save CSV: {e}")
 
             _emit("done")
             return df
 
-    except Exception as e:
+    except Exception as e:  # pragma: no cover
         _emit("error", message=f"Fatal scraping error: {e}")
         raise

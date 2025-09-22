@@ -23,7 +23,7 @@ try:
 
     QUARTER_MONTHS = mapping_module.QUARTER_MONTHS
     QUARTER_LABELS = mapping_module.QUARTER_LABELS
-except Exception as e:
+except Exception as e:  # pragma: no cover
     st.error(f"Failed to import the FAERS scraper: {e}")
     st.stop()
 
@@ -114,7 +114,7 @@ if fetch:
             old_count = df.attrs.get("faers_years_old_count")
             if isinstance(new_count, int) and isinstance(old_count, int):
                 log_box.info(f"Found data for {new_count + old_count} years.")
-        except Exception:
+        except Exception:  # pragma: no cover
             pass
 
         if df is not None and not df.empty:
@@ -122,7 +122,7 @@ if fetch:
         else:
             st.session_state["faers_df"] = None
 
-    except Exception as e:
+    except Exception as e:  # pragma: no cover
         error_box.error(f"Data collection failed: {e}")
         status_box.error("Data collection aborted.")
 
@@ -214,7 +214,7 @@ if df is not None:
                         for mn in months:
                             if mn.lower() in label_lower:
                                 return int(qnum)
-                except Exception:
+                except Exception:  # pragma: no cover
                     pass
                 return None
 
@@ -241,7 +241,7 @@ if df is not None:
                             "filename": filename,
                         }
                     )
-                except Exception:
+                except Exception:  # pragma: no cover
                     continue
 
             if selections_with_urls:
@@ -281,7 +281,9 @@ if df is not None:
                             ) as st_status:
                                 pbar = st.progress(0)  # Progress for this single file
 
-                                def per_file_callback(evt: dict) -> None:
+                                def per_file_callback(
+                                    evt: dict,
+                                ) -> None:  # pragma: no cover
                                     # Handle per-file download progress/logs and errors.
                                     et = evt.get("type")
                                     if et == "download_start":
@@ -316,7 +318,7 @@ if df is not None:
                                         callback=per_file_callback,
                                     )
                                     successes.append(path)
-                                except Exception as _e:
+                                except Exception as _e:  # pragma: no cover
                                     failures.append((fname, str(_e)))
 
                     with download_overall_status.container():
@@ -328,13 +330,13 @@ if df is not None:
                                 st.toast(
                                     "FAERS download(s) complete"
                                 )  # Small confirmation after download is complete
-                            except Exception:
+                            except Exception:  # pragma: no cover
                                 pass
                         if failures:
                             st.error(f"Failed {len(failures)} file(s)")
                             for fname, msg in failures:
                                 st.error(f"{fname}: {msg}")
 
-
-if st.button("Go Back to Homepage", width="stretch"):
+# not limited support in streamlit testing to switch pages in a multipage app, causes issues
+if st.button("Go Back to Homepage", width="stretch"):  # pragma: no cover
     st.switch_page("_app.py")

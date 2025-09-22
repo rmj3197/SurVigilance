@@ -12,7 +12,7 @@ if str(ROOT) not in sys.path:
 try:
     scrape_lareb_module = importlib.import_module("scrapers.scrape_lareb")
     scrape_lareb_sb = scrape_lareb_module.scrape_lareb_sb
-except Exception as e:
+except Exception as e:  # pragma: no cover
     st.set_page_config(page_title="Search Page", layout="wide")
     st.error(f"Failed to import the scraper: {e}")
     st.stop()
@@ -103,10 +103,11 @@ if submitted:
                 table_box.dataframe(results, width="stretch")
             else:
                 table_box.info("No results returned.")
-        except Exception as e:
+        except Exception as e:  # pragma: no cover
             error_box.error(f"Data collection failed: {e}")
             status_box.error("Data collection aborted.")
 
 
-if st.button("Go Back to Homepage", width="stretch"):
+# not limited support in streamlit testing to switch pages in a multipage app, causes issues
+if st.button("Go Back to Homepage", width="stretch"):  # pragma: no cover
     st.switch_page("_app.py")

@@ -1,0 +1,8 @@
+Coverage Policy for using # pragma: no cover and other details
+
+- We do not test the VAERS portion of the app, since it is protected by a GUI captcha that cannot be handled through an API-based approach in pytest.
+- We intentionally avoid monkeypatching/mocking remote websites in tests. Mocked tests can pass even if the real site changes, hiding inconsistencies.
+- For scraping and UI flows that rely on a live website or real browser behavior, we prefer tests to fail when the website changes so we know to update our logic.
+- Therefore, we exclude specific lines of code from coverage where executing them meaningfully requires live sites/GUI. 
+- Additionally, for scenarios where button for switching streamlit pages are present, we use # pragma: no cover, as streamlit testing (AppTest) only supports testing a single page of an app per instance. For multipage apps, each page will need to be tested separately. 
+  AppTest is not yet compatible with multipage apps using st.navigation and st.Page. For details please see https://docs.streamlit.io/develop/api-reference/app-testing/st.testing.v1.apptest. 
