@@ -6,7 +6,7 @@ from pathlib import Path
 import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
-if str(ROOT) not in sys.path:
+if str(ROOT) not in sys.path:  # pragma: no cover
     sys.path.insert(0, str(ROOT))
 
 
@@ -109,7 +109,7 @@ if submitted:
             )
             if results is not None and not results.empty:
                 table_box.dataframe(results, width="stretch")
-            else:
+            else:  # pragma: no cover
                 table_box.info("No results returned.")
         except Exception as e:  # pragma: no cover
             error_box.error(f"Data collection failed: {e}")

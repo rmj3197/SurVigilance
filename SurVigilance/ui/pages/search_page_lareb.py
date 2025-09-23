@@ -6,7 +6,7 @@ from pathlib import Path
 import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
-if str(ROOT) not in sys.path:
+if str(ROOT) not in sys.path:  # pragma: no cover
     sys.path.insert(0, str(ROOT))
 
 try:

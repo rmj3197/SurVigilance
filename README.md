@@ -31,7 +31,7 @@ For downloading from Github, use the following instructions:
 
 ```bash
 git clone https://github.com/rmj3197/SurVigilance.git
-cd MDDC
+cd SurVigilance
 pip install -e .
 ```
 
@@ -48,4 +48,10 @@ The code of conduct can be found at [Code of Conduct](https://survigilance.readt
 This project uses the [GPL-3.0 license](https://github.com/rmj3197/SurVigilance/blob/main/LICENSE), with a full version of the license included in the repository.
 
 ## Funding Information
-The work has been supported by Kaleida Health Foundation.
+The work has been supported by Kaleida Health Foundation Award \# 82114.
+
+## Disclaimer
+
+- SurVigilance is not affiliated with, endorsed by, or supported by the administrators, maintainers, or owners of any safety databases it can access.
+- All database names and trademarks are the property of their respective owners.
+- We gratefully acknowledge the organizations that maintain the FAERS, VAERS, VigiAccess, and Lareb databases, whose efforts make these datasets publicly accessible.

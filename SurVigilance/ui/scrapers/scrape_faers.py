@@ -20,7 +20,7 @@ def scrape_faers_sb(
     callback: Optional[Callable[[dict], None]] = None,
 ) -> pd.DataFrame:
     """
-    Scrapes all available years and associated quarters from the FAERS 
+    Scrapes all available years and associated quarters from the FAERS
     website for which data is available.
 
     Parameters
