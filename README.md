@@ -21,6 +21,8 @@ Currently, SurVigilance suppots the following databases:
 
 ``pip install SurVigilance``
 
+Details on dependencies can be found in the [Installation Guide](https://survigilance.readthedocs.io/en/latest/getting_started/installation.html).
+
 ## Usage
 
 The easiest way to use SurVigilance to download data is by running the following lines of code: 
@@ -32,8 +34,6 @@ UI().run()
 ```
 
 This would instantiate a streamlit dashboard in browser, and you can use the graphical user interface to navigate between the various databases and download data. 
-
-Details on dependencies can be found in the [Installation Guide](getting_started/index.rst).
 
 ## Authors
 
