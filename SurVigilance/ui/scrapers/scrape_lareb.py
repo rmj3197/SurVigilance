@@ -46,7 +46,7 @@ def scrape_lareb_sb(
             try:
                 callback({"type": event_type, **kw})
             except Exception:  # pragma: no cover
-                pass
+                raise
 
     os.makedirs(output_dir, exist_ok=True)
 

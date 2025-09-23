@@ -138,7 +138,7 @@ try:
     )
     st.caption(f"Saving under: `{resolved}`")
 except Exception:
-    pass
+    raise
 
 st.subheader("Please select a Database to Search")
 

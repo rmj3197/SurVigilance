@@ -60,7 +60,7 @@ def download_vaers_zip_sb(
             try:
                 callback({"type": event_type, **kw})
             except Exception:  # pragma: no cover
-                pass
+                raise
 
     os.makedirs(download_dir, exist_ok=True)
 
@@ -72,15 +72,14 @@ def download_vaers_zip_sb(
         try:
             sb.set_downloads_folder(download_dir)
         except Exception:  # pragma: no cover
-            pass
+            raise
         sb.open(url)
 
         try:
             sb.uc_gui_click_captcha()
             _emit("log", message="Attempted CAPTCHA solve.")
         except Exception:  # pragma: no cover
-
-            pass
+            raise
 
         download_xpath = "//*[self::a or self::button][contains(., 'Download File')]"
         try:
@@ -109,13 +108,11 @@ def download_vaers_zip_sb(
                         target_path = os.path.join(download_dir, stray_name)
                         try:
                             if os.path.isfile(target_path):
-
                                 os.remove(stray_path)
                             else:
                                 shutil.move(stray_path, target_path)
                         except Exception:  # pragma: no cover
-
-                            pass
+                            raise
                         if os.path.isfile(target_path):
                             _emit(
                                 "download_complete",
@@ -125,8 +122,7 @@ def download_vaers_zip_sb(
                             return target_path
                     time.sleep(1)
             except Exception:  # pragma: no cover
-
-                pass
+                raise
 
         try:
             elem = sb.find_element(download_xpath)
@@ -157,7 +153,7 @@ def download_vaers_zip_sb(
             if isinstance(ua, str) and ua:
                 sess.headers.update({"User-Agent": ua})
         except Exception:  # pragma: no cover
-            pass
+            raise
 
         try:
             for c in sb.driver.get_cookies():
@@ -169,9 +165,9 @@ def download_vaers_zip_sb(
                         path=c.get("path"),
                     )
                 except Exception:  # pragma: no cover
-                    continue
+                    raise
         except Exception:  # pragma: no cover
-            pass
+            raise
 
         _emit("log", message="Starting VAERS data download")
         with sess.get(href, stream=True, timeout=timeout) as r:
@@ -212,7 +208,7 @@ def download_vaers_zip_sb(
                                 percent=percent,
                             )
                         except Exception:  # pragma: no cover
-                            pass
+                            raise
 
         _emit("download_complete", path=file_path, filename=filename)
 
@@ -227,14 +223,13 @@ def download_vaers_zip_sb(
                     try:
                         os.remove(stray_path)
                     except Exception:  # pragma: no cover
-                        pass
+                        raise
                 else:
                     os.makedirs(download_dir, exist_ok=True)
                     shutil.move(stray_path, target_path)
 
                     file_path = target_path
         except Exception:  # pragma: no cover
-
-            pass
+            raise
 
         return file_path

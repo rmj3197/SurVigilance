@@ -46,7 +46,7 @@ def scrape_vigiaccess_sb(
             try:
                 callback({"type": event_type, **kw})
             except Exception:  # pragma: no cover
-                pass
+                raise
 
     os.makedirs(output_dir, exist_ok=True)
 
@@ -143,7 +143,7 @@ def scrape_vigiaccess_sb(
                 count = int(line.rsplit("(", 1)[1].split(")")[0])
                 data_map[adr] = count
             except Exception:  # pragma: no cover
-                continue
+                raise
 
         df = pd.DataFrame(data_map.items(), columns=["PT", "Count"]).reset_index(
             drop=True

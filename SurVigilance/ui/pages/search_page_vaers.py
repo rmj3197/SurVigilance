@@ -234,11 +234,11 @@ if selected:
             try:
                 st.toast("VAERS download(s) complete")
             except Exception:  # pragma: no cover
-                pass
+                raise
             try:
                 overall_bar.progress(100)
             except Exception:  # pragma: no cover
-                pass
+                raise
         if failures:
             st.error(f"Failed {len(failures)} file(s)")
             for fname, msg in failures:
