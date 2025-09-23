@@ -19,7 +19,7 @@ def scrape_vigiaccess_sb(
     headless: bool = True,
 ) -> pd.DataFrame:
     """
-    Scrapes Preferred Terms and counts for a given medicine.
+    Scrapes the reported MedDRA Preferred Terms and counts for a given medicine from VigiAccess.
 
     Parameters
     -----------
@@ -63,7 +63,6 @@ def scrape_vigiaccess_sb(
                 raise
 
             try:
-
                 sb.click(".level-left")
                 sb.click(".level-right")
 
@@ -144,7 +143,6 @@ def scrape_vigiaccess_sb(
                 count = int(line.rsplit("(", 1)[1].split(")")[0])
                 data_map[adr] = count
             except Exception:  # pragma: no cover
-
                 continue
 
         df = pd.DataFrame(data_map.items(), columns=["PT", "Count"]).reset_index(

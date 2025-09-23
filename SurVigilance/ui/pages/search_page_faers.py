@@ -28,7 +28,11 @@ except Exception as e:  # pragma: no cover
     st.stop()
 
 
-st.set_page_config(page_title="FAERS", layout="wide")
+st.set_page_config(
+    page_title="FAERS",
+    layout="wide",
+    page_icon="SurVigilance/ui/assets/survigilance_sticker.ico",
+)
 
 
 st.session_state.setdefault(
@@ -336,3 +340,19 @@ if df is not None:
 # not limited support in streamlit testing to switch pages in a multipage app, causes issues
 if st.button("Go Back to Homepage", width="stretch"):  # pragma: no cover
     st.switch_page("_app.py")
+
+st.markdown(
+    r"""
+    <style>
+        .reportview-container {
+            margin-top: -2em;
+        }
+        #MainMenu {visibility: hidden;}
+        .stDeployButton {display: none;}
+        .stAppDeployButton {visibility: hidden;}
+        footer {visibility: hidden;}
+        #stDecoration {display: none;}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)

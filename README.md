@@ -1,4 +1,6 @@
-# Introduction
+# SurVigilance 
+<img src="https://drive.google.com/uc?export=view&id=1Ele-5-aLS2BU6ZV-hBXZ4WaO6rb_3NtF" align="right" height="138" alt="SurVigilance" />
+
 
 SurVigilance is designed to access and collect data from various safety databases located across the globe. The primary focus of this application is to provide an unified interface to researchers to access data on adverse events that may be associated the usage of pharmaceutical drugs or vaccines.
 

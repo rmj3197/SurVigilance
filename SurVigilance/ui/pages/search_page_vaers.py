@@ -17,7 +17,11 @@ except Exception:  # pragma: no cover
     download_vaers_zip_sb = None
 
 
-st.set_page_config(page_title="VAERS", layout="wide")
+st.set_page_config(
+    page_title="VAERS",
+    layout="wide",
+    page_icon="SurVigilance/ui/assets/survigilance_sticker.ico",
+)
 
 
 st.session_state.setdefault("data_root", "data")
@@ -245,3 +249,19 @@ if selected:
 # not limited support in streamlit testing to switch pages in a multipage app, causes issues
 if st.button("Go Back to Homepage", width="stretch"):  # pragma: no cover
     st.switch_page("_app.py")
+
+st.markdown(
+    r"""
+    <style>
+        .reportview-container {
+            margin-top: -2em;
+        }
+        #MainMenu {visibility: hidden;}
+        .stDeployButton {display: none;}
+        .stAppDeployButton {visibility: hidden;}
+        footer {visibility: hidden;}
+        #stDecoration {display: none;}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)

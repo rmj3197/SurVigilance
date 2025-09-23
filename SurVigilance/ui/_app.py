@@ -11,7 +11,9 @@ import time
 import streamlit as st
 
 st.set_page_config(
-    page_title="SurVigilance: The Pharmacovigilance Data Mart", layout="wide"
+    page_title="SurVigilance: The Pharmacovigilance Data Mart",
+    layout="wide",
+    page_icon="SurVigilance/ui/assets/survigilance_sticker.ico",
 )
 
 
@@ -182,3 +184,19 @@ with row2[1]:
         database_currently_searching = "LAREB"
         st.session_state["selected_database"] = database_currently_searching
         st.switch_page("pages/search_page_lareb.py")
+
+st.markdown(
+    r"""
+    <style>
+        .reportview-container {
+            margin-top: -2em;
+        }
+        #MainMenu {visibility: hidden;}
+        .stDeployButton {display: none;}
+        .stAppDeployButton {visibility: hidden;}
+        footer {visibility: hidden;}
+        #stDecoration {display: none;}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)

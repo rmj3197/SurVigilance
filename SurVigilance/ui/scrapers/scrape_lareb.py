@@ -19,7 +19,7 @@ def scrape_lareb_sb(
     headless: bool = True,
 ) -> pd.DataFrame:
     """
-    Scrapes the reported MedDRA Preferred Terms and counts for a given medicine.
+    Scrapes the reported MedDRA Preferred Terms and counts for a given medicine from Lareb.
 
     Parameters
     -----------
