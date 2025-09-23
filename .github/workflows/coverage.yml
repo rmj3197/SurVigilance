@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build:
-    name: Run pytest with cov (OS: ${{ matrix.os }} | Py: ${{ matrix.python }})
+    name: "Run pytest with cov (OS: ${{ matrix.os }} | Py: ${{ matrix.python }})"
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
