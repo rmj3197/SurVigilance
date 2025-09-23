@@ -3,13 +3,37 @@
 | Category          | Badge                                                                                                                                                                                                                                                                                                                                                              |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Usage**       | [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/rmj3197/SurVigilance/blob/master/LICENSE) [![Downloads](https://static.pepy.tech/badge/SurVigilance)](https://pepy.tech/project/SurVigilance)                                                                                                                                                                                                                                       |
-| **Release**         | ![PyPI - Version](https://img.shields.io/pypi/v/SurVigilance) [![Build and upload to PyPI](https://github.com/rmj3197/SurVigilance/actions/workflows/publish.yml/badge.svg)](https://github.com/rmj3197/SurVigilance/actions/workflows/publish.yml) [![Documentation Status](https://readthedocs.org/projects/mddc/badge/?version=latest)](https://mddc.readthedocs.io/en/latest/?badge=latest)                                                                                                                      |
+| **Release**         | ![PyPI - Version](https://img.shields.io/pypi/v/SurVigilance) [![Build and upload to PyPI](https://github.com/rmj3197/SurVigilance/actions/workflows/publish.yml/badge.svg)](https://github.com/rmj3197/SurVigilance/actions/workflows/publish.yml) [![Documentation Status](https://readthedocs.org/projects/survigilance/badge/?version=latest)](https://survigilance.readthedocs.io/en/latest/?badge=latest)                                                                                                                      |
 | **Development**  | [![codecov](https://codecov.io/gh/rmj3197/SurVigilance/graph/badge.svg?token=8Q6S051RSC)](https://codecov.io/gh/rmj3197/SurVigilance) [![CodeFactor](https://www.codefactor.io/repository/github/rmj3197/survigilance/badge)](https://www.codefactor.io/repository/github/rmj3197/survigilance) [![Ruff](https://github.com/rmj3197/SurVigilance/actions/workflows/ruff.yml/badge.svg)](https://github.com/rmj3197/SurVigilance/actions/workflows/ruff.yml) |
 
 
 ## Introduction
 
 SurVigilance is designed to access and collect data from various safety databases located across the globe. The primary focus of this application is to provide an unified interface to researchers to access data on adverse events that may be associated the usage of pharmaceutical drugs or vaccines.
+
+Currently, SurVigilance suppots the following databases: 
+- FAERS
+- VAERS
+- VigiAccess
+- Lareb
+
+## Installation using `pip`
+
+``pip install SurVigilance``
+
+## Usage
+
+The easiest way to use SurVigilance to download data is by running the following lines of code: 
+
+```py
+from SurVigilance.ui import UI
+
+UI().run()
+```
+
+This would instantiate a streamlit dashboard in browser, and you can use the graphical user interface to navigate between the various databases and download data. 
+
+Details on dependencies can be found in the [Installation Guide](getting_started/index.rst).
 
 ## Authors
 
@@ -27,10 +51,6 @@ Email: [raktimmu@buffalo.edu](mailto:raktimmu@buffalo.edu)
 ## Documentation
 
 The documentation is hosted on `Read the Docs` at - <https://survigilance.readthedocs.io/en/latest/>
-
-## Installation using `pip`
-
-``pip install SurVigilance``
 
 ## Community
 
