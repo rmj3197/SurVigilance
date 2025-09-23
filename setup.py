@@ -42,7 +42,6 @@ setup(
     install_requires=REQUIRES,
     packages=find_packages(),
     include_package_data=True,
-    # No explicit package_data for .py files; they are part of packages
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3 :: Only",

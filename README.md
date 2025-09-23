@@ -1,4 +1,4 @@
-# SurVigilance <img src="https://drive.usercontent.google.com/download?id=1Ele-5-aLS2BU6ZV-hBXZ4WaO6rb_3NtF&export=view&authuser=0" align="right" height="138" alt="SurVigilance" />
+# SurVigilance <img src="https://camo.githubusercontent.com/127ca8aea552bb4337259b0d67121cc14ffbfc8e4589e758e39f5bb757149024/68747470733a2f2f64726976652e75736572636f6e74656e742e676f6f676c652e636f6d2f646f776e6c6f61643f69643d31456c652d352d614c53324255365a562d6842585a3457614f3672625f334e7446266578706f72743d766965772661757468757365723d30" align="right" height="138" alt="SurVigilance" />
 
 ## Introduction
 

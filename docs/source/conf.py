@@ -47,6 +47,7 @@ myst_enable_extensions = [
     "strikethrough",
     "substitution",
     "tasklist",
+    "html_image"
 ]
 autosummary_generate = True
 
