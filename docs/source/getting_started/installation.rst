@@ -22,7 +22,7 @@ SurVigilance requires the following (arranged alphabetically):
 - `pandas <https://pandas.pydata.org/>`_ (>= 1.5.0)
 - `requests <https://requests.readthedocs.io/>`_ (>= 2.28.0)
 - `seleniumbase <https://seleniumbase.io>`_ (>= 4.0.0)
-- `streamlit <https://streamlit.io/>`_ (>= 1.30)
+- `streamlit <https://streamlit.io/>`_ (>= 1.49.1)
 
 Note: SeleniumBase manages the appropriate WebDriver automatically for Chrome.
 
