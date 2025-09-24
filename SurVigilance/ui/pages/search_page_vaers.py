@@ -124,8 +124,6 @@ if selected:
             )
             * 100
         )
-        btn_label = f"Downloading data {overall_pct}%"
-        st.button(btn_label, width="stretch", disabled=True)
         st.progress(overall_pct)
         triggered = False
     else:
@@ -133,112 +131,104 @@ if selected:
         triggered = st.button(btn_label, width="stretch")
 
     if triggered:
-
         st.session_state["_vaers_downloading"] = True
         st.session_state["_vaers_total_files"] = total_files
         st.session_state["_vaers_completed_files"] = 0
         st.session_state["_vaers_current_file_percent"] = 0
-        st.button("Downloading data", width="stretch", disabled=True)
+
         overall_bar = st.progress(0)
+
         successes = []
         failures = []
 
         for y in selected_years_sorted:
             fname = f"{y}VAERSData.zip"
-            with st.status(f"Preparing {fname}", expanded=True) as st_status:
-                pbar = st.progress(0)
-                st.session_state["_vaers_download_progress"] = 0
-                try:
 
-                    def cb(evt: dict) -> None:
-                        et = evt.get("type")
-                        if et == "download_start":
-                            st_status.update(
-                                label=f"Downloading {fname}", state="running"
-                            )
-                            st.session_state["_vaers_current_file_percent"] = 0
-                        elif et == "download_progress":
-                            try:
-                                pct = int(evt.get("percent", 0))
-                            except Exception:  # pragma: no cover
-                                pct = st.session_state.get(
-                                    "_vaers_download_progress", 0
-                                )
-                            pbar.progress(max(0, min(100, pct)))
+            status_box = st.empty()
+            status_box.info(f"Preparing {fname}...")
 
-                            st.session_state["_vaers_current_file_percent"] = max(
-                                0, min(100, int(pct))
-                            )
+            try:
 
-                            completed = st.session_state.get(
-                                "_vaers_completed_files", 0
-                            )
-                            overall_pct = int(
+                def cb(evt: dict) -> None:
+                    et = evt.get("type")
+
+                    if et == "download_start":
+                        status_box.info(f"Downloading {fname}...")
+                        st.session_state["_vaers_current_file_percent"] = 0
+
+                    elif et == "download_progress":
+                        try:
+                            pct = int(evt.get("percent", 0))
+                        except Exception:  # pragma: no cover
+                            pct = 0
+
+                        st.session_state["_vaers_current_file_percent"] = max(
+                            0, min(100, pct)
+                        )
+
+                        status_box.info(
+                            f"Downloading {fname}… {st.session_state['_vaers_current_file_percent']}%"
+                        )
+
+                        completed = st.session_state.get("_vaers_completed_files", 0)
+                        overall_pct = int(
+                            (
                                 (
-                                    (
-                                        completed
-                                        + (
-                                            st.session_state[
-                                                "_vaers_current_file_percent"
-                                            ]
-                                            / 100.0
-                                        )
+                                    completed
+                                    + (
+                                        st.session_state["_vaers_current_file_percent"]
+                                        / 100.0
                                     )
-                                    / max(1, st.session_state["_vaers_total_files"])
                                 )
-                                * 100
+                                / max(1, st.session_state["_vaers_total_files"])
                             )
-                            overall_bar.progress(overall_pct)
-                        elif et == "download_complete":
-                            pbar.progress(100)
-                            st.session_state["_vaers_current_file_percent"] = 100
-                            completed = st.session_state.get(
-                                "_vaers_completed_files", 0
+                            * 100
+                        )
+                        overall_bar.progress(overall_pct)
+
+                    elif et == "download_complete":
+                        st.session_state["_vaers_current_file_percent"] = 100
+                        completed = st.session_state.get("_vaers_completed_files", 0)
+                        overall_pct = int(
+                            (
+                                (completed + 1)
+                                / max(1, st.session_state["_vaers_total_files"])
                             )
-                            overall_pct = int(
-                                (
-                                    (completed + 1)
-                                    / max(1, st.session_state["_vaers_total_files"])
-                                )
-                                * 100
-                            )
-                            overall_bar.progress(min(100, overall_pct))
+                            * 100
+                        )
+                        overall_bar.progress(min(100, overall_pct))
+                        status_box.success(f"Downloaded {fname}")
 
-                    path = download_vaers_zip_sb(
-                        y,
-                        download_dir=vaers_dir,
-                        timeout=600,
-                        callback=cb,
-                        headless=False,
-                    )
+                path = download_vaers_zip_sb(
+                    y,
+                    download_dir=vaers_dir,
+                    timeout=600,
+                    callback=cb,
+                    headless=False,
+                )
 
-                    pbar.progress(100)
-                    st_status.update(label=f"Downloaded {fname}", state="complete")
-                    successes.append(path)
+                successes.append(path)
 
-                    st.session_state["_vaers_completed_files"] = (
-                        int(st.session_state.get("_vaers_completed_files", 0)) + 1
-                    )
-                    st.session_state["_vaers_current_file_percent"] = 0
-                except Exception as e:  # pragma: no cover
-                    st_status.update(label=f"Failed {fname}", state="error")
-                    st.error(f"{fname}: {e}")
-                    failures.append((fname, str(e)))
-                finally:
+                st.session_state["_vaers_completed_files"] = (
+                    int(st.session_state.get("_vaers_completed_files", 0)) + 1
+                )
+                st.session_state["_vaers_current_file_percent"] = 0
 
-                    pct = st.session_state.get("_vaers_download_progress", 0)
-                    pbar.progress(max(0, min(100, int(pct))))
+            except Exception as e:  # pragma: no cover
+                status_box.error(f"Failed {fname}: {e}")
+                failures.append((fname, str(e)))
 
         if successes:
             st.success(f"Downloaded {len(successes)} file(s) to {vaers_dir}")
             try:
                 st.toast("VAERS download(s) complete")
             except Exception:  # pragma: no cover
-                raise
+                pass
             try:
                 overall_bar.progress(100)
             except Exception:  # pragma: no cover
-                raise
+                pass
+
         if failures:
             st.error(f"Failed {len(failures)} file(s)")
             for fname, msg in failures:
@@ -246,7 +236,7 @@ if selected:
 
         st.session_state["_vaers_downloading"] = False
 
-# not limited support in streamlit testing to switch pages in a multipage app, causes issues
+# limited support in streamlit testing to switch pages in a multipage app, causes issues
 if st.button("Go Back to Homepage", width="stretch"):  # pragma: no cover
     st.switch_page("_app.py")
 

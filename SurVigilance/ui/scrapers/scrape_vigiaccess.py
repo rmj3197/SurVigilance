@@ -57,14 +57,18 @@ def scrape_vigiaccess_sb(
         with SB(uc=True, headless=headless) as sb:
             _emit("log", message="Parsing vigiaccess.org")
             try:
-                sb.open("https://www.vigiaccess.org/")
+                url = "https://www.vigiaccess.org/"
+                sb.activate_cdp_mode(url)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed to open site: {e}")
                 raise
 
             try:
-                sb.click(".level-left")
-                sb.click(".level-right")
+                # sb.cdp.click(".level-left")
+                sb.cdp.check_if_unchecked('//*[@id="accept-terms-and-conditions"]')
+                sb.cdp.click(
+                    '//*[@id="elmish-app"]/section/div/div[2]/nav/div[2]/div/button'
+                )
 
                 sb.type(".input", medicine)
                 sb.click(".button")
@@ -73,23 +77,25 @@ def scrape_vigiaccess_sb(
                 raise
 
             try:
-                sb.wait_for_element("td", timeout=20)
-                sb.click("td")
+                sb.cdp.wait_for_element_visible("td", timeout=20)
+                sb.cdp.click("td")
 
-                sb.click_if_visible('//*[contains(text(), "Ok")]')
+                sb.cdp.click_if_visible(
+                    '//*[@id="elmish-app"]/div/section[1]/div/div/div[1]/div[2]/footer/button'
+                )
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed entering results view: {e}")
                 raise
 
             groups_xpath = '//*[@id="elmish-app"]/div/section[2]/div/div[2]/ul/li'
             try:
-                sb.wait_for_element(groups_xpath, timeout=20)
+                sb.cdp.wait_for_element_visible(groups_xpath, timeout=20)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Reaction groups list not found: {e}")
                 raise
 
             try:
-                group_items = sb.find_elements(groups_xpath)
+                group_items = sb.cdp.find_elements(groups_xpath)
                 total_groups = len(group_items)
                 if total_groups == 0:
                     _emit("log", message="No reaction groups found.")
@@ -101,32 +107,32 @@ def scrape_vigiaccess_sb(
                     title_span = f'//*[@id="elmish-app"]/div/section[2]/div/div[2]/ul/li[{i}]/span[1]'
                     expander_span = f'//*[@id="elmish-app"]/div/section[2]/div/div[2]/ul/li[{i}]/span[2]'
 
-                    if not sb.is_element_present(title_span):
+                    if not sb.cdp.is_element_present(title_span):
                         continue
 
-                    sb.hover(title_span)
-                    sb.click(expander_span)
+                    sb.cdp.gui_hover_element(title_span)
+                    sb.cdp.click(expander_span)
 
                     sb.sleep(0.5)
 
-                    while sb.is_element_visible(
+                    while sb.cdp.is_element_visible(
                         'xpath=//*[contains(text(), "Load more...")]'
                     ):
-                        sb.click('//*[contains(text(), "Load more...")]')
+                        sb.cdp.click('//*[contains(text(), "Load more...")]')
                         sb.sleep(0.5)
 
                     entries_xpath = (
                         '//*[@id="elmish-app"]/div/section[2]/div/div[2]/ul/ul/li'
                     )
-                    if sb.is_element_visible(entries_xpath):
-                        entries = sb.find_elements(entries_xpath)
+                    if sb.cdp.is_element_visible(entries_xpath):
+                        entries = sb.cdp.find_elements(entries_xpath)
                         for el in entries:
                             txt = (el.text or "").strip()
                             if txt:
                                 collected_lines.append(txt)
 
-                    sb.hover(title_span)
-                    sb.click(title_span)
+                    sb.cdp.gui_hover_element(title_span)
+                    sb.cdp.click(title_span)
 
                 except Exception as e:  # pragma: no cover
                     _emit("log", message=f"Group {i}: skipping due to error: {e}")

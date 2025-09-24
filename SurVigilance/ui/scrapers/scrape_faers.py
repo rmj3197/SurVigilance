@@ -55,29 +55,29 @@ def scrape_faers_sb(
     q_old = {}
 
     with SB(uc=True, headless=headless) as sb:
-        sb.open(url)
+        sb.activate_cdp_mode(url)
 
         # This portion of the code accesses the newer years post Q4 2012 and finds the available quarters
-        sb.wait_for_element_visible("#accordion", timeout=30)
-        sb.click("#accordion")
+        sb.cdp.wait_for_element_visible("#accordion", timeout=30)
+        sb.cdp.click("#accordion")
 
-        year_elems1 = sb.find_elements("#accordion h4 a, #accordion .panel-title a")
+        year_elems1 = sb.cdp.find_elements("#accordion h4 a, #accordion .panel-title a")
         years_new = [e.text.strip() for e in year_elems1 if e.text and e.text.strip()]
         delta_new = 50.0 / max(1, len(years_new))
 
         for i, year in enumerate(years_new, start=1):
             try:
                 if i != 1:
-                    sb.click(f'//*[@id="accordion"]/div[{i}]/div[1]/h4/a')
+                    sb.cdp.click(f'//*[@id="accordion"]/div[{i}]/div[1]/h4/a')
                     sb.sleep(0.4)
 
                 tbody_xpath = f'//*[@id="collapse{year}"]/div/div/table/tbody'
-                sb.wait_for_element_visible(tbody_xpath, timeout=30)
-                tbody = sb.find_element(tbody_xpath)
-                rows = tbody.find_elements("tag name", "tr")
+                sb.cdp.wait_for_element_visible(tbody_xpath, timeout=30)
+                tbody = sb.cdp.find_element(tbody_xpath)
+                rows = tbody.query_selector_all("tr")
                 first_col: list[str] = []
                 for row in rows:
-                    tds = row.find_elements("tag name", "td")
+                    tds = row.query_selector_all("td")
                     if not tds:
                         continue
                     cell = (tds[0].text or "").strip()
@@ -90,32 +90,34 @@ def scrape_faers_sb(
 
         # This portion of the code accesses the older years pre Q4 2012 and finds the available quarters
         older_btn = '//*[@id="older_accordion"]/div/div[1]/h4/a'
-        sb.wait_for_element_visible(older_btn, timeout=30)
-        sb.click(older_btn)
+        sb.cdp.wait_for_element_visible(older_btn, timeout=30)
+        sb.cdp.click(older_btn)
         sb.sleep(0.6)
 
         years_xpath = '//*[@id="older_accordion_years"]//h4/a'
-        sb.wait_for_element_visible(years_xpath, timeout=30)
-        elements = sb.find_elements(years_xpath)
+        sb.cdp.wait_for_element_visible(years_xpath, timeout=30)
+        elements = sb.cdp.find_elements(years_xpath)
         years_old = [el.text.strip() for el in elements if el.text and el.text.strip()]
         delta_old = 50.0 / max(1, len(years_old))
 
         for i, year in enumerate(years_old, start=1):
             try:
                 if i != 1:
-                    sb.click(f'//*[@id="older_accordion_years"]/div[{i}]/div[1]/h4/a')
+                    sb.cdp.click(
+                        f'//*[@id="older_accordion_years"]/div[{i}]/div[1]/h4/a'
+                    )
                     sb.sleep(0.4)
 
                 collapse_id = (
                     f"collapse{year}-2" if year == "2012" else f"collapse{year}"
                 )
                 tbody_xpath = f'//*[@id="{collapse_id}"]/div/div/table/tbody'
-                sb.wait_for_element_visible(tbody_xpath, timeout=30)
-                tbody = sb.find_element(tbody_xpath)
-                rows = tbody.find_elements("tag name", "tr")
+                sb.cdp.wait_for_element_visible(tbody_xpath, timeout=30)
+                tbody = sb.cdp.find_element(tbody_xpath)
+                rows = tbody.query_selector_all("tr")
                 first_col2: list[str] = []
                 for row in rows:
-                    tds = row.find_elements("tag name", "td")
+                    tds = row.query_selector_all("td")
                     if not tds:
                         continue
                     cell = (tds[0].text or "").strip()

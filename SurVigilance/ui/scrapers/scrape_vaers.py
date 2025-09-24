@@ -52,9 +52,6 @@ def download_vaers_zip_sb(
     The full path of the downloaded ZIP file.
     """
 
-    if requests is None:
-        raise RuntimeError("The 'requests' package is required but not available.")
-
     def _emit(event_type: str, **kw: Any) -> None:  # pragma: no cover
         if callback:
             try:
@@ -69,11 +66,12 @@ def download_vaers_zip_sb(
 
     with SB(uc=True, headless=headless) as sb:
 
-        try:
-            sb.set_downloads_folder(download_dir)
-        except Exception:  # pragma: no cover
-            raise
-        sb.open(url)
+        # try:
+        #     sb.set_downloads_folder(download_dir)
+        # except Exception:  # pragma: no cover
+        #     raise
+
+        sb.activate_cdp_mode(url)
 
         try:
             sb.uc_gui_click_captcha()
@@ -83,7 +81,7 @@ def download_vaers_zip_sb(
 
         download_xpath = "//*[self::a or self::button][contains(., 'Download File')]"
         try:
-            sb.wait_for_element_visible(download_xpath, timeout=60)
+            sb.cdp.wait_for_element_visible(download_xpath, timeout=60)
         except Exception:  # pragma: no cover
 
             try:
@@ -125,7 +123,7 @@ def download_vaers_zip_sb(
                 raise
 
         try:
-            elem = sb.find_element(download_xpath)
+            elem = sb.cdp.find_element(download_xpath)
         except Exception:  # pragma: no cover
             elem = None
         href = None
@@ -137,9 +135,9 @@ def download_vaers_zip_sb(
 
         if not href and elem is not None:
             try:
-                sb.click(download_xpath)
+                sb.cdp.click(download_xpath)
                 sb.sleep(1.0)
-                href = sb.get_current_url()
+                href = sb.cdp.get_current_url()
             except Exception:  # pragma: no cover
                 href = None
 
@@ -149,14 +147,14 @@ def download_vaers_zip_sb(
 
         sess = requests.Session()
         try:
-            ua = sb.execute_script("return navigator.userAgent") or ""
+            ua = sb.cdp.execute_script("return navigator.userAgent") or ""
             if isinstance(ua, str) and ua:
                 sess.headers.update({"User-Agent": ua})
         except Exception:  # pragma: no cover
             raise
 
         try:
-            for c in sb.driver.get_cookies():
+            for c in sb.cdp.driver.get_cookies():
                 try:
                     sess.cookies.set(
                         c.get("name"),

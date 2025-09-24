@@ -45,7 +45,7 @@ def scrape_lareb_sb(
         if callback:
             try:
                 callback({"type": event_type, **kw})
-            except Exception:  # pragma: no cover
+            except Exception:
                 raise
 
     os.makedirs(output_dir, exist_ok=True)
@@ -54,22 +54,23 @@ def scrape_lareb_sb(
         with SB(uc=True, headless=headless) as sb:
             _emit("log", message="Parsing lareb.nl")
             try:
-                sb.open("https://www.lareb.nl/en")
+                url = "https://www.lareb.nl/en"
+                sb.activate_cdp_mode(url)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed to open site: {e}")
                 raise
 
             try:
-                if sb.is_element_present("input.input-search"):
-                    sb.type("input.input-search", medicine)
+                if sb.cdp.is_element_present("input.input-search"):
+                    sb.cdp.type("input.input-search", medicine)
                 else:
-                    sb.type('[class*="input-search"]', medicine)
+                    sb.cdp.type('[class*="input-search"]', medicine)
             except Exception as e:  # pragma: no cover
-                _emit("error", message=f"Error enountered while searching: {e}")
+                _emit("error", message=f"Error encountered while searching: {e}")
                 raise
 
             try:
-                sb.wait_for_element_visible(
+                sb.cdp.wait_for_element_visible(
                     'div.autocomplete-suggestion[data-index="0"]', timeout=30
                 )
             except Exception as e:  # pragma: no cover
@@ -81,23 +82,21 @@ def scrape_lareb_sb(
                     ),
                 )
 
-            if sb.is_element_present('div.autocomplete-suggestion[data-index="0"]'):
-                sb.click('div.autocomplete-suggestion[data-index="0"]')
+            if sb.cdp.is_element_present('div.autocomplete-suggestion[data-index="0"]'):
+                sb.cdp.click_if_visible('div.autocomplete-suggestion[data-index="0"]')
 
             try:
-                sb.click("#search")
+                sb.cdp.click("#search")
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Couldn't click search button: {e}")
                 raise
 
             try:
-                sb.wait_for_element_visible("#registrationsTab", timeout=25)
-            except Exception as e:  # pragma: no cover
-                _emit("error", message=f"Results area didn't load in time: {e}")
-                raise
-
-            try:
-                rows = sb.find_elements('//*[@id="registrationsTab"]/table[2]/tbody/tr')
+                sb.cdp.wait_for_element_visible("#registrationsTab", timeout=25)
+                sb.cdp.wait_for_element_visible(
+                    "#registrationsTab tbody tr", timeout=20
+                )
+                rows = sb.cdp.find_elements("#registrationsTab tbody tr")
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Couldn't find table: {e}")
                 raise
@@ -107,22 +106,21 @@ def scrape_lareb_sb(
 
             for i, row in enumerate(rows, start=1):
                 try:
-                    sb.find_element(
-                        f'//*[@id="registrationsTab"]/table[2]/tbody/tr[{i}]/td/div[1]'
-                    ).click()
-
+                    expander = row.query_selector("td > div:nth-of-type(1)")
+                    if expander:
+                        expander.click()
                     sb.sleep(1)
-                    div2 = sb.find_element(
-                        f'//*[@id="registrationsTab"]/table[2]/tbody/tr[{i}]/td/div[2]'
-                    )
 
-                    for _ in range(10):
-                        if div2.is_displayed() and div2.text.strip():
-                            break
-                        sb.sleep(0.1)
+                    details = row.query_selector("td > div:nth-of-type(2)")
+                    if details:
+                        for _ in range(10):
+                            if details.text.strip():
+                                break
+                            sb.sleep(0.1)
 
-                    expanded_texts.append(div2.text.strip())
-                    sb.sleep(0.2)
+                        expanded_texts.append(details.text.strip())
+                    else:
+                        expanded_texts.append("")
 
                     if total_rows:
                         _emit("progress", delta=100.0 / total_rows)
