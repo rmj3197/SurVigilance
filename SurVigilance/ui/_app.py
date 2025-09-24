@@ -85,13 +85,13 @@ if st.button("Select Data Folder", width="stretch"):  # pragma: no cover
                     "$foldername = New-Object System.Windows.Forms.FolderBrowserDialog; "
                     "$foldername.Description = 'Please select data folder'; "
                     "$foldername.ShowNewFolderButton = $true; "
-                    "if ($foldername.ShowDialog() -eq OK) { "
+                    "if ($foldername.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) { "
                     "  [Console]::Out.Write($foldername.SelectedPath) "
                     "}"
                 )
                 # -Noprofile is used as customizations to poweshell are not loaded. See https://stackoverflow.com/questions/74471387/why-is-noprofile-pwsh-parameter-considered-safer
                 result = subprocess.run(
-                    ["powershell", "-NoProfile", "-Command", ps_script],
+                    ["powershell", "-NoProfile", "-STA", "-Command", ps_script],
                     capture_output=True,
                     text=True,
                     check=False,
