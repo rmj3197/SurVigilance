@@ -20,7 +20,7 @@ except Exception as e:  # pragma: no cover
 
 
 st.set_page_config(
-    page_title="VigiAccess Search",
+    page_title="Data access page for VigiAccess",
     layout="wide",
     page_icon="SurVigilance/ui/assets/survigilance_sticker.ico",
 )

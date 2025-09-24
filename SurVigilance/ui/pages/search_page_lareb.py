@@ -19,7 +19,7 @@ except Exception as e:  # pragma: no cover
 
 
 st.set_page_config(
-    page_title="Search Page",
+    page_title="Data access page for Lareb",
     layout="wide",
     page_icon="SurVigilance/ui/assets/survigilance_sticker.ico",
 )

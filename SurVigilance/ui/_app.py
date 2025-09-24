@@ -36,109 +36,101 @@ st.markdown(
 
 st.divider()
 
-
 st.subheader("Storage")
 
-st.session_state.setdefault("data_root", "data")
 
-
-current_root = st.session_state.get("data_root", "data")
-data_root_input = st.text_input(
-    "Data folder",
-    help="Folder where downloads and CSVs are saved. Defaults to 'data'.",
-    value=current_root,
-    key="data_root_input",
-)
-
-st.session_state["data_root"] = data_root_input or "data"
-
-# need to take out the visual directory picker from testing, as CI tools would fail.
-if st.button("Select Data Folder", width="stretch"):  # pragma: no cover
-
-    def pick_directory():
-        system = platform.system()
-
-        if system == "Darwin":  # Handles the data directory picker for macOS
+def pick_directory():  # pragma: no cover
+    system = platform.system()
+    if system == "Darwin":
+        try:
+            # subprocess executes directory picker in command line using AppleScript
+            # Directory picker references used from https://developer.apple.com/library/archive/documentation/LanguagesUtilities/Conceptual/MacAutomationScriptingGuide/PromptforaFileorFolder.html
+            result = subprocess.run(
+                [
+                    "osascript",
+                    "-e",
+                    'POSIX path of (choose folder with prompt "Please select data folder")',
+                ],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            return (result.stdout or "").strip() or None
+        except Exception:
+            return None
+    if system == "Windows":
+        try:
+            # Powershell script for directory picker is taken from https://stackoverflow.com/questions/25690038/how-do-i-properly-use-the-folderbrowserdialog-in-powershell
+            ps_script = (
+                "Add-Type -AssemblyName System.Windows.Forms; "
+                "$foldername = New-Object System.Windows.Forms.FolderBrowserDialog; "
+                "$foldername.Description = 'Please select data folder'; "
+                "$foldername.ShowNewFolderButton = $true; "
+                "if ($foldername.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) { "
+                "  [Console]::Out.Write($foldername.SelectedPath) "
+                "}"
+            )
+            # -Noprofile is used as customizations to poweshell are not loaded. See https://stackoverflow.com/questions/74471387/why-is-noprofile-pwsh-parameter-considered-safer
+            # Single Threaded Apartment (-STA) is needed for folder picker to work.
+            result = subprocess.run(
+                ["powershell", "-NoProfile", "-STA", "-Command", ps_script],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            return (result.stdout or "").strip() or None
+        except Exception:
+            return None
+    if system == "Linux":
+        # Linux directory picker is taken from - https://askubuntu.com/questions/488350/how-do-i-prompt-users-with-a-gui-dialog-box-to-choose-file-directory-path-via-t
+        zenity = shutil.which("zenity")
+        if zenity:
             try:
-                # subprocess executes directory picker in command line using AppleScript
-                # Directory picker references used from https://developer.apple.com/library/archive/documentation/LanguagesUtilities/Conceptual/MacAutomationScriptingGuide/PromptforaFileorFolder.html
                 result = subprocess.run(
                     [
-                        "osascript",
-                        "-e",
-                        'POSIX path of (choose folder with prompt "Please select data folder")',
+                        zenity,
+                        "--file-selection",
+                        "--directory",
+                        "--title=Please select data folder",
                     ],
                     capture_output=True,
                     text=True,
                     check=False,
                 )
-                path = (result.stdout or "").strip()
-                return path or None
+                return (result.stdout or "").strip() or None
             except Exception:
                 return None
+    return None
 
-        if system == "Windows":
-            try:
-                # Powershell script for directory picker is taken from https://stackoverflow.com/questions/25690038/how-do-i-properly-use-the-folderbrowserdialog-in-powershell
-                ps_script = (
-                    "Add-Type -AssemblyName System.Windows.Forms; "
-                    "$foldername = New-Object System.Windows.Forms.FolderBrowserDialog; "
-                    "$foldername.Description = 'Please select data folder'; "
-                    "$foldername.ShowNewFolderButton = $true; "
-                    "if ($foldername.ShowDialog() -eq [System.Windows.Forms.DialogResult]::OK) { "
-                    "  [Console]::Out.Write($foldername.SelectedPath) "
-                    "}"
-                )
-                # -Noprofile is used as customizations to poweshell are not loaded. See https://stackoverflow.com/questions/74471387/why-is-noprofile-pwsh-parameter-considered-safer
-                result = subprocess.run(
-                    ["powershell", "-NoProfile", "-STA", "-Command", ps_script],
-                    capture_output=True,
-                    text=True,
-                    check=False,
-                )
-                path = (result.stdout or "").strip()
-                return path or None
-            except Exception:
-                return None
 
-        if system == "Linux":
-            # Linux directory picker is taken from - https://askubuntu.com/questions/488350/how-do-i-prompt-users-with-a-gui-dialog-box-to-choose-file-directory-path-via-t
-            zenity = shutil.which("zenity")
-            if zenity:
-                try:
-                    result = subprocess.run(
-                        [
-                            zenity,
-                            "--file-selection",
-                            "--directory",
-                            "--title=Please select data folder",
-                        ],
-                        capture_output=True,
-                        text=True,
-                        check=False,
-                    )
-                    path = (result.stdout or "").strip()
-                    return path or None
-                except Exception:
-                    return None
-
-        return None
-
-    folder = pick_directory()
-    if folder:
-        st.session_state["data_root"] = folder
-        st.toast("Data folder updated")
-        st.rerun()
+def update_data_folder():
+    """Callback to open folder picker and update session state."""
+    folder_path = pick_directory()
+    if folder_path:
+        st.session_state.data_root = folder_path
+        # No st.rerun() is needed here; Streamlit reruns automatically after callbacks.
     else:
-        st.warning("Folder picker unavailable here. Please type the path manually.")
+        # This branch is optional, in case the user cancels the dialog.
+        st.toast("Folder selection cancelled.")
+
+
+st.session_state.setdefault("data_root", "data")
+
+
+st.text_input(
+    "Data folder",
+    help="Folder where downloads and CSVs are saved. Defaults to 'data'.",
+    key="data_root",
+)
+
+st.button("Select Data Folder", on_click=update_data_folder, width="stretch")
 
 try:
-    resolved = os.path.abspath(
-        os.path.expanduser(st.session_state.get("data_root", "data"))
-    )
+    resolved = os.path.abspath(os.path.expanduser(st.session_state.data_root))
     st.caption(f"Saving under: `{resolved}`")
 except Exception:
     raise
+
 
 st.subheader("Please select a Database to Search")
 
