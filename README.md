@@ -3,7 +3,7 @@
 | Category          | Badge                                                                                                                                                                                                                                                                                                                                                              |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Usage**       | [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/rmj3197/SurVigilance/blob/master/LICENSE) [![Downloads](https://static.pepy.tech/badge/SurVigilance)](https://pepy.tech/project/SurVigilance)                                                                                                                                                                                                                                       |
-| **Release**         | ![PyPI - Version](https://img.shields.io/pypi/v/SurVigilance) [![Build and upload to PyPI](https://github.com/rmj3197/SurVigilance/actions/workflows/publish.yml/badge.svg)](https://github.com/rmj3197/SurVigilance/actions/workflows/publish.yml) [![Documentation Status](https://readthedocs.org/projects/survigilance/badge/?version=latest)](https://survigilance.readthedocs.io/en/latest/?badge=latest)                                                                                                                      |
+| **Release**         | ![PyPI - Version](https://img.shields.io/pypi/v/SurVigilance) [![Build and upload to PyPI](https://github.com/rmj3197/SurVigilance/actions/workflows/publish.yml/badge.svg)](https://github.com/rmj3197/SurVigilance/actions/workflows/publish.yml) [![Netlify Documentation Status](https://api.netlify.com/api/v1/badges/e358958d-8ae8-4f45-9dbe-52849e2e71bc/deploy-status)](https://app.netlify.com/projects/survigilance/deploys)                                                                                                                      |
 | **Development**  | [![codecov](https://codecov.io/gh/rmj3197/SurVigilance/graph/badge.svg?token=8Q6S051RSC)](https://codecov.io/gh/rmj3197/SurVigilance) [![CodeFactor](https://www.codefactor.io/repository/github/rmj3197/survigilance/badge)](https://www.codefactor.io/repository/github/rmj3197/survigilance) [![Ruff](https://github.com/rmj3197/SurVigilance/actions/workflows/ruff.yml/badge.svg)](https://github.com/rmj3197/SurVigilance/actions/workflows/ruff.yml) |
 
 
@@ -21,7 +21,7 @@ Currently, SurVigilance suppots the following databases:
 
 ``pip install SurVigilance``
 
-Details on dependencies can be found in the [Installation Guide](https://survigilance.readthedocs.io/en/latest/getting_started/installation.html).
+Details on dependencies can be found in the [Installation Guide](https://survigilance.netlify.app/getting_started/installation.html).
 
 ## Usage
 
@@ -50,7 +50,7 @@ Email: [raktimmu@buffalo.edu](mailto:raktimmu@buffalo.edu)
 
 ## Documentation
 
-The documentation is hosted on `Read the Docs` at - <https://survigilance.readthedocs.io/en/latest/>
+The documentation is hosted on Netlify at - <https://survigilance.netlify.app/>
 
 ## Community
 
@@ -66,11 +66,11 @@ pip install -e .
 
 ### Contributing Guide
 
-Please refer to the [Contributing Guide](https://survigilance.readthedocs.io/en/latest/development/CONTRIBUTING.html).
+Please refer to the [Contributing Guide](https://survigilance.netlify.app/development/CONTRIBUTING.html).
 
 ### Code of Conduct
 
-The code of conduct can be found at [Code of Conduct](https://survigilance.readthedocs.io/en/latest/development/CODE_OF_CONDUCT.html).
+The code of conduct can be found at [Code of Conduct](https://survigilance.netlify.app/development/CODE_OF_CONDUCT.html).
 
 ## License
 

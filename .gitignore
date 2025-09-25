@@ -49,3 +49,7 @@ docs/_autosummary/
 docs/source/api_reference/generated/
 docs/.doctrees/
 docs/source/.doctrees/
+
+docs/*/*.csv
+docs/*/*.zip
+docs/*/*.ZIP

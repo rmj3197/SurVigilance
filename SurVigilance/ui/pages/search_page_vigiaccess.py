@@ -31,6 +31,8 @@ vigi_dir = os.path.join(
     os.path.expanduser(st.session_state.get("data_root", "data")), "vigiaccess"
 )
 
+vigi_dir_display = os.path.abspath(vigi_dir)
+
 
 st.session_state.setdefault("selected_database", "VigiAccess")
 st.session_state.setdefault("vigi_drug", "Atorvastatin")
@@ -43,7 +45,7 @@ st.info(
     How the VigiAccess data collection works:
     - Opens [vigiaccess.org](https://www.vigiaccess.org/), and searches the drug name the user provided.
     - Parses the Preferred Terms (PTs) and their corresponding counts.
-    - Saves a CSV to `{vigi_dir}/<drug>_vigiaccess_adrs.csv`.
+    - Saves a CSV to `{vigi_dir_display}/<drug>_vigiaccess_adrs.csv`.
     """
 )
 

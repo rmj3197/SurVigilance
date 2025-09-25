@@ -161,7 +161,7 @@ def scrape_faers_sb(
     except Exception:  # pragma: no cover
         raise
 
-    _emit("log", message=f"Data saved to: {output_csv_path}")
+    _emit("log", message=f"Data saved to: {os.path.abspath(output_csv_path)}")
     _emit("done")
     return df
 

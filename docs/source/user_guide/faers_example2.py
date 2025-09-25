@@ -7,7 +7,7 @@ def main():
     # Please note the year and quarters in this url should be changed corresponding to data to be downloaded.
     # Also for data prior to Q4 2012, please use url : https://fis.fda.gov/content/Exports/aers_ascii_YYYYQQ.zip
     url = "https://fis.fda.gov/content/Exports/faers_ascii_2025q1.zip"
-    out_dir = "faers"
+    out_dir = "faers_out"
     os.makedirs(out_dir, exist_ok=True)
 
     path = download_file(url=url, download_dir=out_dir)

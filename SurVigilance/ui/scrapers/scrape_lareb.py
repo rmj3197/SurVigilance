@@ -93,9 +93,7 @@ def scrape_lareb_sb(
 
             try:
                 sb.wait_for_element_visible("#registrationsTab", timeout=120)
-                sb.wait_for_element_visible(
-                    "#registrationsTab tbody tr", timeout=120
-                )
+                sb.wait_for_element_visible("#registrationsTab tbody tr", timeout=120)
                 rows = sb.find_elements("#registrationsTab tbody tr")
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Couldn't find table: {e}")
@@ -151,7 +149,9 @@ def scrape_lareb_sb(
             output_csv_path = os.path.join(output_dir, f"{medicine}_lareb_adrs.csv")
             try:
                 df.to_csv(output_csv_path, index=False)
-                _emit("log", message=f"Data saved to: {output_csv_path}")
+                _emit(
+                    "log", message=f"Data saved to: {os.path.abspath(output_csv_path)}"
+                )
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed to save CSV: {e}")
 

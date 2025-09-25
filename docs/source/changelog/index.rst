@@ -6,6 +6,6 @@ Changelogs and release notes for all `SurVigilance` releases are linked in this 
 .. toctree::
    :maxdepth: 1
    
-   v0.1.0.rst
+   v1.0.0.rst
    
    

@@ -41,6 +41,7 @@ st.session_state.setdefault(
 faers_dir = os.path.join(
     os.path.expanduser(st.session_state["data_root"]), "faers"
 )  # Subfolder for FAERS
+faers_dir_display = os.path.abspath(faers_dir)
 
 
 st.session_state.setdefault("selected_database", "FAERS")
@@ -249,7 +250,7 @@ if df is not None:
                 st.subheader(
                     "Download Selected FAERS ASCII ZIPs"
                 )  # Download chosen files
-                st.caption(f"Downloaded data will be saved to `{faers_dir}`.")
+                st.caption(f"Downloaded data will be saved to `{faers_dir_display}`.")
 
                 for item in selections_with_urls:
                     y = item["year"]
@@ -324,7 +325,7 @@ if df is not None:
                     with download_overall_status.container():
                         if successes:
                             st.success(
-                                f"Downloaded {len(successes)} file(s) to {faers_dir}"
+                                f"Downloaded {len(successes)} file(s) to {faers_dir_display}"
                             )
                             try:
                                 st.toast(

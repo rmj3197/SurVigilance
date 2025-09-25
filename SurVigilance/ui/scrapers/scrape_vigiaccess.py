@@ -158,7 +158,7 @@ def scrape_vigiaccess_sb(
         output_csv_path = os.path.join(output_dir, f"{medicine}_vigiaccess_adrs.csv")
         try:
             df.to_csv(output_csv_path, index=False)
-            _emit("log", message=f"Data saved to: {output_csv_path}")
+            _emit("log", message=f"Data saved to: {os.path.abspath(output_csv_path)}")
         except Exception as e:  # pragma: no cover
             _emit("error", message=f"Failed to save CSV: {e}")
 

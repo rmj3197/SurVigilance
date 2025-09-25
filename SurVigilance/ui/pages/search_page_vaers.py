@@ -28,6 +28,7 @@ st.session_state.setdefault("data_root", "data")
 vaers_dir = os.path.join(
     os.path.expanduser(st.session_state.get("data_root", "data")), "vaers"
 )
+vaers_dir_display = os.path.abspath(vaers_dir)
 
 
 st.session_state.setdefault("selected_database", "VAERS")
@@ -104,7 +105,7 @@ def vaers_zip_url(year: int) -> str:
 if selected:
     st.divider()
     st.subheader("Download Selected VAERS Zips")
-    st.caption(f"Downloads are saved to `{vaers_dir}`.")
+    st.caption(f"Downloads are saved to `{vaers_dir_display}`.")
 
     selected_years_sorted = [int(y) for y in sorted(selected, reverse=True)]
     for y in selected_years_sorted:
@@ -219,7 +220,7 @@ if selected:
                 failures.append((fname, str(e)))
 
         if successes:
-            st.success(f"Downloaded {len(successes)} file(s) to {vaers_dir}")
+            st.success(f"Downloaded {len(successes)} file(s) to {vaers_dir_display}")
             try:
                 st.toast("VAERS download(s) complete")
             except Exception:  # pragma: no cover

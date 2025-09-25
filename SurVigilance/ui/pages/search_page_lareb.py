@@ -29,6 +29,7 @@ st.session_state.setdefault("data_root", "data")
 lareb_dir = os.path.join(
     os.path.expanduser(st.session_state.get("data_root", "data")), "lareb"
 )
+lareb_dir_display = os.path.abspath(lareb_dir)
 
 
 st.session_state.setdefault("selected_database", "Lareb")
@@ -42,7 +43,7 @@ st.info(
     How the Lareb data collection works:
     - Opens [lareb.nl](https://www.lareb.nl/en) and searches the drug name the user provided.
     - Extracts Preferred Terms (PT) and counts. 
-    - Saves a CSV to `{lareb_dir}/<drug>_lareb_adrs.csv`.
+    - Saves a CSV to `{lareb_dir_display}/<drug>_lareb_adrs.csv`.
     """
 )
 st.divider()
