@@ -29,9 +29,8 @@ extensions = [
     "sphinx.ext.mathjax",
     "sphinx.ext.ifconfig",
     "sphinx.ext.githubpages",
-    "myst_nb",
+    "nbsphinx",
     "sphinx.ext.intersphinx",
-    "myst_parser",
     "sphinx.ext.viewcode",
     "sphinxcontrib.programoutput",
     "sphinx_exec_code",
@@ -56,9 +55,7 @@ autosummary_generate = True
 
 
 templates_path = ["_templates"]
-exclude_patterns = [
-    ".ipynb_checkpoints",
-]
+exclude_patterns = []
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -69,13 +66,6 @@ html_static_path = ["_static"]
 html_css_files = ["css/custom.css"]
 # html_js_files = ["js/version_warning.js"]
 strip_signature_backslash = True
-
-
-# Execute notebooks during the build; fail on errors
-# See: https://myst-nb.readthedocs.io/
-nb_execution_mode = "force"  # execute on each build; use "auto" to cache
-nb_execution_timeout = 600  # seconds per cell
-nb_execution_raise_on_error = True
 
 # -- Options for Latex output -------------------------------------------------
 latex_elements = {
