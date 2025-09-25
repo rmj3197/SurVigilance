@@ -1,10 +1,10 @@
 .. |logo| image:: https://github.com/rmj3197/SurVigilance/blob/master/docs/source/_static/survigilance_sticker.png?raw=true
-   :height: 32
-   :align: middle
+   :height: 138
+   :align: right
    :alt: SurVigilance
 
 SurVigilance |logo|
-====================
+===================
 
 
 +------------------+-------------------------------------------------------------------------------------------+
@@ -27,8 +27,11 @@ application is to provide an unified interface to researchers to access
 data on adverse events that may be associated the usage of
 pharmaceutical drugs or vaccines.
 
-Currently, SurVigilance supports the following databases: - FAERS -
-VAERS - VigiAccess - Lareb
+Currently, SurVigilance supports the following databases: 
+- FAERS 
+- VAERS
+- VigiAccess
+- Lareb
 
 Installation using ``pip``
 --------------------------
