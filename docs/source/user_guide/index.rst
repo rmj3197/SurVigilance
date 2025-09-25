@@ -14,6 +14,7 @@ Examples to use the Graphical User Interface
 
 .. toctree::
    :maxdepth: 4
+   
    FAERS_GUI
    VAERS_GUI
    Lareb_GUI

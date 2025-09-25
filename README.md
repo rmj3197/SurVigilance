@@ -11,7 +11,7 @@
 
 SurVigilance is designed to access and collect data from various safety databases located across the globe. The primary focus of this application is to provide an unified interface to researchers to access data on adverse events that may be associated the usage of pharmaceutical drugs or vaccines.
 
-Currently, SurVigilance suppots the following databases: 
+Currently, SurVigilance supports the following databases: 
 - FAERS
 - VAERS
 - VigiAccess
@@ -33,7 +33,7 @@ from SurVigilance.ui import UI
 UI().run()
 ```
 
-This would instantiate a streamlit dashboard in browser, and you can use the graphical user interface to navigate between the various databases and download data. 
+This would instantiate a Streamlit dashboard in browser, and you can use the graphical user interface to navigate between the various databases and download data. 
 
 ## Authors
 
@@ -54,9 +54,9 @@ The documentation is hosted on Netlify at - <https://survigilance.netlify.app/>
 
 ## Community
 
-For installing the development version, please download the code files from the master branch of the Github repository.
-Please note that installation from Github might be buggy, for the latest stable release please download using `pip`.
-For downloading from Github, use the following instructions:
+For installing the development version, please download the code files from the master branch of the GitHub repository.
+Please note that installation from GitHub might be buggy, for the latest stable release please download using `pip`.
+For downloading from GitHub, use the following instructions:
 
 ```bash
 git clone https://github.com/rmj3197/SurVigilance.git

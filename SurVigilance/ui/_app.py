@@ -1,5 +1,5 @@
 """
-This script is the entry point of the streamlit application.
+This script is the entry point of the Streamlit application.
 """
 
 import os
@@ -60,7 +60,7 @@ def pick_directory():  # pragma: no cover
             return None
     if system == "Windows":
         try:
-            # Powershell script for directory picker is taken from https://stackoverflow.com/questions/25690038/how-do-i-properly-use-the-folderbrowserdialog-in-powershell
+            # PowerShell script for directory picker is taken from https://stackoverflow.com/questions/25690038/how-do-i-properly-use-the-folderbrowserdialog-in-powershell
             ps_script = (
                 "Add-Type -AssemblyName System.Windows.Forms; "
                 "$foldername = New-Object System.Windows.Forms.FolderBrowserDialog; "
@@ -70,7 +70,7 @@ def pick_directory():  # pragma: no cover
                 "  [Console]::Out.Write($foldername.SelectedPath) "
                 "}"
             )
-            # -Noprofile is used as customizations to poweshell are not loaded. See https://stackoverflow.com/questions/74471387/why-is-noprofile-pwsh-parameter-considered-safer
+            # -NoProfile is used as customizations to PowerShell are not loaded. See https://stackoverflow.com/questions/74471387/why-is-noprofile-pwsh-parameter-considered-safer
             # Single Threaded Apartment (-STA) is needed for folder picker to work.
             result = subprocess.run(
                 ["powershell", "-NoProfile", "-STA", "-Command", ps_script],

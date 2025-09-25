@@ -39,6 +39,8 @@ class UI:
             "#0e0e0e",
             "--browser.gatherUsageStats",
             "false",
+            "--server.showEmailPrompt",
+            "false",
             "--client.showSidebarNavigation",
             "false",
         ]
