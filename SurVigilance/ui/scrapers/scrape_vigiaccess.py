@@ -110,7 +110,7 @@ def scrape_vigiaccess_sb(
                     if not sb.cdp.is_element_present(title_span):
                         continue
 
-                    sb.cdp.gui_hover_element(title_span)
+                    # sb.cdp.gui_hover_element(title_span)
                     sb.cdp.click(expander_span)
 
                     sb.sleep(0.5)
@@ -131,7 +131,7 @@ def scrape_vigiaccess_sb(
                             if txt:
                                 collected_lines.append(txt)
 
-                    sb.cdp.gui_hover_element(title_span)
+                    # sb.cdp.gui_hover_element(title_span)
                     sb.cdp.click(title_span)
 
                 except Exception as e:  # pragma: no cover

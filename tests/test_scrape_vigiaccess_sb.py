@@ -17,6 +17,7 @@ def test_scrape_vigiaccess_real_browser(tmp_path):
     assert isinstance(df, pd.DataFrame)
     # Site content changes, but should usually have some rows
     assert set(["PT", "Count"]).issubset(df.columns)
+    assert df.shape[0] != 0
 
     # CSV persisted
     expected_csv = Path(out_dir) / f"{med}_vigiaccess_adrs.csv"

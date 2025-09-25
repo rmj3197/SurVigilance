@@ -32,6 +32,9 @@ extensions = [
     "nbsphinx",
     "sphinx.ext.intersphinx",
     "myst_parser",
+    "sphinx.ext.viewcode",
+    "sphinxcontrib.programoutput",
+    "sphinx_exec_code",
 ]
 myst_enable_extensions = [
     "amsmath",

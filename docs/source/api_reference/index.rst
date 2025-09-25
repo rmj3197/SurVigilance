@@ -30,6 +30,7 @@ FAERS
    :toctree: generated/
 
    scrape_faers_sb
+   download_file
 
 VigiAccess
 -----------
@@ -66,3 +67,4 @@ VAERS
    :toctree: generated/
 
    download_vaers_zip_sb
+
