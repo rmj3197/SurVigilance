@@ -1,21 +1,19 @@
-.. |logo| image:: https://github.com/rmj3197/SurVigilance/blob/master/docs/source/_static/survigilance_sticker.png?raw=true
-   :height: 138
-   :align: right
-   :alt: SurVigilance
+.. raw:: html
 
-SurVigilance |logo|
-===================
+    <h1><img src="https://github.com/rmj3197/SurVigilance/blob/master/docs/source/_static/survigilance_sticker.png?raw=true" align="right" height="200" alt="SurVigilance" />SurVigilance </h1>
 
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
 
-+------------------+-------------------------------------------------------------------------------------------+
-| **Category**     | **Badge**                                                                                  |
-+==================+===========================================================================================+
-| **Usage**        | |License: GPL v3| |Downloads|                                                              |
-+------------------+-------------------------------------------------------------------------------------------+
-| **Release**      | |PyPI - Version| |Build and upload to PyPI| |Netlify Documentation Status|                |
-+------------------+-------------------------------------------------------------------------------------------+
-| **Development**  | |codecov| |CodeFactor| |Ruff|                                                              |
-+------------------+-------------------------------------------------------------------------------------------+
+   * - **Category**
+     - **Badges**
+   * - **Usage**
+     - |License: GPL v3| |Downloads|
+   * - **Release**
+     - |PyPI - Version| |Build and upload to PyPI| |Netlify Documentation Status|
+   * - **Development**
+     - |codecov| |CodeFactor| |Ruff|
 
 
 Introduction
@@ -28,6 +26,7 @@ data on adverse events that may be associated the usage of
 pharmaceutical drugs or vaccines.
 
 Currently, SurVigilance supports the following databases: 
+
 - FAERS 
 - VAERS
 - VigiAccess
