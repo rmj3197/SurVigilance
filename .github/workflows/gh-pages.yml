@@ -52,7 +52,7 @@ jobs:
               import subprocess; subprocess.check_call([sys.executable, "-m", "pip", "install", *missing])
           PY
       - name: Install Pandoc
-        run: sudo apt-get install -y pandoc
+        run: apt-get install -y pandoc
       - name: Setup Chrome
         id: setup-chrome
         uses: browser-actions/setup-chrome@v2
