@@ -9,7 +9,7 @@ First of all, thanks for considering contributing to SurVigilance!
 .. _issues: https://github.com/rmj3197/SurVigilance/issues
 .. _new_issue: https://github.com/rmj3197/SurVigilance/issues/new
 .. _website: https://survigilance.netlify.app/
-.. _conduct: https://github.com/rmj3197/SurVigilance/blob/main/docs/source/development/CODE_OF_CONDUCT.rst
+.. _conduct: https://github.com/rmj3197/SurVigilance/blob/master/docs/source/development/CODE_OF_CONDUCT.rst
 .. _bug_report: https://github.com/rmj3197/SurVigilance/issues/new?assignees=&labels=Bug%2CNeeds+Triage&projects=&template=bug_report.yml
 .. _doc_improvement: https://github.com/rmj3197/SurVigilance/issues/new?assignees=&labels=Documentation%2CNeeds+Triage&projects=&template=documentation_improvement.yml
 .. _email: mailto:raktimmu@buffalo.edu

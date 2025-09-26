@@ -106,7 +106,7 @@ License
 -------
 
 This project uses the `GPL-3.0
-license <https://github.com/rmj3197/SurVigilance/blob/main/LICENSE>`__,
+license <https://github.com/rmj3197/SurVigilance/blob/master/LICENSE>`__,
 with a full version of the license included in the repository.
 
 Funding Information

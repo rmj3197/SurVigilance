@@ -177,22 +177,22 @@ def download_file(
 
     Parameters
     -----------
-        url: str
-            Direct URL to the file.
+    url: str
+        Direct URL to the file.
 
-        download_dir: str
-            Directory where the file should be saved.
+    download_dir: str
+        Directory where the file should be saved.
 
-        timeout: int
-            Max seconds to wait for the download (default 600s or 10 mins).
+    timeout: int
+        Max seconds to wait for the download (default 600s or 10 mins).
 
-        callback: callable, optional
-            Callable to receive UI/status events, called with a dict.
-            This is essential to show progress to user.
+    callback: callable, optional
+        Callable to receive UI/status events, called with a dict.
+        This is essential to show progress to user.
 
     Returns
     --------
-        Full path to the saved file as a string.
+    Full path to the saved file as a string.
     """
 
     os.makedirs(download_dir, exist_ok=True)
