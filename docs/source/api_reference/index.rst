@@ -4,12 +4,12 @@
 API Reference
 ===============
 
-SurVigilance UI
-================
-
 .. automodule:: SurVigilance.ui
 
 .. currentmodule:: SurVigilance.ui
+
+SurVigilance UI
+=================
 
 .. autosummary::
    :toctree: generated/
@@ -19,12 +19,12 @@ SurVigilance UI
 Scrapers
 =========
 
+.. automodule:: SurVigilance.ui.scrapers
+
+.. currentmodule:: SurVigilance.ui.scrapers
+
 FAERS
 ------
-
-.. automodule:: SurVigilance.ui.scrapers.scrape_faers
-
-.. currentmodule:: SurVigilance.ui.scrapers.scrape_faers
 
 .. autosummary::
    :toctree: generated/
@@ -35,9 +35,9 @@ FAERS
 VigiAccess
 -----------
 
-.. automodule:: SurVigilance.ui.scrapers.scrape_vigiaccess
+.. automodule:: SurVigilance.ui.scrapers
 
-.. currentmodule:: SurVigilance.ui.scrapers.scrape_vigiaccess
+.. currentmodule:: SurVigilance.ui.scrapers
 
 .. autosummary::
    :toctree: generated/
@@ -47,9 +47,9 @@ VigiAccess
 Lareb
 ------
 
-.. automodule:: SurVigilance.ui.scrapers.scrape_lareb
+.. automodule:: SurVigilance.ui.scrapers
 
-.. currentmodule:: SurVigilance.ui.scrapers.scrape_lareb
+.. currentmodule:: SurVigilance.ui.scrapers
 
 .. autosummary::
    :toctree: generated/
@@ -59,12 +59,13 @@ Lareb
 VAERS
 ------
 
-.. automodule:: SurVigilance.ui.scrapers.scrape_vaers
+.. automodule:: SurVigilance.ui.scrapers
 
-.. currentmodule:: SurVigilance.ui.scrapers.scrape_vaers
+.. currentmodule:: SurVigilance.ui.scrapers
 
 .. autosummary::
    :toctree: generated/
 
    download_vaers_zip_sb
+
 
