@@ -56,20 +56,24 @@ def scrape_lareb_sb(
             try:
                 url = "https://www.lareb.nl/en"
                 sb.activate_cdp_mode(url)
+                sb.sleep(2)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed to open site: {e}")
                 raise
 
             try:
+                sb.sleep(1.5)
                 if sb.cdp.is_element_present("input.input-search"):
                     sb.cdp.type("input.input-search", medicine)
                 else:
                     sb.cdp.type('[class*="input-search"]', medicine)
+                sb.sleep(2)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Error encountered while searching: {e}")
                 raise
 
             try:
+                sb.sleep(2)
                 sb.cdp.wait_for_element_visible(
                     'div.autocomplete-suggestion[data-index="0"]', timeout=30
                 )
@@ -83,18 +87,26 @@ def scrape_lareb_sb(
                 )
 
             if sb.cdp.is_element_present('div.autocomplete-suggestion[data-index="0"]'):
+                sb.sleep(1)
                 sb.cdp.click_if_visible('div.autocomplete-suggestion[data-index="0"]')
+                sb.sleep(2)
 
             try:
+                sb.sleep(1.5)
                 sb.cdp.click("#search")
+                sb.sleep(3)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Couldn't click search button: {e}")
                 raise
 
             try:
-                sb.wait_for_element_visible("#registrationsTab", timeout=600)
-                sb.wait_for_element_visible("#registrationsTab tbody tr", timeout=600)
-                rows = sb.find_elements("#registrationsTab tbody tr")
+                sb.cdp.wait_for_element_visible("#registrationsTab", timeout=600)
+                sb.sleep(1.5)
+                sb.cdp.wait_for_element_visible(
+                    "#registrationsTab tbody tr", timeout=600
+                )
+                rows = sb.cdp.find_elements("#registrationsTab tbody tr")
+                sb.sleep(2)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Couldn't find table: {e}")
                 raise
@@ -104,17 +116,18 @@ def scrape_lareb_sb(
 
             for i, row in enumerate(rows, start=1):
                 try:
+                    sb.sleep(1)
                     expander = row.query_selector("td > div:nth-of-type(1)")
                     if expander:
                         expander.click()
-                    sb.sleep(1)
+                        sb.sleep(1.5)
 
                     details = row.query_selector("td > div:nth-of-type(2)")
                     if details:
                         for _ in range(10):
                             if details.text.strip():
                                 break
-                            sb.sleep(0.1)
+                            sb.sleep(0.3)
 
                         expanded_texts.append(details.text.strip())
                     else:
@@ -127,6 +140,8 @@ def scrape_lareb_sb(
                     msg = f"Row {i}: expand failed: {e}"
                     _emit("error", message=msg)
                     expanded_texts.append("")
+
+            sb.sleep(2)
 
             data = []
             for idx, text_block in enumerate(expanded_texts):
@@ -148,6 +163,7 @@ def scrape_lareb_sb(
 
             output_csv_path = os.path.join(output_dir, f"{medicine}_lareb_adrs.csv")
             try:
+                sb.sleep(1)
                 df.to_csv(output_csv_path, index=False)
                 _emit(
                     "log", message=f"Data saved to: {os.path.abspath(output_csv_path)}"

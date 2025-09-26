@@ -1,5 +1,5 @@
 """
-Even though SurVigilance is a GUI application to download data from various safety databases, 
+Even though SurVigilance is a GUI application to download data from various safety databases,
 we have also kept the possibility for a user to interact in a programmatic manner to download the data.
 This vignette demonstrates how to access the different databases programmatically and download the required data."
 """
