@@ -92,8 +92,8 @@ def scrape_lareb_sb(
                 raise
 
             try:
-                sb.wait_for_element_visible("#registrationsTab", timeout=120)
-                sb.wait_for_element_visible("#registrationsTab tbody tr", timeout=120)
+                sb.wait_for_element_visible("#registrationsTab", timeout=600)
+                sb.wait_for_element_visible("#registrationsTab tbody tr", timeout=600)
                 rows = sb.find_elements("#registrationsTab tbody tr")
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Couldn't find table: {e}")

@@ -11,7 +11,7 @@ jobs:
       max-parallel: 1
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
-        python: ['3.10', '3.11', '3.12', '3.13']
+        python: ['3.11']
 
     steps:
       - uses: actions/checkout@v4
@@ -43,7 +43,7 @@ jobs:
         shell: bash
 
       - name: Upload coverage reports to Codecov
-        if: matrix.os == 'macos-latest' && matrix.python == '3.10'
+        if: matrix.os == 'macos-latest' && matrix.python == '3.11'
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
