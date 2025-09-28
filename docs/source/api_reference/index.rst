@@ -23,53 +23,20 @@ Scrapers
 
 .. currentmodule:: SurVigilance.ui.scrapers
 
-FAERS
+AU DAEN
+--------
+
+.. automodule:: SurVigilance.ui.scrapers.scrape_daen
+
+.. currentmodule:: SurVigilance.ui.scrapers.scrape_daen
+
+.. autosummary::
+   :toctree: generated/
+
+   scrape_daen_sb
+
+DK DMA
 ------
-
-.. autosummary::
-   :toctree: generated/
-
-   scrape_faers_sb
-   download_file
-
-VigiAccess
------------
-
-.. automodule:: SurVigilance.ui.scrapers
-
-.. currentmodule:: SurVigilance.ui.scrapers
-
-.. autosummary::
-   :toctree: generated/
-
-   scrape_vigiaccess_sb
-
-Lareb
-------
-
-.. automodule:: SurVigilance.ui.scrapers
-
-.. currentmodule:: SurVigilance.ui.scrapers
-
-.. autosummary::
-   :toctree: generated/
-
-   scrape_lareb_sb
-
-VAERS
-------
-
-.. automodule:: SurVigilance.ui.scrapers
-
-.. currentmodule:: SurVigilance.ui.scrapers
-
-.. autosummary::
-   :toctree: generated/
-
-   download_vaers_zip_sb
-
-DMA
----
 
 .. automodule:: SurVigilance.ui.scrapers
 
@@ -80,8 +47,20 @@ DMA
 
    scrape_dma_sb
 
-MEDSAFE
--------
+NL Lareb
+---------
+
+.. automodule:: SurVigilance.ui.scrapers
+
+.. currentmodule:: SurVigilance.ui.scrapers
+
+.. autosummary::
+   :toctree: generated/
+
+   scrape_lareb_sb
+
+NZ MEDSAFE
+----------
 
 .. automodule:: SurVigilance.ui.scrapers
 
@@ -92,3 +71,39 @@ MEDSAFE
 
    scrape_medsafe_sb
 
+USA FAERS
+----------
+
+.. automodule:: SurVigilance.ui.scrapers
+
+.. currentmodule:: SurVigilance.ui.scrapers
+
+.. autosummary::
+   :toctree: generated/
+
+   scrape_faers_sb
+   download_file
+
+USA VAERS
+----------
+
+.. automodule:: SurVigilance.ui.scrapers
+
+.. currentmodule:: SurVigilance.ui.scrapers
+
+.. autosummary::
+   :toctree: generated/
+
+   download_vaers_zip_sb
+
+WHO VigiAccess
+---------------
+
+.. automodule:: SurVigilance.ui.scrapers
+
+.. currentmodule:: SurVigilance.ui.scrapers
+
+.. autosummary::
+   :toctree: generated/
+
+   scrape_vigiaccess_sb

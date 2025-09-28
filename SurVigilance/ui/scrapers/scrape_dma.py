@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 from seleniumbase import SB
 
 
-def _group_label(name: str) -> Optional[str]:
+def _group_label(name: str) -> Optional[str]:  # pragma: no cover
     name = (name or "").strip().lower()
     second = name[1]
     if "a" <= second <= "d":

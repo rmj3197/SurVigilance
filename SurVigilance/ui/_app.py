@@ -139,52 +139,15 @@ row4 = st.columns(2)
 
 
 with row1[0]:
-    if st.button("**WHO VigiAccess**", key="vigiaccess", width="stretch"):
-        st.success("WHO VigiAccess selected")
+    if st.button("**AU DAEN**", key="daen", width="stretch"):
+        st.success("AU DAEN selected")
         time.sleep(1)
 
-        database_currently_searching = "WHO VIGIACCESS"
+        database_currently_searching = "AU DAEN"
         st.session_state["selected_database"] = database_currently_searching
-        st.switch_page("pages/search_page_vigiaccess.py")
-
+        st.switch_page("pages/search_page_daen.py")
 
 with row1[1]:
-    if st.button("**USA FAERS**", key="faers", width="stretch"):
-        st.success("USA FAERS selected")
-        time.sleep(1)
-
-        database_currently_searching = "USA FAERS"
-        st.session_state["selected_database"] = database_currently_searching
-        st.switch_page("pages/search_page_faers.py")
-
-with row2[0]:
-    if st.button("**USA VAERS**", key="vaers", width="stretch"):
-        st.success("USA VAERS selected")
-        time.sleep(1)
-
-        database_currently_searching = "USA VAERS"
-        st.session_state["selected_database"] = database_currently_searching
-        st.switch_page("pages/search_page_vaers.py")
-
-with row2[1]:
-    if st.button("**NL Lareb**", key="lareb", width="stretch"):
-        st.success("NL Lareb selected")
-        time.sleep(1)
-
-        database_currently_searching = "NL LAREB"
-        st.session_state["selected_database"] = database_currently_searching
-        st.switch_page("pages/search_page_lareb.py")
-
-with row3[0]:
-    if st.button("**NZ MEDSAFE**", key="nzsmars", width="stretch"):
-        st.success("NZ MEDSAFE selected")
-        time.sleep(1)
-
-        database_currently_searching = "NZ MEDSAFE"
-        st.session_state["selected_database"] = database_currently_searching
-        st.switch_page("pages/search_page_nzsmars.py")
-
-with row3[1]:
     if st.button("**DK DMA**", key="dma", width="stretch"):
         st.success("DK DMA selected")
         time.sleep(1)
@@ -193,14 +156,50 @@ with row3[1]:
         st.session_state["selected_database"] = database_currently_searching
         st.switch_page("pages/search_page_dma.py")
 
-with row4[0]:
-    if st.button("**AU DAEN**", key="daen", width="stretch"):
-        st.success("AU DAEN selected")
+with row2[0]:
+    if st.button("**NL Lareb**", key="lareb", width="stretch"):
+        st.success("NL Lareb selected")
         time.sleep(1)
 
-        database_currently_searching = "AU DAEN"
+        database_currently_searching = "NL LAREB"
         st.session_state["selected_database"] = database_currently_searching
-        st.switch_page("pages/search_page_daen.py")
+        st.switch_page("pages/search_page_lareb.py")
+
+with row2[1]:
+    if st.button("**NZ MEDSAFE**", key="nzsmars", width="stretch"):
+        st.success("NZ MEDSAFE selected")
+        time.sleep(1)
+
+        database_currently_searching = "NZ MEDSAFE"
+        st.session_state["selected_database"] = database_currently_searching
+        st.switch_page("pages/search_page_nzsmars.py")
+
+with row3[0]:
+    if st.button("**USA FAERS**", key="faers", width="stretch"):
+        st.success("USA FAERS selected")
+        time.sleep(1)
+
+        database_currently_searching = "USA FAERS"
+        st.session_state["selected_database"] = database_currently_searching
+        st.switch_page("pages/search_page_faers.py")
+
+with row3[1]:
+    if st.button("**USA VAERS**", key="vaers", width="stretch"):
+        st.success("USA VAERS selected")
+        time.sleep(1)
+
+        database_currently_searching = "USA VAERS"
+        st.session_state["selected_database"] = database_currently_searching
+        st.switch_page("pages/search_page_vaers.py")
+
+with row4[0]:
+    if st.button("**WHO VigiAccess**", key="vigiaccess", width="stretch"):
+        st.success("WHO VigiAccess selected")
+        time.sleep(1)
+
+        database_currently_searching = "WHO VIGIACCESS"
+        st.session_state["selected_database"] = database_currently_searching
+        st.switch_page("pages/search_page_vigiaccess.py")
 
 st.markdown(
     r"""
