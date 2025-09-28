@@ -29,7 +29,7 @@ REQUIRES = [
     "seleniumbase>=4.0.0",
     "pandas>=1.5.0",
     "requests>=2.28.0",
-    "beautifulsoup4>=4.9.0",
+    "beautifulsoup4>=4.12.0",
 ]
 
 
