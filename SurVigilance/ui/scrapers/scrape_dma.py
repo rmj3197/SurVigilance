@@ -82,14 +82,14 @@ def scrape_dma_sb(
 
     try:
         with SB(uc=True, headless=headless) as sb:
-            url = (
-                "https://laegemiddelstyrelsen.dk/en/sideeffects/side-effects-of-medicines/interactive-adverse-drug-reaction-overviews/"
-            )
+            url = "https://laegemiddelstyrelsen.dk/en/sideeffects/side-effects-of-medicines/interactive-adverse-drug-reaction-overviews/"
             _emit("log", message="Opening laegemiddelstyrelsen.dk (DMA)")
             sb.activate_cdp_mode(url)
 
             sb.sleep(5)
-            sb.cdp.click('//*[@id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]')
+            sb.cdp.click(
+                '//*[@id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]'
+            )
 
             try:
                 sb.cdp.click(
@@ -138,66 +138,61 @@ def scrape_dma_sb(
             sb.sleep(0.6)
             step()
 
-            try:
-                sb.cdp.switch_to_newest_tab()
-            except Exception:  # pragma: no cover
-                pass
+            sb.cdp.switch_to_newest_tab()
             step()
-
-            sb.sleep(30)
 
             outer_iframe = (
                 'iframe[src*="/upload/dap/dap.html?drug=./DK_EXTERNAL/NONCOMBINED/"]'
             )
-            sb.wait_for_element_present(outer_iframe, timeout=60)
-            with sb.frame_switch(outer_iframe):
+            if sb.is_element_present(outer_iframe):
+                with sb.frame_switch(outer_iframe):
+                    try:
+                        sb.click("button#soc_expand_all_button")
+                        sb.sleep(0.4)
+                    except Exception as e:  # pragma: no cover
+                        _emit("log", message=f"Expand-all click issue: {e}")
+                    step()
+
+                    sb.wait_for_element_present("#meddra_table", timeout=30)
+                    table_el = sb.find_element("#meddra_table")
+                    table_html = table_el.get_attribute("outerHTML")
+
+                    soup = BeautifulSoup(table_html, "html.parser")
+                    table = soup.find("table", {"id": "meddra_table"})
+                    df = pd.read_html(str(table))[0]
+
+                    df.columns = [str(c).strip() for c in df.columns]
+                    df = df.dropna(axis=1, how="all")
+
+                    if df.shape[1] >= 2:
+                        pt_col = df.columns[0]
+                        count_col = df.columns[-2]
+                        df = df.loc[:, [pt_col, count_col]]
+                        df.columns = ["PT", "Count"]
+                        # Retain rows where PT contains '+'
+                        df = df[df["PT"].astype(str).str.contains("\\+")]
+                        # Remove '+' from PT values
+                        df["PT"] = (
+                            df["PT"]
+                            .astype(str)
+                            .str.replace("+", "", regex=False)
+                            .str.strip()
+                        )
+                    step()
+
+                df = df.reset_index(drop=True)
+
+                out_path = os.path.join(output_dir, f"{med}_dma_adrs.csv")
                 try:
-                    sb.click("button#soc_expand_all_button")
-                    sb.sleep(0.4)
+                    df.to_csv(out_path, index=False)
+                    _emit("log", message=f"Data saved to: {os.path.abspath(out_path)}")
                 except Exception as e:  # pragma: no cover
-                    _emit("log", message=f"Expand-all click issue: {e}")
+                    _emit("error", message=f"Failed to save CSV: {e}")
+                    raise
                 step()
 
-                sb.wait_for_element_present("#meddra_table", timeout=30)
-                table_el = sb.find_element("#meddra_table")
-                table_html = table_el.get_attribute("outerHTML")
-
-                soup = BeautifulSoup(table_html, "html.parser")
-                table = soup.find("table", {"id": "meddra_table"})
-                df = pd.read_html(str(table))[0]
-
-                df.columns = [str(c).strip() for c in df.columns]
-                df = df.dropna(axis=1, how="all")
-
-                if df.shape[1] >= 2:
-                    pt_col = df.columns[0]
-                    count_col = df.columns[-2]
-                    df = df.loc[:, [pt_col, count_col]]
-                    df.columns = ["PT", "Count"]
-                    # Retain rows where PT contains '+'
-                    df = df[df["PT"].astype(str).str.contains("\\+")]
-                    # Remove '+' from PT values
-                    df["PT"] = (
-                        df["PT"]
-                        .astype(str)
-                        .str.replace("+", "", regex=False)
-                        .str.strip()
-                    )
-                step()
-
-            df = df.reset_index(drop=True)
-
-            out_path = os.path.join(output_dir, f"{med}_dma_adrs.csv")
-            try:
-                df.to_csv(out_path, index=False)
-                _emit("log", message=f"Data saved to: {os.path.abspath(out_path)}")
-            except Exception as e:  # pragma: no cover
-                _emit("error", message=f"Failed to save CSV: {e}")
-                raise
-            step()
-
-            _emit("done")
-            return df
+                _emit("done")
+                return df
 
     except Exception:  # pragma: no cover
         raise
