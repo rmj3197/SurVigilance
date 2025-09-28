@@ -53,5 +53,6 @@ docs/source/.doctrees/
 docs/*/*.csv
 docs/*/*.zip
 docs/*/*.ZIP
+docs/*/*.xlsx
 
 tests/data

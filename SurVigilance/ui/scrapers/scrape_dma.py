@@ -142,7 +142,7 @@ def scrape_dma_sb(
                 pass
             step()
 
-            sb.sleep(10)
+            sb.sleep(30)
 
             outer_iframe = (
                 'iframe[src*="/upload/dap/dap.html?drug=./DK_EXTERNAL/NONCOMBINED/"]'
