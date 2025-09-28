@@ -4,7 +4,7 @@ Test file to check if the AU DAEN scraping is working
 
 from pathlib import Path
 
-from SurVigilance.ui.scrapers.scrape_daen import scrape_daen_sb
+from SurVigilance.ui.scrapers import scrape_daen_sb
 
 
 def test_scrape_daen_real_browser(tmp_path):

@@ -1,6 +1,6 @@
 import os
 
-from SurVigilance.ui.scrapers.scrape_daen import scrape_daen_sb
+from SurVigilance.ui.scrapers import scrape_daen_sb
 
 
 def main():

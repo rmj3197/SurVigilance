@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from SurVigilance.ui.scrapers.scrape_dma import scrape_dma_sb
+from SurVigilance.ui.scrapers import scrape_dma_sb
 
 
 def test_scrape_dma_real_browser(tmp_path):

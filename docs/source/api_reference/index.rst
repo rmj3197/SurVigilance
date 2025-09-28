@@ -26,9 +26,9 @@ Scrapers
 AU DAEN
 --------
 
-.. automodule:: SurVigilance.ui.scrapers.scrape_daen
+.. automodule:: SurVigilance.ui.scrapers
 
-.. currentmodule:: SurVigilance.ui.scrapers.scrape_daen
+.. currentmodule:: SurVigilance.ui.scrapers
 
 .. autosummary::
    :toctree: generated/

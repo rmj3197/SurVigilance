@@ -1,6 +1,6 @@
 import os
 
-from SurVigilance.ui.scrapers.scrape_faers import scrape_faers_sb
+from SurVigilance.ui.scrapers import scrape_faers_sb
 
 
 def main():
