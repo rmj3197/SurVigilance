@@ -68,4 +68,27 @@ VAERS
 
    download_vaers_zip_sb
 
+DMA
+---
+
+.. automodule:: SurVigilance.ui.scrapers
+
+.. currentmodule:: SurVigilance.ui.scrapers
+
+.. autosummary::
+   :toctree: generated/
+
+   scrape_dma_sb
+
+MEDSAFE
+-------
+
+.. automodule:: SurVigilance.ui.scrapers
+
+.. currentmodule:: SurVigilance.ui.scrapers
+
+.. autosummary::
+   :toctree: generated/
+
+   scrape_medsafe_sb
 

@@ -18,7 +18,7 @@ except Exception:  # pragma: no cover
 
 
 st.set_page_config(
-    page_title="Data access page for VAERS",
+    page_title="Data access page for USA VAERS",
     layout="wide",
     page_icon="SurVigilance/ui/assets/survigilance_sticker.ico",
 )
@@ -31,7 +31,7 @@ vaers_dir = os.path.join(
 vaers_dir_display = os.path.abspath(vaers_dir)
 
 
-st.session_state.setdefault("selected_database", "VAERS")
+st.session_state.setdefault("selected_database", "USA VAERS")
 st.session_state.setdefault("vaers_selected_years", set())
 
 st.session_state.setdefault("_vaers_downloading", False)
@@ -44,7 +44,7 @@ heading = f"Download Page for {st.session_state['selected_database']} Database"
 st.markdown(f"<h1 style='text-align: center;'>{heading}</h1>", unsafe_allow_html=True)
 st.info(
     f"""
-    How the VAERS data collection works:
+    How the USA VAERS data collection works:
     - Parses the VAERS yearly download page and lists all available years.
     - Shows the user a browser windows for attempting GUI CAPTCHA click for selected years for which data is to be downloaded.
     - Waits for the "Download File" control and captures the real file URL.

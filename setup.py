@@ -4,7 +4,7 @@ from pathlib import Path
 from setuptools import find_packages, setup
 
 NAME = "SurVigilance"
-DESCRIPTION = "SurVigilance: An application to collect pharmacovigilance data from multiple safety databases."
+DESCRIPTION = "SurVigilance: An application to collect pharmacovigilance data from safety databases around the world."
 
 
 def read_version() -> str:
@@ -18,7 +18,7 @@ def read_version() -> str:
 
 
 def read_long_description() -> str:
-    readme = Path(__file__).parent / "README.md"
+    readme = Path(__file__).parent / "README.rst"
     if readme.is_file():
         return readme.read_text(encoding="utf-8")
     return DESCRIPTION
@@ -29,6 +29,7 @@ REQUIRES = [
     "seleniumbase>=4.0.0",
     "pandas>=1.5.0",
     "requests>=2.28.0",
+    "beautifulsoup4>=4.9.0",
 ]
 
 
@@ -37,7 +38,7 @@ setup(
     version=read_version(),
     description=DESCRIPTION,
     long_description=read_long_description(),
-    long_description_content_type="text/markdown",
+    long_description_content_type="text/x-rst",
     python_requires=">=3.10",
     install_requires=REQUIRES,
     packages=find_packages(),

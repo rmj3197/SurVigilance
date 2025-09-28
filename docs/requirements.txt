@@ -5,6 +5,6 @@ sphinx-book-theme>=1.0
 nbsphinx>0.9
 ipykernel
 sphinx-exec-code>=0.12.1
-git+https://github.com/rmj3197/SurVigilance.git
 sphinxcontrib-programoutput
 pandoc
+git+https://github.com/rmj3197/SurVigilance.git

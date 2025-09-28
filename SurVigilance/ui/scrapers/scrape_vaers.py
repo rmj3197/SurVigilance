@@ -65,12 +65,6 @@ def download_vaers_zip_sb(
     _emit("log", message=f"Opening VAERS page for {year}")
 
     with SB(uc=True, headless=headless) as sb:
-
-        # try:
-        #     sb.set_downloads_folder(download_dir)
-        # except Exception:  # pragma: no cover
-        #     raise
-
         sb.activate_cdp_mode(url)
 
         try:

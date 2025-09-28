@@ -14,13 +14,13 @@ try:
     scrape_vigiaccess_module = importlib.import_module("scrapers.scrape_vigiaccess")
     scrape_vigiaccess_sb = scrape_vigiaccess_module.scrape_vigiaccess_sb
 except Exception as e:  # pragma: no cover
-    st.set_page_config(page_title="VigiAccess Search", layout="wide")
-    st.error(f"Failed to import the VigiAccess scraper: {e}")
+    st.set_page_config(page_title="WHO VigiAccess Search", layout="wide")
+    st.error(f"Failed to import the WHO VigiAccess scraper: {e}")
     st.stop()
 
 
 st.set_page_config(
-    page_title="Data access page for VigiAccess",
+    page_title="Data access page for WHO VigiAccess",
     layout="wide",
     page_icon="SurVigilance/ui/assets/survigilance_sticker.ico",
 )
@@ -34,7 +34,7 @@ vigi_dir = os.path.join(
 vigi_dir_display = os.path.abspath(vigi_dir)
 
 
-st.session_state.setdefault("selected_database", "VigiAccess")
+st.session_state.setdefault("selected_database", "WHO VigiAccess")
 st.session_state.setdefault("vigi_drug", "Atorvastatin")
 
 
@@ -42,7 +42,7 @@ heading = f"Search Page for {st.session_state['selected_database']} Database"
 st.markdown(f"<h1 style='text-align: center;'>{heading}</h1>", unsafe_allow_html=True)
 st.info(
     f"""
-    How the VigiAccess data collection works:
+    How the WHO VigiAccess data collection works:
     - Opens [vigiaccess.org](https://www.vigiaccess.org/), and searches the drug name the user provided.
     - Parses the Preferred Terms (PTs) and their corresponding counts.
     - Saves a CSV to `{vigi_dir_display}/<drug>_vigiaccess_adrs.csv`.

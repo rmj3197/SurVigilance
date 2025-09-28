@@ -24,12 +24,12 @@ try:
     QUARTER_MONTHS = mapping_module.QUARTER_MONTHS
     QUARTER_LABELS = mapping_module.QUARTER_LABELS
 except Exception as e:  # pragma: no cover
-    st.error(f"Failed to import the FAERS scraper: {e}")
+    st.error(f"Failed to import the USA FAERS scraper: {e}")
     st.stop()
 
 
 st.set_page_config(
-    page_title="Data access page for FAERS",
+    page_title="Data access page for USA FAERS",
     layout="wide",
     page_icon="SurVigilance/ui/assets/survigilance_sticker.ico",
 )
@@ -44,14 +44,14 @@ faers_dir = os.path.join(
 faers_dir_display = os.path.abspath(faers_dir)
 
 
-st.session_state.setdefault("selected_database", "FAERS")
+st.session_state.setdefault("selected_database", "USA FAERS")
 
 
 heading = f"Download Page for {st.session_state['selected_database']} Database"
 st.markdown(f"<h1 style='text-align: center;'>{heading}</h1>", unsafe_allow_html=True)
 st.info(
     f"""
-    How the FAERS data collection works:
+    How the USA FAERS data collection works:
     - Parses the FDA FAERS website [https://fis.fda.gov/extensions/FPD-QDE-FAERS/FPD-QDE-FAERS.html](https://fis.fda.gov/extensions/FPD-QDE-FAERS/FPD-QDE-FAERS.html) for available quarters per year.
     - User selects the quarters to download the data, and initiates download using download button.
     - ZIP ASCII Files for selected quarters are saved under `{faers_dir}/`.

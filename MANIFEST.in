@@ -1,0 +1,5 @@
+include README.rst
+
+# Include UI assets used by the Streamlit app
+recursive-include SurVigilance/ui/assets *.ico *.png *.jpg *.jpeg *.svg
+

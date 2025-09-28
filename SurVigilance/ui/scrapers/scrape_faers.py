@@ -75,7 +75,7 @@ def scrape_faers_sb(
                 sb.cdp.wait_for_element_visible(tbody_xpath, timeout=30)
                 tbody = sb.cdp.find_element(tbody_xpath)
                 rows = tbody.query_selector_all("tr")
-                first_col: list[str] = []
+                first_col = []
                 for row in rows:
                     tds = row.query_selector_all("td")
                     if not tds:
@@ -115,7 +115,7 @@ def scrape_faers_sb(
                 sb.cdp.wait_for_element_visible(tbody_xpath, timeout=30)
                 tbody = sb.cdp.find_element(tbody_xpath)
                 rows = tbody.query_selector_all("tr")
-                first_col2: list[str] = []
+                first_col2 = []
                 for row in rows:
                     tds = row.query_selector_all("td")
                     if not tds:

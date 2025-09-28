@@ -108,9 +108,7 @@ def update_data_folder():
     folder_path = pick_directory()
     if folder_path:
         st.session_state.data_root = folder_path
-        # No st.rerun() is needed here; Streamlit reruns automatically after callbacks.
     else:
-        # This branch is optional, in case the user cancels the dialog.
         st.toast("Folder selection cancelled.")
 
 
@@ -134,48 +132,65 @@ except Exception:
 
 st.subheader("Please select a Database to Search")
 
-
-# Organize the datasets in a 2 x 2 grid like fashion
 row1 = st.columns(2)
 row2 = st.columns(2)
+row3 = st.columns(2)
 
 
 with row1[0]:
-    if st.button("**VigiAccess**", key="vigiaccess", width="stretch"):
+    if st.button("**WHO VigiAccess**", key="vigiaccess", width="stretch"):
         st.success("WHO VigiAccess selected")
         time.sleep(1)
 
-        database_currently_searching = "VIGIACCESS"
+        database_currently_searching = "WHO VIGIACCESS"
         st.session_state["selected_database"] = database_currently_searching
         st.switch_page("pages/search_page_vigiaccess.py")
 
 
 with row1[1]:
-    if st.button("**FAERS**", key="faers", width="stretch"):
-        st.success("FAERS selected")
+    if st.button("**USA FAERS**", key="faers", width="stretch"):
+        st.success("USA FAERS selected")
         time.sleep(1)
 
-        database_currently_searching = "FAERS"
+        database_currently_searching = "USA FAERS"
         st.session_state["selected_database"] = database_currently_searching
         st.switch_page("pages/search_page_faers.py")
 
 with row2[0]:
-    if st.button("**VAERS**", key="vaers", width="stretch"):
-        st.success("VAERS selected")
+    if st.button("**USA VAERS**", key="vaers", width="stretch"):
+        st.success("USA VAERS selected")
         time.sleep(1)
 
-        database_currently_searching = "VAERS"
+        database_currently_searching = "USA VAERS"
         st.session_state["selected_database"] = database_currently_searching
         st.switch_page("pages/search_page_vaers.py")
 
 with row2[1]:
-    if st.button("**LAREB**", key="lareb", width="stretch"):
-        st.success("LAREB selected")
+    if st.button("**NL Lareb**", key="lareb", width="stretch"):
+        st.success("NL Lareb selected")
         time.sleep(1)
 
-        database_currently_searching = "LAREB"
+        database_currently_searching = "NL LAREB"
         st.session_state["selected_database"] = database_currently_searching
         st.switch_page("pages/search_page_lareb.py")
+
+with row3[0]:
+    if st.button("**NZ MEDSAFE**", key="nzsmars", width="stretch"):
+        st.success("NZ MEDSAFE selected")
+        time.sleep(1)
+
+        database_currently_searching = "NZ MEDSAFE"
+        st.session_state["selected_database"] = database_currently_searching
+        st.switch_page("pages/search_page_nzsmars.py")
+
+with row3[1]:
+    if st.button("**DK DMA**", key="dma", width="stretch"):
+        st.success("DK DMA selected")
+        time.sleep(1)
+
+        database_currently_searching = "DK DMA"
+        st.session_state["selected_database"] = database_currently_searching
+        st.switch_page("pages/search_page_dma.py")
 
 st.markdown(
     r"""
