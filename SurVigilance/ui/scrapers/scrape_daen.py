@@ -141,7 +141,7 @@ def scrape_daen_sb(
                 raise RuntimeError("DAEN export file not detected")
 
             base_name = os.path.basename(last_candidate)
-            root, ext = os.path.splitext(base_name)
+            _root, ext = os.path.splitext(base_name)
             if not ext:
                 ext = ".csv"
             target_name = f"{med}_daen_export{ext}"
