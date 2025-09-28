@@ -83,11 +83,13 @@ def scrape_dma_sb(
     try:
         with SB(uc=True, headless=headless) as sb:
             url = (
-                "https://laegemiddelstyrelsen.dk/en/sideeffects/side-effects-of-"
-                "medicines/interactive-adverse-drug-reaction-overviews/"
+                "https://laegemiddelstyrelsen.dk/en/sideeffects/side-effects-of-medicines/interactive-adverse-drug-reaction-overviews/"
             )
             _emit("log", message="Opening laegemiddelstyrelsen.dk (DMA)")
             sb.activate_cdp_mode(url)
+
+            sb.sleep(5)
+            sb.cdp.click('//*[@id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]')
 
             try:
                 sb.cdp.click(
