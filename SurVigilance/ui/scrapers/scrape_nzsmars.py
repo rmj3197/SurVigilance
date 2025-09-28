@@ -21,7 +21,7 @@ def scrape_medsafe_sb(
     headless: bool = True,
 ) -> pd.DataFrame:
     """
-    Scrapes NZ Medsafe database for a given medicine or vaccine.
+    Scrapes NZ Medsafe database for a given medicine or vaccine, for System Organ Class (SOC), PTs and associated count.
 
     Parameters
     -----------

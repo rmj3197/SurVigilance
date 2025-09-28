@@ -4,6 +4,7 @@ sphinx-autobuild>=2021.0
 sphinx-book-theme>=1.0
 nbsphinx>0.9
 ipykernel
+lxml>=6.0.0
 sphinx-exec-code>=0.12.1
 sphinxcontrib-programoutput
 pandoc

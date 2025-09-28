@@ -42,7 +42,7 @@ st.info(
     f"""
     How the NL Lareb data collection works:
     - Opens [lareb.nl](https://www.lareb.nl/en) and searches the drug name the user provided.
-    - Extracts Preferred Terms (PT) and counts. 
+    - Extracts Preferred Terms (PTs) and counts. 
     - Saves a CSV to `{lareb_dir_display}/<drug>_lareb_adrs.csv`.
     """
 )

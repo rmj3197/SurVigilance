@@ -135,6 +135,7 @@ st.subheader("Please select a Database to Search")
 row1 = st.columns(2)
 row2 = st.columns(2)
 row3 = st.columns(2)
+row4 = st.columns(2)
 
 
 with row1[0]:
@@ -191,6 +192,15 @@ with row3[1]:
         database_currently_searching = "DK DMA"
         st.session_state["selected_database"] = database_currently_searching
         st.switch_page("pages/search_page_dma.py")
+
+with row4[0]:
+    if st.button("**AU DAEN**", key="daen", width="stretch"):
+        st.success("AU DAEN selected")
+        time.sleep(1)
+
+        database_currently_searching = "AU DAEN"
+        st.session_state["selected_database"] = database_currently_searching
+        st.switch_page("pages/search_page_daen.py")
 
 st.markdown(
     r"""

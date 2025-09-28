@@ -4,6 +4,7 @@ Downloader for VAERS yearly ZIPs.
 
 import os
 import shutil
+import time
 from typing import Any, Callable, Optional
 
 import requests
@@ -90,8 +91,6 @@ def download_vaers_zip_sb(
                         f"Waiting up to {fallback_wait}s for a browser-initiated download."
                     ),
                 )
-
-                import time
 
                 end_time = time.time() + max(0, int(fallback_wait))
                 while time.time() < end_time:

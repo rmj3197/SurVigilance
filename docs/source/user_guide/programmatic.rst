@@ -20,6 +20,27 @@ In this example, we would like to download data from Lareb for the drug "paracet
 .. exec_code::
    :filename: user_guide/lareb_example.py
 
+DK DMA
+======
+In this example, we would like to download data from Danish Medicines Agency for the drug "paracetamol".
+
+.. exec_code::
+   :filename: user_guide/dma_example.py
+
+NZ MEDSAFE
+==========
+In this example, we would like to download data from NZ Medsafe for the medicine "atorvastatin".
+
+.. exec_code::
+   :filename: user_guide/nzsmars_example.py
+
+AU DAEN
+=======
+In this example, we would like to fetch data from the TGA DAEN for the medicine "aspirin".
+
+.. exec_code::
+   :filename: user_guide/daen_example.py
+
 FAERS
 ======
 For the FAERS databases, we can download the ZIP files. To see which data files are available 
