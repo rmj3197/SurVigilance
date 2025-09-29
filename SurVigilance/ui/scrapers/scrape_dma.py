@@ -79,7 +79,7 @@ def scrape_dma_sb(
         nonlocal progress_steps
         progress_steps += 1
         _emit("progress", delta=delta)
-        sb.sleep(5)
+        sb.sleep(15)
 
     try:
         with SB(uc=True, headless=headless) as sb:
@@ -87,13 +87,13 @@ def scrape_dma_sb(
             _emit("log", message="Opening laegemiddelstyrelsen.dk (DMA)")
             sb.activate_cdp_mode(url)
 
-            sb.sleep(5)
+            sb.sleep(15)
             sb.click('//*[@id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]')
-            sb.sleep(5)
+            sb.sleep(15)
 
             try:
                 sb.click('//*[@id="main-content"]/div/div/div[2]/div[1]/form/div/input')
-                sb.sleep(5)
+                sb.sleep(15)
             except Exception:  # pragma: no cover
                 pass
             step()
@@ -106,7 +106,7 @@ def scrape_dma_sb(
                 sb.click(
                     f'//*[@id="main-content"]/div/div/div[2]/div[1]/section/div[2]/div[1]/a[{alphabet_index}]'
                 )
-                sb.sleep(5)
+                sb.sleep(15)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed selecting alphabet: {e}")
                 raise
@@ -116,7 +116,7 @@ def scrape_dma_sb(
                 group = _group_label(med)
                 if group:
                     sb.click(f'a[href="?letter={med[0].upper()}&subletter={group}"]')
-                    sb.sleep(5)
+                    sb.sleep(15)
             except Exception as e:  # pragma: no cover
                 _emit("log", message=f"Skipping subgroup selection: {e}")
             step()
@@ -125,7 +125,7 @@ def scrape_dma_sb(
                 '//*[@id="main-content"]/div/div/div[2]/div[1]/section/table'
             )
             sb.wait_for_element_visible(drugs_table_xpath, timeout=30)
-            sb.sleep(5)
+            sb.sleep(15)
             table_text = sb.cdp.get_text(drugs_table_xpath) or ""
             if med.lower() not in table_text.lower():
                 _emit("error", message=f"Drug '{med}' not found in DMA list")
@@ -134,7 +134,7 @@ def scrape_dma_sb(
             sb.click(
                 f"//*[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '{med.lower()}']"
             )
-            sb.sleep(5)
+            sb.sleep(15)
             step()
 
             sb.cdp.switch_to_newest_tab()
@@ -154,7 +154,7 @@ def scrape_dma_sb(
                     step()
 
                     sb.wait_for_element_present("#meddra_table", timeout=30)
-                    sb.sleep(5)
+                    sb.sleep(15)
                     table_el = sb.find_element("#meddra_table")
                     table_html = table_el.get_attribute("outerHTML")
 
@@ -177,7 +177,7 @@ def scrape_dma_sb(
                             .str.replace("+", "", regex=False)
                             .str.strip()
                         )
-                    sb.sleep(5)
+                    sb.sleep(15)
                     step()
 
                 df = df.reset_index(drop=True)
@@ -189,7 +189,7 @@ def scrape_dma_sb(
                 except Exception as e:  # pragma: no cover
                     _emit("error", message=f"Failed to save CSV: {e}")
                     raise
-                sb.sleep(5)
+                sb.sleep(15)
                 step()
 
                 _emit("done")
