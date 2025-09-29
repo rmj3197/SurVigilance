@@ -137,17 +137,19 @@ def scrape_dma_sb(
             step()
 
             sb.cdp.switch_to_tab(sb.cdp.get_tabs()[1])
-            sb.sleep(15)
+            sb.wait_for_ready_state_complete()
             step()
 
             outer_iframe = (
                 'iframe[src*="/upload/dap/dap.html?drug=./DK_EXTERNAL/NONCOMBINED/"]'
             )
+            sb.wait_for_element_visible(outer_iframe, timeout=30)
             if sb.is_element_present(outer_iframe):
                 with sb.frame_switch(outer_iframe):
                     try:
                         if sb.is_element_present("#button#soc_expand_all_button"):
-                            sb.click("button#soc_expand_all_button")
+                            sb.scroll_to("button#soc_expand_all_button")
+                            sb.click_if_visible("button#soc_expand_all_button")
                     except Exception as e:  # pragma: no cover
                         _emit("log", message=f"Expand-all click issue: {e}")
                     step()
