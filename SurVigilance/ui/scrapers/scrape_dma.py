@@ -136,7 +136,17 @@ def scrape_dma_sb(
             sb.sleep(5)
             step()
 
-            sb.cdp.switch_to_tab(sb.cdp.get_tabs()[1])
+            tabs = sb.cdp.get_tabs()
+            for tab in tabs:
+                if (
+                    tab.url
+                ):  # the first tab needs to be closed else it is creating issues.
+                    sb.cdp.switch_to_tab(tab)
+                    sb.cdp.close_active_tab()
+                    break
+            else:
+                print("No tab without a URL was found.")
+
             sb.wait_for_ready_state_complete()
             step()
 
