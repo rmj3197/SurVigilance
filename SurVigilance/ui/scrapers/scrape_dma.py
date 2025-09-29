@@ -79,7 +79,6 @@ def scrape_dma_sb(
         nonlocal progress_steps
         progress_steps += 1
         _emit("progress", delta=delta)
-        sb.sleep(15)
 
     try:
         with SB(uc=True, headless=headless) as sb:
@@ -87,13 +86,13 @@ def scrape_dma_sb(
             _emit("log", message="Opening laegemiddelstyrelsen.dk (DMA)")
             sb.activate_cdp_mode(url)
 
-            sb.sleep(15)
+            sb.sleep(1)
             sb.click('//*[@id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]')
-            sb.sleep(15)
+            sb.sleep(1)
 
             try:
                 sb.click('//*[@id="main-content"]/div/div/div[2]/div[1]/form/div/input')
-                sb.sleep(15)
+                sb.sleep(1)
             except Exception:  # pragma: no cover
                 pass
             step()
@@ -106,7 +105,7 @@ def scrape_dma_sb(
                 sb.click(
                     f'//*[@id="main-content"]/div/div/div[2]/div[1]/section/div[2]/div[1]/a[{alphabet_index}]'
                 )
-                sb.sleep(15)
+                sb.sleep(1)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed selecting alphabet: {e}")
                 raise
@@ -116,7 +115,7 @@ def scrape_dma_sb(
                 group = _group_label(med)
                 if group:
                     sb.click(f'a[href="?letter={med[0].upper()}&subletter={group}"]')
-                    sb.sleep(15)
+                    sb.sleep(1)
             except Exception as e:  # pragma: no cover
                 _emit("log", message=f"Skipping subgroup selection: {e}")
             step()
@@ -125,7 +124,7 @@ def scrape_dma_sb(
                 '//*[@id="main-content"]/div/div/div[2]/div[1]/section/table'
             )
             sb.wait_for_element_visible(drugs_table_xpath, timeout=30)
-            sb.sleep(15)
+            sb.sleep(2)
             table_text = sb.cdp.get_text(drugs_table_xpath) or ""
             if med.lower() not in table_text.lower():
                 _emit("error", message=f"Drug '{med}' not found in DMA list")
@@ -134,11 +133,11 @@ def scrape_dma_sb(
             sb.click(
                 f"//*[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '{med.lower()}']"
             )
-            sb.sleep(15)
+            sb.sleep(5)
             step()
 
             sb.cdp.switch_to_newest_tab()
-            sb.sleep(30)
+            sb.sleep(15)
             step()
 
             outer_iframe = (
@@ -148,52 +147,54 @@ def scrape_dma_sb(
                 with sb.frame_switch(outer_iframe):
                     try:
                         sb.click("button#soc_expand_all_button")
-                        sb.sleep(15)
+                        sb.sleep(5)
                     except Exception as e:  # pragma: no cover
                         _emit("log", message=f"Expand-all click issue: {e}")
                     step()
 
-                    sb.wait_for_element_present("#meddra_table", timeout=30)
-                    sb.sleep(15)
-                    table_el = sb.find_element("#meddra_table")
-                    table_html = table_el.get_attribute("outerHTML")
+                    if sb.is_element_present("#meddra_table"):
+                        table_el = sb.find_element("#meddra_table")
+                        table_html = table_el.get_attribute("outerHTML")
 
-                    soup = BeautifulSoup(table_html, "html.parser")
-                    table = soup.find("table", {"id": "meddra_table"})
-                    df = pd.read_html(str(table))[0]
+                        soup = BeautifulSoup(table_html, "html.parser")
+                        table = soup.find("table", {"id": "meddra_table"})
+                        df = pd.read_html(str(table))[0]
 
-                    df.columns = [str(c).strip() for c in df.columns]
-                    df = df.dropna(axis=1, how="all")
+                        df.columns = [str(c).strip() for c in df.columns]
+                        df = df.dropna(axis=1, how="all")
 
-                    if df.shape[1] >= 2:
-                        pt_col = df.columns[0]
-                        count_col = df.columns[-2]
-                        df = df.loc[:, [pt_col, count_col]]
-                        df.columns = ["PT", "Count"]
-                        df = df[df["PT"].astype(str).str.contains("\\+")]
-                        df["PT"] = (
-                            df["PT"]
-                            .astype(str)
-                            .str.replace("+", "", regex=False)
-                            .str.strip()
-                        )
-                    sb.sleep(15)
-                    step()
+                        if df.shape[1] >= 2:
+                            pt_col = df.columns[0]
+                            count_col = df.columns[-2]
+                            df = df.loc[:, [pt_col, count_col]]
+                            df.columns = ["PT", "Count"]
+                            df = df[df["PT"].astype(str).str.contains("\\+")]
+                            df["PT"] = (
+                                df["PT"]
+                                .astype(str)
+                                .str.replace("+", "", regex=False)
+                                .str.strip()
+                            )
+                        sb.sleep(5)
+                        step()
 
-                df = df.reset_index(drop=True)
+                        df = df.reset_index(drop=True)
 
-                out_path = os.path.join(output_dir, f"{med}_dma_adrs.csv")
-                try:
-                    df.to_csv(out_path, index=False)
-                    _emit("log", message=f"Data saved to: {os.path.abspath(out_path)}")
-                except Exception as e:  # pragma: no cover
-                    _emit("error", message=f"Failed to save CSV: {e}")
-                    raise
-                sb.sleep(15)
-                step()
+                        out_path = os.path.join(output_dir, f"{med}_dma_adrs.csv")
+                        try:
+                            df.to_csv(out_path, index=False)
+                            _emit(
+                                "log",
+                                message=f"Data saved to: {os.path.abspath(out_path)}",
+                            )
+                        except Exception as e:  # pragma: no cover
+                            _emit("error", message=f"Failed to save CSV: {e}")
+                            raise
+                        sb.sleep(5)
+                        step()
 
-                _emit("done")
-                return df
+                        _emit("done")
+                        return df
 
     except Exception:  # pragma: no cover
         raise
