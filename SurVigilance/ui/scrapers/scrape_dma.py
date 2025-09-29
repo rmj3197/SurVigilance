@@ -57,7 +57,7 @@ def scrape_dma_sb(
     A dataframe with columns ['PT', 'Count'].
     """
 
-    def _emit(event_type: str, **kw: Any) -> None:  # pragma: no cover
+    def _emit(event_type: str, **kw: Any) -> None:
         if callback:
             try:
                 callback({"type": event_type, **kw})
@@ -79,6 +79,7 @@ def scrape_dma_sb(
         nonlocal progress_steps
         progress_steps += 1
         _emit("progress", delta=delta)
+        sb.sleep(5)
 
     try:
         with SB(uc=True, headless=headless) as sb:
@@ -88,11 +89,12 @@ def scrape_dma_sb(
 
             sb.sleep(5)
             sb.click('//*[@id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]')
+            sb.sleep(5)
 
             try:
                 sb.click('//*[@id="main-content"]/div/div/div[2]/div[1]/form/div/input')
-                sb.sleep(0.6)
-            except Exception:
+                sb.sleep(5)
+            except Exception:  # pragma: no cover
                 pass
             step()
 
@@ -104,7 +106,7 @@ def scrape_dma_sb(
                 sb.click(
                     f'//*[@id="main-content"]/div/div/div[2]/div[1]/section/div[2]/div[1]/a[{alphabet_index}]'
                 )
-                sb.sleep(0.5)
+                sb.sleep(5)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed selecting alphabet: {e}")
                 raise
@@ -114,7 +116,7 @@ def scrape_dma_sb(
                 group = _group_label(med)
                 if group:
                     sb.click(f'a[href="?letter={med[0].upper()}&subletter={group}"]')
-                    sb.sleep(0.6)
+                    sb.sleep(5)
             except Exception as e:  # pragma: no cover
                 _emit("log", message=f"Skipping subgroup selection: {e}")
             step()
@@ -123,6 +125,7 @@ def scrape_dma_sb(
                 '//*[@id="main-content"]/div/div/div[2]/div[1]/section/table'
             )
             sb.wait_for_element_visible(drugs_table_xpath, timeout=30)
+            sb.sleep(5)
             table_text = sb.cdp.get_text(drugs_table_xpath) or ""
             if med.lower() not in table_text.lower():
                 _emit("error", message=f"Drug '{med}' not found in DMA list")
@@ -131,10 +134,11 @@ def scrape_dma_sb(
             sb.click(
                 f"//*[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '{med.lower()}']"
             )
-            sb.sleep(0.6)
+            sb.sleep(5)
             step()
 
             sb.cdp.switch_to_newest_tab()
+            sb.sleep(5)
             step()
 
             outer_iframe = (
@@ -144,12 +148,13 @@ def scrape_dma_sb(
                 with sb.frame_switch(outer_iframe):
                     try:
                         sb.click("button#soc_expand_all_button")
-                        sb.sleep(0.4)
+                        sb.sleep(5)
                     except Exception as e:  # pragma: no cover
                         _emit("log", message=f"Expand-all click issue: {e}")
                     step()
 
                     sb.wait_for_element_present("#meddra_table", timeout=30)
+                    sb.sleep(5)
                     table_el = sb.find_element("#meddra_table")
                     table_html = table_el.get_attribute("outerHTML")
 
@@ -165,15 +170,14 @@ def scrape_dma_sb(
                         count_col = df.columns[-2]
                         df = df.loc[:, [pt_col, count_col]]
                         df.columns = ["PT", "Count"]
-                        # Retain rows where PT contains '+'
                         df = df[df["PT"].astype(str).str.contains("\\+")]
-                        # Remove '+' from PT values
                         df["PT"] = (
                             df["PT"]
                             .astype(str)
                             .str.replace("+", "", regex=False)
                             .str.strip()
                         )
+                    sb.sleep(5)
                     step()
 
                 df = df.reset_index(drop=True)
@@ -185,6 +189,7 @@ def scrape_dma_sb(
                 except Exception as e:  # pragma: no cover
                     _emit("error", message=f"Failed to save CSV: {e}")
                     raise
+                sb.sleep(5)
                 step()
 
                 _emit("done")
