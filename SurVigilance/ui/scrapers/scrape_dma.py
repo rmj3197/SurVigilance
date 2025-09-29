@@ -136,7 +136,7 @@ def scrape_dma_sb(
             sb.sleep(5)
             step()
 
-            sb.cdp.switch_to_newest_tab()
+            sb.cdp.switch_to_tab(sb.cdp.get_tabs()[1])
             sb.sleep(15)
             step()
 
@@ -146,8 +146,8 @@ def scrape_dma_sb(
             if sb.is_element_present(outer_iframe):
                 with sb.frame_switch(outer_iframe):
                     try:
-                        sb.click("button#soc_expand_all_button")
-                        sb.sleep(5)
+                        if sb.is_element_present("#button#soc_expand_all_button"):
+                            sb.click("button#soc_expand_all_button")
                     except Exception as e:  # pragma: no cover
                         _emit("log", message=f"Expand-all click issue: {e}")
                     step()
