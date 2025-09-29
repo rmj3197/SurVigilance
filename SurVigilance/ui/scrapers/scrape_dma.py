@@ -138,7 +138,7 @@ def scrape_dma_sb(
             step()
 
             sb.cdp.switch_to_newest_tab()
-            sb.sleep(5)
+            sb.sleep(30)
             step()
 
             outer_iframe = (
@@ -148,7 +148,7 @@ def scrape_dma_sb(
                 with sb.frame_switch(outer_iframe):
                     try:
                         sb.click("button#soc_expand_all_button")
-                        sb.sleep(5)
+                        sb.sleep(15)
                     except Exception as e:  # pragma: no cover
                         _emit("log", message=f"Expand-all click issue: {e}")
                     step()
