@@ -32,13 +32,21 @@ Currently, SurVigilance supports the following databases:
 - VigiAccess
 - Lareb
 
-Installation using ``pip``
---------------------------
+Installation Overview
+----------------------
 
 ``pip install SurVigilance``
 
-Details on dependencies can be found in the `Installation
-Guide <https://survigilance.netlify.app/getting_started/installation.html>`__.
+**Google Chrome** is required to run **SurVigilance**. You can download it here:
+`https://www.google.com/chrome/ <https://www.google.com/chrome/>`_
+
+Any operating system and architecture in which Google Chrome and other dependencies are available should be able to run this application.
+
+.. note::
+
+   **Chromium** is different from **Google Chrome**. Please ensure that Google Chrome is installed.
+
+Details on additional dependencies can be found in the `Installation Guide <https://survigilance.netlify.app/getting_started/installation.html>`__.
 
 Usage
 -----

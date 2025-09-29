@@ -46,7 +46,7 @@ def scrape_faers_sb(
             try:
                 callback({"type": event_type, **kw})
             except Exception:  # pragma: no cover
-                raise
+                raise  # pragma: no cover
 
     os.makedirs(output_dir, exist_ok=True)
 
@@ -86,7 +86,7 @@ def scrape_faers_sb(
                 q_new[year] = first_col
                 _emit("progress", delta=delta_new)
             except Exception:  # pragma: no cover
-                raise
+                raise  # pragma: no cover
 
         # This portion of the code accesses the older years pre Q4 2012 and finds the available quarters
         older_btn = '//*[@id="older_accordion"]/div/div[1]/h4/a'
@@ -126,7 +126,7 @@ def scrape_faers_sb(
                 q_old[year] = first_col2
                 _emit("progress", delta=delta_old)
             except Exception:  # pragma: no cover
-                raise
+                raise  # pragma: no cover
 
     merged = {}
     for y, qs in q_new.items():
@@ -159,7 +159,7 @@ def scrape_faers_sb(
         df.attrs["faers_years_new_count"] = len(years_new)
         df.attrs["faers_years_old_count"] = len(years_old)
     except Exception:  # pragma: no cover
-        raise
+        raise  # pragma: no cover
 
     _emit("log", message=f"Data saved to: {os.path.abspath(output_csv_path)}")
     _emit("done")
@@ -202,7 +202,7 @@ def download_file(
             try:
                 callback(evt)
             except Exception:  # pragma: no cover
-                raise
+                raise  # pragma: no cover
 
     u = str(url)
 
@@ -258,4 +258,4 @@ def download_file(
 
     except Exception as e:  # pragma: no cover
         _emit({"type": "error", "message": str(e), "url": u})
-        raise
+        raise  # pragma: no cover

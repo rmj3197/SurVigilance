@@ -32,7 +32,7 @@ QUARTER_MONTHS = {
 def faers_ascii_url(year: int, quarter: int) -> str:  # pragma: no cover
     """Return the FAERS ASCII zip URL for a given year and quarter (1 to 4)."""
     if quarter not in (1, 2, 3, 4):
-        raise ValueError("quarter must be 1, 2, 3, or 4")
+        raise ValueError("quarter must be 1, 2, 3, or 4")  # pragma: no cover
 
     if year >= 2013:
         return f"https://fis.fda.gov/content/Exports/faers_ascii_{year}q{quarter}.zip"

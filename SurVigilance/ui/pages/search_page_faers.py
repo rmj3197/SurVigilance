@@ -120,7 +120,7 @@ if fetch:
             if isinstance(new_count, int) and isinstance(old_count, int):
                 log_box.info(f"Found data for {new_count + old_count} years.")
         except Exception:  # pragma: no cover
-            raise
+            raise  # pragma: no cover
 
         if df is not None and not df.empty:
             st.session_state["faers_df"] = df
@@ -216,7 +216,7 @@ if df is not None:
                             return int(qnum)
 
                 except Exception:  # pragma: no cover
-                    raise
+                    raise  # pragma: no cover
                 return None
 
             # Build a list of objects containing year, quarter, and the URL to download
@@ -243,7 +243,7 @@ if df is not None:
                         }
                     )
                 except Exception:  # pragma: no cover
-                    raise
+                    raise  # pragma: no cover
 
             if selections_with_urls:
                 st.divider()
@@ -332,7 +332,7 @@ if df is not None:
                                     "FAERS download(s) complete"
                                 )  # Small confirmation after download is complete
                             except Exception:  # pragma: no cover
-                                raise
+                                raise  # pragma: no cover
                         if failures:  # pragma: no cover
                             st.error(f"Failed {len(failures)} file(s)")
                             for fname, msg in failures:

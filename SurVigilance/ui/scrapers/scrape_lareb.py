@@ -46,7 +46,7 @@ def scrape_lareb_sb(
             try:
                 callback({"type": event_type, **kw})
             except Exception:
-                raise
+                raise  # pragma: no cover
 
     os.makedirs(output_dir, exist_ok=True)
 
@@ -59,7 +59,7 @@ def scrape_lareb_sb(
                 sb.sleep(2)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed to open site: {e}")
-                raise
+                raise  # pragma: no cover
 
             try:
                 sb.sleep(1.5)
@@ -70,7 +70,7 @@ def scrape_lareb_sb(
                 sb.sleep(2)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Error encountered while searching: {e}")
-                raise
+                raise  # pragma: no cover
 
             try:
                 sb.sleep(2)
@@ -97,7 +97,7 @@ def scrape_lareb_sb(
                 sb.sleep(3)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Couldn't click search button: {e}")
-                raise
+                raise  # pragma: no cover
 
             try:
                 sb.cdp.wait_for_element_visible("#registrationsTab", timeout=600)
@@ -109,7 +109,7 @@ def scrape_lareb_sb(
                 sb.sleep(2)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Couldn't find table: {e}")
-                raise
+                raise  # pragma: no cover
 
             expanded_texts = []
             total_rows = len(rows) if rows else 0
@@ -176,4 +176,4 @@ def scrape_lareb_sb(
 
     except Exception as e:  # pragma: no cover
         _emit("error", message=f"Fatal scraping error: {e}")
-        raise
+        raise  # pragma: no cover

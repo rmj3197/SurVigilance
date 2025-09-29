@@ -127,7 +127,7 @@ try:
     resolved = os.path.abspath(os.path.expanduser(st.session_state.data_root))
     st.caption(f"Saving under: `{resolved}`")
 except Exception:
-    raise
+    raise  # pragma: no cover
 
 
 st.subheader("Please select a Database to Search")

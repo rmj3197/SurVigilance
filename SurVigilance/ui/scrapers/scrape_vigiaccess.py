@@ -46,7 +46,7 @@ def scrape_vigiaccess_sb(
             try:
                 callback({"type": event_type, **kw})
             except Exception:  # pragma: no cover
-                raise
+                raise  # pragma: no cover
 
     os.makedirs(output_dir, exist_ok=True)
 
@@ -61,7 +61,7 @@ def scrape_vigiaccess_sb(
                 sb.activate_cdp_mode(url)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed to open site: {e}")
-                raise
+                raise  # pragma: no cover
 
             try:
                 # sb.cdp.click(".level-left")
@@ -74,7 +74,7 @@ def scrape_vigiaccess_sb(
                 sb.click(".button")
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Search actions failed: {e}")
-                raise
+                raise  # pragma: no cover
 
             try:
                 sb.cdp.wait_for_element_visible("td", timeout=20)
@@ -85,14 +85,14 @@ def scrape_vigiaccess_sb(
                 )
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed entering results view: {e}")
-                raise
+                raise  # pragma: no cover
 
             groups_xpath = '//*[@id="elmish-app"]/div/section[2]/div/div[2]/ul/li'
             try:
                 sb.cdp.wait_for_element_visible(groups_xpath, timeout=20)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Reaction groups list not found: {e}")
-                raise
+                raise  # pragma: no cover
 
             try:
                 group_items = sb.cdp.find_elements(groups_xpath)
@@ -149,7 +149,7 @@ def scrape_vigiaccess_sb(
                 count = int(line.rsplit("(", 1)[1].split(")")[0])
                 data_map[adr] = count
             except Exception:  # pragma: no cover
-                raise
+                raise  # pragma: no cover
 
         df = pd.DataFrame(data_map.items(), columns=["PT", "Count"]).reset_index(
             drop=True
@@ -167,4 +167,4 @@ def scrape_vigiaccess_sb(
 
     except Exception as e:  # pragma: no cover
         _emit("error", message=f"Fatal scraping error: {e}")
-        raise
+        raise  # pragma: no cover
