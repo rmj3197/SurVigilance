@@ -87,14 +87,10 @@ def scrape_dma_sb(
             sb.activate_cdp_mode(url)
 
             sb.sleep(5)
-            sb.cdp.click(
-                '//*[@id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]'
-            )
+            sb.click('//*[@id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]')
 
             try:
-                sb.cdp.click(
-                    '//*[@id="main-content"]/div/div/div[2]/div[1]/form/div/input'
-                )
+                sb.click('//*[@id="main-content"]/div/div/div[2]/div[1]/form/div/input')
                 sb.sleep(0.6)
             except Exception:
                 pass
@@ -105,7 +101,7 @@ def scrape_dma_sb(
                 if not ("A" <= first_char <= "Z"):
                     raise ValueError("Unsupported starting character for medicine")
                 alphabet_index = ord(first_char) - ord("A") + 1
-                sb.cdp.click(
+                sb.click(
                     f'//*[@id="main-content"]/div/div/div[2]/div[1]/section/div[2]/div[1]/a[{alphabet_index}]'
                 )
                 sb.sleep(0.5)
