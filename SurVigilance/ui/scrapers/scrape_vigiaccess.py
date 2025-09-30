@@ -59,6 +59,7 @@ def scrape_vigiaccess_sb(
             try:
                 url = "https://www.vigiaccess.org/"
                 sb.activate_cdp_mode(url)
+                sb.sleep(1)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed to open site: {e}")
                 raise  # pragma: no cover
@@ -66,12 +67,16 @@ def scrape_vigiaccess_sb(
             try:
                 # sb.cdp.click(".level-left")
                 sb.cdp.check_if_unchecked('//*[@id="accept-terms-and-conditions"]')
+                sb.sleep(0.5)
                 sb.cdp.click(
                     '//*[@id="elmish-app"]/section/div/div[2]/nav/div[2]/div/button'
                 )
+                sb.sleep(0.5)
 
                 sb.type(".input", medicine)
+                sb.sleep(0.5)
                 sb.click(".button")
+                sb.sleep(1)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Search actions failed: {e}")
                 raise  # pragma: no cover
@@ -79,10 +84,12 @@ def scrape_vigiaccess_sb(
             try:
                 sb.cdp.wait_for_element_visible("td", timeout=20)
                 sb.cdp.click("td")
+                sb.sleep(0.5)
 
                 sb.cdp.click_if_visible(
                     '//*[@id="elmish-app"]/div/section[1]/div/div/div[1]/div[2]/footer/button'
                 )
+                sb.sleep(0.5)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed entering results view: {e}")
                 raise  # pragma: no cover
@@ -90,6 +97,7 @@ def scrape_vigiaccess_sb(
             groups_xpath = '//*[@id="elmish-app"]/div/section[2]/div/div[2]/ul/li'
             try:
                 sb.cdp.wait_for_element_visible(groups_xpath, timeout=20)
+                sb.sleep(0.5)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Reaction groups list not found: {e}")
                 raise  # pragma: no cover
@@ -133,6 +141,7 @@ def scrape_vigiaccess_sb(
 
                     # sb.cdp.gui_hover_element(title_span)
                     sb.cdp.click(title_span)
+                    sb.sleep(0.5)
 
                 except Exception as e:  # pragma: no cover
                     _emit("log", message=f"Group {i}: skipping due to error: {e}")
