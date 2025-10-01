@@ -43,7 +43,7 @@ st.markdown(f"<h1 style='text-align: center;'>{heading}</h1>", unsafe_allow_html
 st.info(
     f"""
     How the DK DMA data collection works:
-    - Opens the Danish Medicines Agency database and searches for provided the medicine or vaccine.
+    - Opens the Danish Medicines Agency database (https://laegemiddelstyrelsen.dk/sideeffects/side-effects-of-medicines/interactive-adverse-drug-reaction-overviews/.aspx) and searches for provided the medicine or vaccine.
     - Extracts the MedDRA Preferred Terms (PTs) and counts associated with the drug/vaccine.
     - Saves a CSV to `{dma_dir_display}/<medicine>_dma_adrs.csv`.
     """

@@ -56,3 +56,5 @@ docs/*/*.ZIP
 docs/*/*.xlsx
 
 tests/data
+additional_scripts/*
+extracted_files/*

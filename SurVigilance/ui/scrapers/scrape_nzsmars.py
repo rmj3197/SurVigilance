@@ -85,7 +85,7 @@ def scrape_medsafe_sb(
             try:
                 if sb.cdp.is_element_present('//*[@id="Accept"]'):
                     sb.cdp.click('//*[@id="Accept"]')
-                    sb.sleep(0.5)
+                    sb.sleep(2)
             except Exception as e:  # pragma: no cover
                 _emit("log", message=f"Cookie/terms click skipped or failed: {e}")
 
@@ -96,17 +96,18 @@ def scrape_medsafe_sb(
                     sb.cdp.select_if_unselected('//*[@id="MainContent_MedicineType_0"]')
                 else:
                     sb.cdp.select_if_unselected('//*[@id="MainContent_MedicineType_1"]')
-                sb.sleep(0.4)
+                sb.sleep(5)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed setting medicine type: {e}")
                 raise  # pragma: no cover
 
             # Search text
             try:
-                sb.cdp.type('//*[@id="MainContent_TextToFind"]', str(drug_vaccine))
-                sb.sleep(0.4)
-                sb.cdp.click('//*[@id="MainContent_ButtonFind"]')
-                sb.sleep(0.6)
+                if sb.cdp.is_element_visible('//*[@id="MainContent_TextToFind"]'):
+                    sb.cdp.type('//*[@id="MainContent_TextToFind"]', str(drug_vaccine))
+                    sb.sleep(0.4)
+                    sb.cdp.click('//*[@id="MainContent_ButtonFind"]')
+                    sb.sleep(0.6)
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed typing/searching for term: {e}")
                 raise  # pragma: no cover

@@ -1,6 +1,11 @@
 name: Codecov Workflow
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  schedule:
+    # Every 14 days at 00:00 UTC
+    - cron: "0 0 */14 * *"
 
 jobs:
   build:

@@ -44,7 +44,7 @@ st.markdown(f"<h1 style='text-align: center;'>{heading}</h1>", unsafe_allow_html
 st.info(
     f"""
     How the NZ MEDSAFE data collection works:
-    - Opens the NZ Medsafe database and searches for provided medicine/vaccine by selecting appropriate radio button.
+    - Opens the NZ Medsafe database (https://www.medsafe.govt.nz/SMARS/Default) and searches for provided medicine/vaccine by selecting appropriate radio button.
     - Parses the Preferred Terms (PTs) and counts for the given drug/vaccine.
     - Saves a CSV to `{nz_dir_display}/<term>_nzsmars_adrs.csv`.
     """

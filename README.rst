@@ -35,7 +35,7 @@ Currently, SurVigilance supports the following databases:
 Installation Overview
 ----------------------
 
-``pip install SurVigilance``
+SurVigilance is available on PyPI and can be installed using ``pip install SurVigilance``
 
 **Google Chrome** is required to run **SurVigilance**. You can download it here:
 `https://www.google.com/chrome/ <https://www.google.com/chrome/>`_
@@ -130,9 +130,10 @@ Disclaimer
    access.
 -  All database names and trademarks are the property of their
    respective owners.
--  We gratefully acknowledge the organizations that maintain the FAERS,
-   VAERS, VigiAccess, and Lareb databases, whose efforts make these
-   datasets publicly accessible.
+-  We gratefully acknowledge the organizations that maintain the **FAERS**, 
+   **VAERS**, **VigiAccess**, **Lareb**, **DAEN**, **DMA**, and **Medsafe** 
+   databases, whose efforts make these datasets publicly accessible.
+
 
 .. |License: GPL v3| image:: https://img.shields.io/badge/License-GPLv3-blue.svg
    :target: https://github.com/rmj3197/SurVigilance/blob/master/LICENSE

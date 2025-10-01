@@ -43,7 +43,7 @@ st.markdown(f"<h1 style='text-align: center;'>{heading}</h1>", unsafe_allow_html
 st.info(
     f"""
     How the AU DAEN data collection works:
-    - Opens the TGA DAEN medicines search and searches for the provided drug/vaccine.
+    - Opens the DAEN medicines (https://daen.tga.gov.au/medicines-search/) search and searches for the provided drug/vaccine.
     - Initiates an export of the data with MedDRA Preferred Terms (PTs) and associated counts.
     - Saves the downloaded file to `{daen_dir_display}/<medicine>_daen_export.ext`.
     """
