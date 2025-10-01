@@ -27,10 +27,13 @@ pharmaceutical drugs or vaccines.
 
 Currently, SurVigilance supports the following databases: 
 
-- FAERS 
+- FAERS
 - VAERS
 - VigiAccess
 - Lareb
+- DAEN
+- DMA
+- Medsafe
 
 Installation Overview
 ----------------------
