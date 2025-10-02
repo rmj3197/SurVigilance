@@ -3,6 +3,7 @@ import os
 import sys
 from pathlib import Path
 
+import pandas as pd
 import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -124,17 +125,18 @@ if submitted:
         error_box.error("Please enter a medicine name.")
     else:
         try:
-            result_path = scrape_daen_sb(
+            result_df = scrape_daen_sb(
                 medicine=med,
                 output_dir=daen_dir,
                 callback=streamlit_callback,
                 headless=True,
             )
-            if result_path and os.path.isfile(result_path):
-                abs_path = os.path.abspath(result_path)
-                download_box.info(f"File saved to: {abs_path}")
+            if isinstance(result_df, pd.DataFrame):
+                download_box.info(
+                    f"Data collected: {len(result_df)} rows, {len(result_df.columns)} columns."
+                )
             else:  # pragma: no cover
-                download_box.info("No file detected from export.")
+                download_box.info("Data collected.")
         except Exception as e:  # pragma: no cover
             error_box.error(f"Data collection failed: {e}")
             status_box.error("Data collection aborted.")

@@ -7,6 +7,7 @@ import shutil
 import time
 from typing import Any, Callable, Optional
 
+import pandas as pd
 from selenium.webdriver.common.keys import Keys
 from seleniumbase import SB
 
@@ -17,9 +18,10 @@ def scrape_daen_sb(
     callback: Optional[Callable[[dict], None]] = None,
     headless: bool = True,
     fallback_wait: int = 120,
-) -> str:  # pragma: no cover
+) -> pd.DataFrame:  # pragma: no cover
     """
-    Navigate the DAEN Power BI report, search for a medicine, and export data.
+    Scrapes the reported MedDRA Preferred Terms and counts for a given medicine
+    from the Australian DAEN database.
 
     Parameters
     -----------
@@ -27,7 +29,7 @@ def scrape_daen_sb(
         Drug/medicine name to search.
 
     output_dir: str
-        Directory to move the exported file into (default "data/daen").
+        Directory to save the CSV data file (default "data/daen").
 
     callback: callable, optional
         Callable to receive UI/status events, called with a dict.
@@ -42,14 +44,14 @@ def scrape_daen_sb(
 
     Returns
     --------
-    The full path to the moved exported file.
+    A dataFrame of the downloaded data.
     """
 
     def _emit(event_type: str, **kw: Any) -> None:  # pragma: no cover
         if callback:
             try:
                 callback({"type": event_type, **kw})
-            except Exception:
+            except Exception:  # pragma: no cover
                 raise  # pragma: no cover
 
     med = (medicine or "").strip()
@@ -156,7 +158,17 @@ def scrape_daen_sb(
                 shutil.move(last_candidate, target_path)
 
             _emit("download_complete", path=target_path, filename=target_name)
-            return target_path
+
+            try:
+                ext_l = ext.lower()
+                if ext_l in [".xlsx", ".xls"]:
+                    df = pd.read_excel(target_path)
+                else:
+                    df = pd.read_csv(target_path)
+                return df
+            except Exception as e:  # pragma: no cover
+                _emit("error", message=f"Failed to read exported file: {e}")
+                raise  # pragma: no cover
 
         except Exception:  # pragma: no cover
             raise  # pragma: no cover
