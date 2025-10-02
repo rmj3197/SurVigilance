@@ -21,6 +21,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: 📁 List files in repository root
+        run: |
+          echo "Files in root directory:"
+          ls -la
+        shell: bash
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
