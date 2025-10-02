@@ -126,7 +126,7 @@ st.button("Select Data Folder", on_click=update_data_folder, width="stretch")
 try:
     resolved = os.path.abspath(os.path.expanduser(st.session_state.data_root))
     st.caption(f"Saving under: `{resolved}`")
-except Exception:
+except Exception:  # pragma: no cover
     raise  # pragma: no cover
 
 

@@ -6,15 +6,15 @@ Even though SurVigilance is a GUI application to download data from various safe
 we have also kept the possibility for a user to interact in a programmatic manner to download the data.
 This vignette demonstrates how to access the different databases programmatically and download the required data.
 
-VigiAccess
-==========
+WHO VigiAccess
+==============
 In this example, we would like to download data from VigiAccess for the drug "aspirin".
 
 .. exec_code::
    :filename: user_guide/vigiaccess_example.py
 
-Lareb
-======
+NL Lareb
+========
 In this example, we would like to download data from Lareb for the drug "paracetamol".
 
 .. exec_code::
@@ -41,8 +41,8 @@ In this example, we would like to fetch data from the TGA DAEN for the medicine 
 .. exec_code::
    :filename: user_guide/daen_example.py
 
-FAERS
-======
+USA FAERS
+=========
 For the FAERS databases, we can download the ZIP files. To see which data files are available 
 for different quarters, we should first review the list of available files.
 

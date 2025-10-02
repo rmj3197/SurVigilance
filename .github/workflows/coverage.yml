@@ -42,8 +42,9 @@ jobs:
         shell: bash
 
       - name: Run tests and collect coverage
+        working-directory: .
         run: |
-          coverage run -m pytest
+          coverage run -m pytest .
           coverage xml
         shell: bash
 
