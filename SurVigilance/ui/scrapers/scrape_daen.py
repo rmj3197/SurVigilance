@@ -161,7 +161,7 @@ def scrape_daen_sb(
 
             try:
                 ext_l = ext.lower()
-                if ext_l in [".xlsx", ".xls"]:
+                if ext_l in [".xlsx"]:
                     df = pd.read_excel(target_path)
                 else:
                     df = pd.read_csv(target_path)

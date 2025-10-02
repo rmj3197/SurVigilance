@@ -31,8 +31,8 @@ REQUIRES = [
     "requests>=2.28.0",
     "beautifulsoup4>=4.12.0",
     "lxml>=6.0.0",
+    "openpyxl>=3.1.0",
 ]
-
 
 setup(
     name=NAME,
