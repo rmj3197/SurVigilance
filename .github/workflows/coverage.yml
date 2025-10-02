@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: 📁 List files in repository root
+      - name: List files in repository root
         run: |
           echo "Files in root directory:"
           ls -la

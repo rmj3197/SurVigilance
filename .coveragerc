@@ -2,6 +2,7 @@
 branch = True
 source =
     SurVigilance
+    tests
 omit =
     SurVigilance/ui/scrapers/scrape_vaers.py
     SurVigilance/ui/pages/search_page_vaers.py
