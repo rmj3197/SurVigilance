@@ -29,7 +29,7 @@ def scrape_daen_sb(
         Drug/medicine name to search.
 
     output_dir: str
-        Directory to save the CSV data file (default "data/daen").
+        Directory to save the Excel (.xlsx) data file (default "data/daen").
 
     callback: callable, optional
         Callable to receive UI/status events, called with a dict.
@@ -145,7 +145,7 @@ def scrape_daen_sb(
             base_name = os.path.basename(last_candidate)
             _root, ext = os.path.splitext(base_name)
             if not ext:
-                ext = ".csv"
+                ext = ".xlsx"
             target_name = f"{med}_daen_export{ext}"
             target_path = os.path.join(output_dir, target_name)
 
@@ -160,11 +160,8 @@ def scrape_daen_sb(
             _emit("download_complete", path=target_path, filename=target_name)
 
             try:
-                ext_l = ext.lower()
-                if ext_l in [".xlsx"]:
-                    df = pd.read_excel(target_path)
-                else:
-                    df = pd.read_csv(target_path)
+                # The DAEN export is expected to be an Excel .xlsx file.
+                df = pd.read_excel(target_path)
                 return df
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed to read exported file: {e}")
