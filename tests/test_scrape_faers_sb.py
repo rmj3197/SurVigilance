@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from SurVigilance.ui.scrapers.scrape_faers import scrape_faers_sb
+from SurVigilance.ui.scrapers import scrape_faers_sb
 
 
 def test_scrape_faers_sb_real_browser(tmp_path):

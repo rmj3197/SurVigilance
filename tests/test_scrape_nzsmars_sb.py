@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from SurVigilance.ui.scrapers.scrape_nzsmars import scrape_medsafe_sb
+from SurVigilance.ui.scrapers import scrape_medsafe_sb
 
 
 def test_scrape_nzsmars_real_browser(tmp_path):

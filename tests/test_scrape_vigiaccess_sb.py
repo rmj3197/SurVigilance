@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from SurVigilance.ui.scrapers.scrape_vigiaccess import scrape_vigiaccess_sb
+from SurVigilance.ui.scrapers import scrape_vigiaccess_sb
 
 
 def test_scrape_vigiaccess_real_browser(tmp_path):

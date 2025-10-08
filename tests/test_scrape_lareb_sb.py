@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from SurVigilance.ui.scrapers.scrape_lareb import scrape_lareb_sb
+from SurVigilance.ui.scrapers import scrape_lareb_sb
 
 
 def test_scrape_lareb_real_browser(tmp_path):
