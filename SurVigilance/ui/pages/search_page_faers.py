@@ -3,7 +3,6 @@ import os
 import re
 import sys
 from pathlib import Path
-from typing import Optional
 
 import streamlit as st
 
@@ -203,7 +202,7 @@ if df is not None:
 
         if selected_list:
             # Trying to convert a label like "Jan-Mar" into Q1.
-            def _infer_quarter_number(label: str) -> Optional[int]:
+            def _infer_quarter_number(label: str) -> int | None:
                 try:
                     label_lower = (label or "").lower()
 

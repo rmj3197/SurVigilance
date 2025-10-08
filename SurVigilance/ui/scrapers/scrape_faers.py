@@ -4,7 +4,8 @@ Scraper for FAERS using SeleniumBase.
 
 import os
 import warnings
-from typing import Any, Callable, Optional
+from collections.abc import Callable
+from typing import Any
 from urllib.parse import urlparse
 
 import pandas as pd
@@ -17,7 +18,7 @@ warnings.filterwarnings("ignore")
 def scrape_faers_sb(
     output_dir: str = "data/faers",
     headless: bool = True,
-    callback: Optional[Callable[[dict], None]] = None,
+    callback: Callable[[dict], None] | None = None,
 ) -> pd.DataFrame:
     """
     Scrapes all available years and associated quarters from the FAERS
@@ -26,7 +27,6 @@ def scrape_faers_sb(
     Parameters
     -----------
     output_dir: Directory to save CSV (default "data/faers").
-        headless: Run the browser in headless mode (default True).
 
     headless: bool
         Run the browser in headless mode (default True).
@@ -170,7 +170,7 @@ def download_file(
     url: str,
     download_dir: str = "data/faers",
     timeout: int = 600,
-    callback: Optional[Callable[[dict], None]] = None,
+    callback: Callable[[dict], None] | None = None,
 ) -> str:
     """
     Save a file from a direct link using requests module.

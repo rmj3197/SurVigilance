@@ -3,14 +3,15 @@ Scraper for Denmark DMA interactive ADR overviews using SeleniumBase.
 """
 
 import os
-from typing import Any, Callable, Optional
+from collections.abc import Callable
+from typing import Any
 
 import pandas as pd
 from bs4 import BeautifulSoup
 from seleniumbase import SB
 
 
-def _group_label(name: str) -> Optional[str]:  # pragma: no cover
+def _group_label(name: str) -> str | None:  # pragma: no cover
     name = (name or "").strip().lower()
     second = name[1]
     if "a" <= second <= "d":
@@ -30,7 +31,7 @@ def _group_label(name: str) -> Optional[str]:  # pragma: no cover
 def scrape_dma_sb(
     medicine: str,
     output_dir: str = "data/dma",
-    callback: Optional[Callable[[dict], None]] = None,
+    callback: Callable[[dict], None] | None = None,
     headless: bool = True,
 ) -> pd.DataFrame:
     """

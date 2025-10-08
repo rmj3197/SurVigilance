@@ -4,7 +4,8 @@ Scraper for NZ MEDSAFE (Suspected Medicine Adverse Reaction Search (SMARS)) usin
 
 import os
 import warnings
-from typing import Any, Callable, Optional
+from collections.abc import Callable
+from typing import Any
 
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -17,7 +18,7 @@ def scrape_medsafe_sb(
     searching_for: str,
     drug_vaccine: str,
     output_dir: str = "data/nzmedsafe",
-    callback: Optional[Callable[[dict], None]] = None,
+    callback: Callable[[dict], None] | None = None,
     headless: bool = True,
 ) -> pd.DataFrame:
     """

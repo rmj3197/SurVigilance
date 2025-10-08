@@ -4,7 +4,8 @@ Scraper for LAREB using SeleniumBase.
 
 import os
 import warnings
-from typing import Any, Callable, Optional
+from collections.abc import Callable
+from typing import Any
 
 import pandas as pd
 from seleniumbase import SB
@@ -15,7 +16,7 @@ warnings.filterwarnings("ignore")
 def scrape_lareb_sb(
     medicine: str,
     output_dir: str = "data/lareb",
-    callback: Optional[Callable[[dict], None]] = None,
+    callback: Callable[[dict], None] | None = None,
     headless: bool = True,
 ) -> pd.DataFrame:
     """

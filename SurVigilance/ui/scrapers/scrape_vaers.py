@@ -5,7 +5,8 @@ Downloader for VAERS yearly ZIPs.
 import os
 import shutil
 import time
-from typing import Any, Callable, Optional
+from collections.abc import Callable
+from typing import Any
 
 import requests
 from seleniumbase import SB
@@ -19,8 +20,8 @@ def download_vaers_zip_sb(
     year: int,
     download_dir: str = "data/vaers",
     timeout: int = 600,
-    callback: Optional[Callable[[dict], None]] = None,
-    headless: bool = False,
+    callback: Callable[[dict], None] | None = None,
+    headless: bool = True,
     fallback_wait: int = 120,
 ) -> str:  # pragma: no cover
     """
@@ -186,7 +187,7 @@ def download_vaers_zip_sb(
 
             downloaded = 0
             with open(file_path, "wb") as f:
-                for chunk in r.iter_content(chunk_size=18192):
+                for chunk in r.iter_content(chunk_size=8192):
                     if not chunk:
                         continue
                     f.write(chunk)
