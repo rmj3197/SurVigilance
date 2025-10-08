@@ -67,10 +67,12 @@ def scrape_vigiaccess_sb(
 
             try:
                 # sb.cdp.click(".level-left")
+                sb.cdp.scroll_into_view('//*[@id="elmish-app"]/footer')
+                sb.sleep(0.5)
                 if sb.is_element_visible(
                     '//*[@id="elmish-app"]/section/div/div[2]/nav/div[1]/div'
                 ):
-                    sb.cdp.check_if_unchecked('//*[@id="accept-terms-and-conditions"]')
+                    sb.cdp.click('//*[@id="accept-terms-and-conditions"]')
                 sb.sleep(0.5)
                 sb.cdp.click(
                     '//*[@id="elmish-app"]/section/div/div[2]/nav/div[2]/div/button'
