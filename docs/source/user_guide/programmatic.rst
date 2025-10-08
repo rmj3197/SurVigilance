@@ -8,7 +8,7 @@ This vignette demonstrates how to access the different databases programmaticall
 
 WHO VigiAccess
 ==============
-In this example, we would like to download data from VigiAccess for the drug "aspirin".
+In this example, we would like to download data from VigiAccess for the drug "paracetamol".
 
 .. exec_code::
    :filename: user_guide/vigiaccess_example.py

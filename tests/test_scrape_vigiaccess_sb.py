@@ -11,7 +11,7 @@ from SurVigilance.ui.scrapers import scrape_vigiaccess_sb
 
 def test_scrape_vigiaccess_real_browser(tmp_path):
     out_dir = tmp_path / "vigi_out"
-    med = "aspirin"
+    med = "paracetamol"
     df = scrape_vigiaccess_sb(medicine=med, output_dir=str(out_dir), headless=True)
     # Basic checks similar to Lareb
     assert isinstance(df, pd.DataFrame)
