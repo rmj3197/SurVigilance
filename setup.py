@@ -18,10 +18,9 @@ def read_version() -> str:
 
 
 def read_long_description() -> str:
-    readme = Path(__file__).parent / "README.rst"
-    if readme.is_file():
-        return readme.read_text(encoding="utf-8")
-    return DESCRIPTION
+    text = (Path(__file__).parent / "README.rst").read_text(encoding="utf-8")
+    text = re.sub(r"(?ms)^ *\.\. *raw::.*?(?:\n +\S.*?)*", "", text)
+    return text.strip()
 
 
 REQUIRES = [
