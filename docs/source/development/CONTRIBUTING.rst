@@ -56,7 +56,7 @@ Using SurVigilance and discovered a bug? That's annoying! Don't let others have 
 Improve the documentation 📖
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Noticed a typo on the website? Think a function could use a better example? Good documentation makes all the difference, so your help to improve it is very welcome! Submit a issue here `Documentation Improvement <doc_improvement_>`_.
+Noticed a typo on the website? Think a function could use a better example? Good documentation makes all the difference, so your help to improve is very welcome! Submit a issue here `Documentation Improvement <doc_improvement_>`_.
 
 API documentation
 ^^^^^^^^^^^^^^^^^^^

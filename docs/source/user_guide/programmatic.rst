@@ -55,4 +55,5 @@ From the list of available files, let's try to download the data for Q1 (Jan - M
    :filename: user_guide/faers_example2.py
 
 Please note that for downloading the VAERS data, the user needs to provide a CAPTCHA, hence it is not possible to download
-the data without opening a GUI. It is for this reason, we have not included the 
+the data without opening a GUI. It is for this reason, we have not included the example for VAERS in the programmatic access
+section.
