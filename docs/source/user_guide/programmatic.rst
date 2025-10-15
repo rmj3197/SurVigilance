@@ -15,7 +15,7 @@ In this example, we would like to download data from VigiAccess for the drug "pa
 
 NL Lareb
 ========
-In this example, we would like to download data from Lareb for the drug "paracetamol".
+In this example, we would like to download data from Lareb for the drug "atorvastatin".
 
 .. exec_code::
    :filename: user_guide/lareb_example.py

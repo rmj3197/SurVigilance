@@ -7,7 +7,7 @@ def main():
     out_dir = "lareb_out"
     os.makedirs(out_dir, exist_ok=True)
 
-    med = "paracetamol"
+    med = "atorvastatin"
 
     df = scrape_lareb_sb(medicine=med, output_dir=out_dir, headless=True)
     print(df.head())
