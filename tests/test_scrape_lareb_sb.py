@@ -11,7 +11,7 @@ from SurVigilance.ui.scrapers import scrape_lareb_sb
 
 def test_scrape_lareb_real_browser(tmp_path):
     out_dir = tmp_path / "lareb_out"
-    med = "paracetamol"
+    med = "atorvastatin"
     df = scrape_lareb_sb(medicine=med, output_dir=str(out_dir), headless=True)
 
     assert isinstance(df, pd.DataFrame)
