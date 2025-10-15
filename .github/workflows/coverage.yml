@@ -37,7 +37,7 @@ jobs:
         id: setup-chrome
         uses: browser-actions/setup-chrome@v2
         with:
-          chrome-version: 141.0.7390.66 
+          chrome-version: stable
           install-chromedriver: true
 
       - name: Install deps
