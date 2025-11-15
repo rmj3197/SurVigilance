@@ -163,7 +163,7 @@ def scrape_daen_sb(
 
             try:
                 # The DAEN export is expected to be an Excel .xlsx file.
-                df = pd.read_excel(target_path)
+                df = pd.read_excel(target_path, engine='openpyxl')
                 return df
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed to read exported file: {e}")
