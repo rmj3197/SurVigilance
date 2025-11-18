@@ -1,7 +1,7 @@
 
 .. list-table::
    :header-rows: 1
-   :widths: 20 80
+   :widths: 20 70
 
    * - **Category**
      - **Badges**
