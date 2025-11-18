@@ -1,3 +1,8 @@
+.. image:: https://raw.githubusercontent.com/rmj3197/SurVigilance/refs/heads/master/docs/source/_static/survigilance_sticker.png
+  :target: https://survigilance.netlify.app/
+  :height: 150
+  :align: left 
+
 .. list-table::
    :header-rows: 1
    :widths: 20 80
@@ -10,11 +15,6 @@
      - |PyPI - Version| |Build and upload to PyPI| |Netlify Documentation Status|
    * - **Development**
      - |codecov| |CodeFactor| |Ruff|
-
-.. image:: https://raw.githubusercontent.com/rmj3197/SurVigilance/refs/heads/master/docs/source/_static/survigilance_sticker.png
-  :target: https://survigilance.netlify.app/
-  :height: 150
-  :align: right 
 
 Introduction
 ------------
