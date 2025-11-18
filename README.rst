@@ -13,7 +13,7 @@
 
 .. image:: https://raw.githubusercontent.com/rmj3197/SurVigilance/refs/heads/master/docs/source/_static/survigilance_sticker.png
   :target: https://survigilance.netlify.app/
-  :height: 200
+  :height: 150
   :align: right 
 
 Introduction
