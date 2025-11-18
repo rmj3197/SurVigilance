@@ -1,12 +1,10 @@
 .. list-table::
    :header-rows: 1
-   :widths: 20 60 20
+   :widths: 70 30
 
-   * - **Category**
-     - **Badges**
+   * - **Badges**
      - **Logo**
-   * - 
-     - **Usage**
+   * - **Usage**
 
        |License: GPL v3| |Downloads|
 
@@ -21,7 +19,6 @@
           :target: https://survigilance.netlify.app/
           :height: 150
           :alt: SurVigilance Logo
-
 
 Introduction
 ------------
