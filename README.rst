@@ -17,7 +17,7 @@ Introduction
 
 .. image:: https://raw.githubusercontent.com/rmj3197/SurVigilance/refs/heads/master/docs/source/_static/survigilance_sticker.png
    :target: https://survigilance.netlify.app/
-   :height: 150
+   :height: 80
    :alt: SurVigilance Logo
    :align: left
 
@@ -137,10 +137,6 @@ Disclaimer
    **VAERS**, **VigiAccess**, **Lareb**, **DAEN**, **DMA**, and **Medsafe** 
    databases, whose efforts make these datasets publicly accessible.
 
-.. |SurVigilanceLogo| image:: https://raw.githubusercontent.com/rmj3197/SurVigilance/refs/heads/master/docs/source/_static/survigilance_sticker.png
-   :target: https://survigilance.netlify.app/
-   :height: 150
-   :alt: SurVigilance Logo
 .. |License: GPL v3| image:: https://img.shields.io/badge/License-GPLv3-blue.svg
    :target: https://github.com/rmj3197/SurVigilance/blob/master/LICENSE
 .. |Downloads| image:: https://static.pepy.tech/badge/SurVigilance
