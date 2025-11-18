@@ -17,7 +17,7 @@
        |codecov| |CodeFactor| |Ruff|
      - .. image:: https://raw.githubusercontent.com/rmj3197/SurVigilance/refs/heads/master/docs/source/_static/survigilance_sticker.png
           :target: https://survigilance.netlify.app/
-          :height: 150
+          :height: 200
           :alt: SurVigilance Logo
 
 Introduction
