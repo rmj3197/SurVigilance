@@ -1,3 +1,11 @@
+.. image:: https://raw.githubusercontent.com/rmj3197/SurVigilance/refs/heads/master/docs/source/_static/survigilance_sticker.png
+   :target: https://survigilance.netlify.app/
+   :height: 60
+   :alt: SurVigilance Logo
+   :align: left
+######################
+SurVigilance 
+######################
 
 .. list-table::
    :header-rows: 1
@@ -14,12 +22,6 @@
 
 Introduction
 ------------
-
-.. image:: https://raw.githubusercontent.com/rmj3197/SurVigilance/refs/heads/master/docs/source/_static/survigilance_sticker.png
-   :target: https://survigilance.netlify.app/
-   :height: 60
-   :alt: SurVigilance Logo
-   :align: left
 
 SurVigilance is designed to access and collect data from various
 safety databases located across the globe. The primary focus of this
