@@ -59,3 +59,4 @@ tests/data
 additional_scripts/*
 extracted_files/*
 Dockerfile
+/docs/source/user_guide/dma_out

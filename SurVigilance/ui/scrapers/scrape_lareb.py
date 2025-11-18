@@ -63,7 +63,9 @@ def scrape_lareb_sb(
                 raise  # pragma: no cover
 
             try:
-                sb.sleep(1.5)
+                sb.sleep(1)
+                sb.scroll_into_view("input.input-search")
+                sb.sleep(1)
                 if sb.cdp.is_element_present("input.input-search"):
                     sb.cdp.type("input.input-search", medicine)
                 else:

@@ -1,6 +1,7 @@
-.. raw:: html
-
-    <h1><img src="https://github.com/rmj3197/SurVigilance/blob/master/docs/source/_static/survigilance_sticker.png?raw=true" align="right" height="200" alt="SurVigilance" />SurVigilance </h1>
+.. image:: https://raw.githubusercontent.com/rmj3197/SurVigilance/refs/heads/master/docs/source/_static/survigilance_sticker.png
+  :target: https://survigilance.netlify.app/
+  :height: 200
+  :align: right 
 
 .. list-table::
    :header-rows: 1
@@ -45,9 +46,7 @@ SurVigilance is available on PyPI and can be installed using ``pip install SurVi
 
 Any operating system and architecture in which Google Chrome and other dependencies are available should be able to run this application.
 
-.. note::
-
-   **Chromium** is different from **Google Chrome**. Please ensure that Google Chrome is installed.
+.. note:: **Chromium** is different from **Google Chrome**. Please ensure that Google Chrome is installed.
 
 Details on additional dependencies can be found in the `Installation Guide <https://survigilance.netlify.app/getting_started/installation.html>`__.
 
