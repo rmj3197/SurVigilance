@@ -1,24 +1,22 @@
 .. list-table::
-   :header-rows: 1
-   :widths: 20 60 20
+    :header-rows: 1
+    :widths: 20 60 20
 
-   * - **Category**
-     - **Badges**
-     - **Logo**
-   * - **Usage**
-       |License: GPL v3| |Downloads|
-
-       **Release**  
-       |PyPI - Version| |Build and upload to PyPI| |Netlify Documentation Status|
-
-       **Development**  
-       |codecov| |CodeFactor| |Ruff|
-     - 
-     - .. image:: https://raw.githubusercontent.com/rmj3197/SurVigilance/refs/heads/master/docs/source/_static/survigilance_sticker.png
+    * - **Category**
+      - **Badges**
+      - **Logo**
+    * - **Usage**
+      - |License: GPL v3| |Downloads|
+      - .. image:: https://raw.githubusercontent.com/rmj3197/SurVigilance/refs/heads/master/docs/source/_static/survigilance_sticker.png
           :target: https://survigilance.netlify.app/
           :height: 150
           :alt: SurVigilance Logo
-
+    * - **Release**
+      - |PyPI - Version| |Build and upload to PyPI| |Netlify Documentation Status|
+      -
+    * - **Development**
+      - |codecov| |CodeFactor| |Ruff|
+      -
 
 Introduction
 ------------
