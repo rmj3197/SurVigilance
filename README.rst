@@ -3,8 +3,6 @@
    :header-rows: 1
    :widths: 20 80
 
-   * - |Logo|
-     - 
    * - **Category**
      - **Badges**
    * - **Usage**
@@ -17,11 +15,16 @@
 Introduction
 ------------
 
-SurVigilance is designed to access and collect data from various safety
-databases located across the globe. The primary focus of this
-application is to provide an unified interface to researchers to access
-data on adverse events that may be associated the usage of
-pharmaceutical drugs or vaccines.
+.. list-table::
+   :widths: 15 85
+   :class: borderless
+
+   * - .. image:: https://raw.githubusercontent.com/rmj3197/SurVigilance/refs/heads/master/docs/source/_static/survigilance_sticker.png
+          :target: https://survigilance.netlify.app/
+          :height: 110
+          :width: 110
+          :alt: SurVigilance Logo
+     - SurVigilance is designed to access and collect data from various safety databases located across the globe. The primary focus of this application is to provide an unified interface to researchers to access data on adverse events that may be associated the usage of pharmaceutical drugs or vaccines.
 
 Currently, SurVigilance supports the following databases: 
 
@@ -133,11 +136,7 @@ Disclaimer
    **VAERS**, **VigiAccess**, **Lareb**, **DAEN**, **DMA**, and **Medsafe** 
    databases, whose efforts make these datasets publicly accessible.
 
-.. |Logo| image:: https://raw.githubusercontent.com/rmj3197/SurVigilance/refs/heads/master/docs/source/_static/survigilance_sticker.png
-   :target: https://survigilance.netlify.app/
-   :height: 110
-   :width: 110
-   :alt: SurVigilance Logo
+
 .. |License: GPL v3| image:: https://img.shields.io/badge/License-GPLv3-blue.svg
    :target: https://github.com/rmj3197/SurVigilance/blob/master/LICENSE
 .. |Downloads| image:: https://static.pepy.tech/badge/SurVigilance
