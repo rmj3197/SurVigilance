@@ -25,7 +25,7 @@ def read_long_description() -> str:
 
 REQUIRES = [
     "streamlit>=1.49.1",
-    "seleniumbase==4.44.15",
+    "seleniumbase<=4.44.15",
     "pandas>=1.5.0",
     "requests>=2.28.0",
     "beautifulsoup4>=4.12.0",
