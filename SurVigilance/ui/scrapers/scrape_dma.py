@@ -4,6 +4,7 @@ Scraper for Denmark DMA interactive ADR overviews using SeleniumBase.
 
 import os
 from collections.abc import Callable
+from io import StringIO
 from typing import Any
 
 import pandas as pd
@@ -88,8 +89,13 @@ def scrape_dma_sb(
             sb.activate_cdp_mode(url)
 
             sb.sleep(1)
-            sb.click('//*[@id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]')
-            sb.sleep(1)
+            try:
+                sb.cdp.click_if_visible(
+                    '//*[@id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]'
+                )
+                sb.sleep(1)
+            except Exception:
+                pass
 
             try:
                 sb.click('//*[@id="main-content"]/div/div/div[2]/div[1]/form/div/input')
@@ -171,7 +177,7 @@ def scrape_dma_sb(
 
                         soup = BeautifulSoup(table_html, "html.parser")
                         table = soup.find("table", {"id": "meddra_table"})
-                        df = pd.read_html(str(table))[0]
+                        df = pd.read_html(StringIO(str(table)))[0]
 
                         df.columns = [str(c).strip() for c in df.columns]
                         df = df.dropna(axis=1, how="all")

@@ -69,7 +69,9 @@ def scrape_daen_sb(
         sb.open(url)
 
         try:
-            sb.scroll_into_view("input#termsCondition") # had to be introduced on Nov 15 as seleniumbase released a new version
+            sb.scroll_into_view(
+                "input#termsCondition"
+            )  # had to be introduced on Nov 15 as seleniumbase released a new version
             sb.click_if_visible("input#termsCondition", timeout=5)
         except Exception:  # pragma: no cover
             pass
@@ -163,7 +165,7 @@ def scrape_daen_sb(
 
             try:
                 # The DAEN export is expected to be an Excel .xlsx file.
-                df = pd.read_excel(target_path, engine='openpyxl')
+                df = pd.read_excel(target_path, engine="openpyxl")
                 return df
             except Exception as e:  # pragma: no cover
                 _emit("error", message=f"Failed to read exported file: {e}")
