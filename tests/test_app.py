@@ -7,7 +7,7 @@ from streamlit.testing.v1 import AppTest
 
 def setup_app():
     # Load the app relative to the repo root where tests run
-    at = AppTest.from_file("SurVigilance/ui/_app.py")
+    at = AppTest.from_file("../SurVigilance/ui/_app.py")
     return at
 
 

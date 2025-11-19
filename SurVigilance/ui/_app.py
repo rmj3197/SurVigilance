@@ -6,9 +6,15 @@ import os
 import platform
 import shutil
 import subprocess
+import sys
 import time
+from pathlib import Path
 
 import streamlit as st
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:  # pragma: no cover
+    sys.path.insert(0, str(ROOT))
 
 st.set_page_config(
     page_title="SurVigilance: The Pharmacovigilance Data Mart",
