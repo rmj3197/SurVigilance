@@ -12,6 +12,8 @@ from pathlib import Path
 
 import streamlit as st
 
+from SurVigilance.ui.scrapers import check_all_scraper_sites
+
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:  # pragma: no cover
     sys.path.insert(0, str(ROOT))
@@ -41,6 +43,22 @@ st.markdown(
 )
 
 st.divider()
+
+with st.spinner("Checking connectivity to data sources..."):
+    connectivity_expander = st.expander(
+        "Connectivity Check", expanded=True
+    )  # Expanded to show details by default
+    with connectivity_expander:
+        all_sites_ok, all_messages = check_all_scraper_sites(
+            st_object=connectivity_expander
+        )  # Pass st_object for direct writing to expander
+
+
+if not all_sites_ok:
+    st.error(
+        "One or more of the data source sites are unreachable. There might be functionality issues due to this. "
+        "Please make sure your internet connectivity is working and try again."
+    )
 
 st.subheader("Storage")
 
