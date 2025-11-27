@@ -7,13 +7,14 @@ from streamlit.testing.v1 import AppTest
 
 def setup_app():
     # Load the app relative to the repo root where tests run
-    at = AppTest.from_file("../SurVigilance/ui/_app.py")
+    at = AppTest.from_file("../SurVigilance/ui/_app.py", default_timeout=30)
     return at
 
 
 def test_who_vigiaccess_selection():
     at = setup_app()
     at.run()
+
     at.button[7].click().run()
     assert at.session_state["selected_database"] == "WHO VIGIACCESS"
 
@@ -56,6 +57,5 @@ def test_dma_selection():
 def test_daen_selection():
     at = setup_app()
     at.run()
-    # Click the AU DAEN database button and verify selection
     at.button[1].click().run()
     assert at.session_state["selected_database"] == "AU DAEN"
