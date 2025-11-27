@@ -36,6 +36,7 @@ vigi_dir_display = os.path.abspath(vigi_dir)
 
 st.session_state.setdefault("selected_database", "WHO VigiAccess")
 st.session_state.setdefault("vigi_drug", "Atorvastatin")
+st.session_state.setdefault("vigi_log_messages", [])
 
 
 heading = f"Search Page for {st.session_state['selected_database']} Database"
@@ -85,10 +86,19 @@ def streamlit_callback(event: dict) -> None:  # pragma: no cover
         progress.progress(int(_progress_state["value"]))
     elif etype == "log":
         msg = event.get("message", "")
-        log_box.info(msg)
+        st.session_state.vigi_log_messages.append(("log", msg))
     elif etype == "error":
         msg = event.get("message", "Unknown error")
-        error_box.error(msg)
+        st.session_state.vigi_log_messages.append(("error", msg))
+
+    if etype in ("log", "error"):
+        with log_box.container():
+            for mtype, m in st.session_state.vigi_log_messages:
+                if mtype == "log":
+                    st.info(m)
+                else:
+                    st.error(m)
+
     elif etype == "done":
         status_box.success("Data Fetching Complete!")
 
@@ -96,16 +106,21 @@ def streamlit_callback(event: dict) -> None:  # pragma: no cover
 if submitted:
     drug = st.session_state["vigi_drug"].strip()
 
+    st.session_state.vigi_log_messages = []
     _progress_state["value"] = 0.0
     progress.progress(0)
     log_box.empty()
     error_box.empty()
-    status_box.info(f"Starting data collection for: {drug}")
+    status_box.empty()
     table_box.empty()
 
     if not drug:
         error_box.error("Please enter a drug name.")
     else:
+        msg = f"Starting data collection for: {drug}"
+        st.session_state.vigi_log_messages.append(("log", msg))
+        with log_box.container():
+            st.info(msg)
         try:
             results = scrape_vigiaccess_sb(
                 medicine=drug,
@@ -118,7 +133,6 @@ if submitted:
             else:  # pragma: no cover
                 table_box.info("No results returned.")
         except Exception as e:  # pragma: no cover
-            error_box.error(f"Data collection failed: {e}")
             status_box.error("Data collection aborted.")
 
 # not limited support in streamlit testing to switch pages in a multipage app, causes issues

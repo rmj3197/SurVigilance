@@ -36,6 +36,7 @@ dma_dir_display = os.path.abspath(dma_dir)
 
 st.session_state.setdefault("selected_database", "DK DMA")
 st.session_state.setdefault("dma_drug", "Paracetamol")
+st.session_state.setdefault("dma_log_messages", [])
 
 
 heading = f"Search Page for {st.session_state['selected_database']} Database"
@@ -85,10 +86,19 @@ def streamlit_callback(event: dict) -> None:  # pragma: no cover
         progress.progress(int(_progress_state["value"]))
     elif etype == "log":
         msg = event.get("message", "")
-        log_box.info(msg)
+        st.session_state.dma_log_messages.append(("log", msg))
     elif etype == "error":
         msg = event.get("message", "Unknown error")
-        error_box.error(msg)
+        st.session_state.dma_log_messages.append(("error", msg))
+
+    if etype in ("log", "error"):
+        with log_box.container():
+            for mtype, m in st.session_state.dma_log_messages:
+                if mtype == "log":
+                    st.info(m)
+                else:
+                    st.error(m)
+
     elif etype == "done":
         status_box.success("Data Fetching Complete!")
 
@@ -96,16 +106,21 @@ def streamlit_callback(event: dict) -> None:  # pragma: no cover
 if submitted:
     med = st.session_state["dma_drug"].strip()
 
+    st.session_state.dma_log_messages = []
     _progress_state["value"] = 0.0
     progress.progress(0)
     log_box.empty()
     error_box.empty()
-    status_box.info(f"Starting data collection for: {med}")
+    status_box.empty()
     table_box.empty()
 
     if not med:
         error_box.error("Please enter a medicine name.")
     else:
+        msg = f"Starting data collection for: {med}"
+        st.session_state.dma_log_messages.append(("log", msg))
+        with log_box.container():
+            st.info(msg)
         try:
             results = scrape_dma_sb(
                 medicine=med,
@@ -119,7 +134,6 @@ if submitted:
             else:  # pragma: no cover
                 table_box.info("No results returned.")
         except Exception as e:  # pragma: no cover
-            error_box.error(f"Data collection failed: {e}")
             status_box.error("Data collection aborted.")
 
 

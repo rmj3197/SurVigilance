@@ -86,8 +86,8 @@ def scrape_lareb_sb(
                     else:
                         sb.cdp.type('[class*="input-search"]', med)
                     sb.sleep(2)
-                except Exception:  # pragma: no cover
-                    # _emit("error", message=f"Error encountered while searching: {e}")
+                except Exception as e:  # pragma: no cover
+                    _emit("log", message=f"Error encountered while searching: {e}")
                     raise  # pragma: no cover
 
                 try:

@@ -37,6 +37,8 @@ daen_dir_display = os.path.abspath(daen_dir)
 
 st.session_state.setdefault("selected_database", "AU DAEN")
 st.session_state.setdefault("daen_drug", "Paracetamol")
+st.session_state.setdefault("daen_log_messages", [])
+
 
 
 heading = f"Search Page for {st.session_state['selected_database']} Database"
@@ -46,7 +48,7 @@ st.info(
     How the AU DAEN data collection works:
     - Opens the DAEN medicines (https://daen.tga.gov.au/medicines-search/) search and searches for the provided drug/vaccine.
     - Initiates an export of the data with MedDRA Preferred Terms (PTs) and associated counts.
-    - Saves the downloaded file to `{daen_dir_display}/<medicine>_daen_export.ext`.
+    - Saves the downloaded file to `{daen_dir_display}/<medicine>_daen_export.xlsx`.
     """
 )
 
@@ -80,10 +82,19 @@ def streamlit_callback(event: dict) -> None:  # pragma: no cover
     etype = event.get("type")
     if etype == "log":
         msg = event.get("message", "")
-        log_box.info(msg)
+        st.session_state.daen_log_messages.append(("log", msg))
     elif etype == "error":
         msg = event.get("message", "Unknown error")
-        error_box.error(msg)
+        st.session_state.daen_log_messages.append(("error", msg))
+
+    if etype in ("log", "error"):
+        with log_box.container():
+            for mtype, m in st.session_state.daen_log_messages:
+                if mtype == "log":
+                    st.info(m)
+                else:
+                    st.error(m)
+
     elif etype == "download_complete":
         path = event.get("path")
         fname = event.get("filename")
@@ -116,14 +127,20 @@ def streamlit_callback(event: dict) -> None:  # pragma: no cover
 if submitted:
     med = st.session_state["daen_drug"].strip()
 
+    st.session_state.daen_log_messages = []
     log_box.empty()
     error_box.empty()
     download_box.empty()
-    status_box.info(f"Starting data collection for: {med}")
+    status_box.empty()
 
     if not med:
         error_box.error("Please enter a medicine name.")
     else:
+        msg = f"Starting data collection for: {med}"
+        st.session_state.daen_log_messages.append(("log", msg))
+        with log_box.container():
+            st.info(msg)
+
         try:
             result_df = scrape_daen_sb(
                 medicine=med,
@@ -137,8 +154,7 @@ if submitted:
                 )
             else:  # pragma: no cover
                 download_box.info("Data collected.")
-        except Exception as e:  # pragma: no cover
-            error_box.error(f"Data collection failed: {e}")
+        except Exception:  # pragma: no cover
             status_box.error("Data collection aborted.")
 
 
