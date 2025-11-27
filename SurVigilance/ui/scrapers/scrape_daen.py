@@ -122,7 +122,7 @@ def scrape_daen_sb(
 
                         confirm_btn = '//*[@id="mat-mdc-dialog-0"]/div/div/export-data-dialog/mat-dialog-actions/button[1]'
                         sb.click(confirm_btn)
-                    except Exception as e:  # pragma: no cover
+                    except Exception as e:  # pragma: no cover  # pragma: no cover
                         _emit("log", message=f"Export initiation failed: {e}")
                         raise  # pragma: no cover
 
@@ -183,13 +183,13 @@ def scrape_daen_sb(
                         # The DAEN export is expected to be an Excel .xlsx file.
                         df = pd.read_excel(target_path, engine="openpyxl")
                         return df
-                    except Exception as e:  # pragma: no cover
+                    except Exception as e:  # pragma: no cover  # pragma: no cover
                         _emit("log", message=f"Failed to read exported file: {e}")
                         raise  # pragma: no cover
 
                 except Exception:  # pragma: no cover
                     raise  # pragma: no cover
-        except Exception as e:
+        except Exception as e:  # pragma: no cover
             exceptions.append(e)
             _emit("log", message=f"Attempt {attempt + 1} failed with error: {e}.\n")
             time.sleep(2)

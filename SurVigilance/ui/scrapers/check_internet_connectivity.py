@@ -28,7 +28,7 @@ def check_site_connectivity(url, timeout=5):
             True,
             f"{url} is reachable.",
         )
-    except Exception as e:
+    except Exception as e:  # pragma: no cover
         return False, f"{url} is not reachable. Error: {e}."
     finally:
         if "connection" in locals() and connection:

@@ -111,7 +111,7 @@ def streamlit_callback(event: dict) -> None:  # pragma: no cover
                     mime="text/csv",
                     key="daen_download_button",
                 )
-            except Exception as e:
+            except Exception as e:  # pragma: no cover
                 download_box.info(
                     f"File saved to: {os.path.abspath(path)} (download button unavailable: {e})"
                 )

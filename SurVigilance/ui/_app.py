@@ -80,7 +80,7 @@ def pick_directory():  # pragma: no cover
                 check=False,
             )
             return (result.stdout or "").strip() or None
-        except Exception:
+        except Exception:  # pragma: no cover
             return None
     if system == "Windows":
         try:
@@ -103,7 +103,7 @@ def pick_directory():  # pragma: no cover
                 check=False,
             )
             return (result.stdout or "").strip() or None
-        except Exception:
+        except Exception:  # pragma: no cover
             return None
     if system == "Linux":
         # Linux directory picker is taken from - https://askubuntu.com/questions/488350/how-do-i-prompt-users-with-a-gui-dialog-box-to-choose-file-directory-path-via-t

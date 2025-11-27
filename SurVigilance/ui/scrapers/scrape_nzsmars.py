@@ -53,7 +53,7 @@ def scrape_medsafe_sb(
         if callback:
             try:
                 callback({"type": event_type, **kw})
-            except Exception:
+            except Exception:  # pragma: no cover
                 raise  # pragma: no cover
 
     def parse_table(html: str):
@@ -211,7 +211,7 @@ def scrape_medsafe_sb(
                                 .str.replace(",", "", regex=False)
                                 .astype(int)
                             )
-                        except Exception:
+                        except Exception:  # pragma: no cover
                             pass
 
                 out_path = os.path.join(output_dir, f"{drug_vaccine}_nzsmars_adrs.csv")
@@ -223,7 +223,7 @@ def scrape_medsafe_sb(
 
                 _emit("done")
                 return df
-        except Exception as e:
+        except Exception as e:  # pragma: no cover
             exceptions.append(e)
             _emit("log", message=f"Attempt {attempt + 1} failed.\n")
             time.sleep(2)

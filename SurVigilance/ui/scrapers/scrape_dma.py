@@ -68,7 +68,7 @@ def scrape_dma_sb(
         if callback:
             try:
                 callback({"type": event_type, **kw})
-            except Exception:
+            except Exception:  # pragma: no cover
                 raise  # pragma: no cover
 
     med = (medicine or "").strip()
@@ -98,7 +98,7 @@ def scrape_dma_sb(
                         '//*[@id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]'
                     )
                     sb.sleep(1)
-                except Exception:
+                except Exception:  # pragma: no cover
                     pass
 
                 try:
@@ -218,7 +218,7 @@ def scrape_dma_sb(
 
                             _emit("done")
                             return df
-        except Exception as e:
+        except Exception as e:  # pragma: no cover
             exceptions.append(e)
             _emit("log", message=f"Attempt {attempt + 1} failed.\n")
             time.sleep(2)

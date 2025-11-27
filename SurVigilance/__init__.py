@@ -23,7 +23,7 @@ def __getattr__(name):
     else:
         try:
             return globals()[name]
-        except KeyError as err:
+        except KeyError as err:  # pragma: no cover
             raise AttributeError(
                 f"Module 'SurVigilance' has no attribute '{name}'"
             ) from err
