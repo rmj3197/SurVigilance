@@ -40,7 +40,6 @@ st.session_state.setdefault("daen_drug", "Paracetamol")
 st.session_state.setdefault("daen_log_messages", [])
 
 
-
 heading = f"Search Page for {st.session_state['selected_database']} Database"
 st.markdown(f"<h1 style='text-align: center;'>{heading}</h1>", unsafe_allow_html=True)
 st.info(

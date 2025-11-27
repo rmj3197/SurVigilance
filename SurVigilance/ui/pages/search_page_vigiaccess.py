@@ -132,7 +132,7 @@ if submitted:
                 table_box.dataframe(results, width="stretch")
             else:  # pragma: no cover
                 table_box.info("No results returned.")
-        except Exception as e:  # pragma: no cover
+        except Exception:  # pragma: no cover
             status_box.error("Data collection aborted.")
 
 # not limited support in streamlit testing to switch pages in a multipage app, causes issues
