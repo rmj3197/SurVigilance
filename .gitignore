@@ -60,3 +60,4 @@ additional_scripts/*
 extracted_files/*
 Dockerfile
 /docs/source/user_guide/dma_out
+/docs/source/user_guide/vigi_out

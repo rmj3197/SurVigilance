@@ -44,6 +44,15 @@ def scrape_vigiaccess_sb(
     pd.DataFrame: A dataframe with columns ["PT", "Count"].
     """
 
+    def extract_clean_text(text_list: list[str]) -> list[str]:  # pragma: no cover
+        cleaned = []
+        for text in text_list:
+            clean_str = "".join(
+                char for char in text if char.isalnum() or char.isspace()
+            )
+            cleaned.append(clean_str.strip().lower())
+        return cleaned
+
     def _emit(event_type: str, **kw: Any) -> None:  # pragma: no cover
         if callback:
             try:
@@ -100,7 +109,18 @@ def scrape_vigiaccess_sb(
 
                 try:
                     sb.cdp.wait_for_element_visible("td", timeout=20)
-                    sb.cdp.click("td")
+                    rows = sb.find_elements("tr")
+                    row_text_list = [row.text for row in rows]
+                    results = extract_clean_text(row_text_list)
+                    index = results.index(medicine.lower())
+
+                    sb.cdp.scroll_into_view(
+                        f'//*[@id="elmish-app"]/div/section[1]/div/div/div[1]/div[2]/section/table/tbody/tr[{index+1}]/td'
+                    )
+                    sb.cdp.click(
+                        f'//*[@id="elmish-app"]/div/section[1]/div/div/div[1]/div[2]/section/table/tbody/tr[{index+1}]/td'
+                    )
+
                     sb.sleep(1.5)
 
                     sb.cdp.click_if_visible(
