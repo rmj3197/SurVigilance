@@ -192,7 +192,7 @@ def scrape_daen_sb(
         except Exception as e:  # pragma: no cover
             exceptions.append(e)
             _emit("log", message=f"Attempt {attempt + 1} failed with error: {e}.\n")
-            time.sleep(2)
+            time.sleep(10)
             continue
 
     _emit(

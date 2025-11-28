@@ -217,7 +217,7 @@ def scrape_vigiaccess_sb(
 
         except Exception:  # pragma: no cover
             _emit("log", message=f"Attempt {attempt + 1} failed.\n")
-            time.sleep(2)
+            time.sleep(10)
             continue
 
     _emit(

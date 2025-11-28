@@ -205,7 +205,7 @@ def scrape_lareb_sb(
         except Exception as e:  # pragma: no cover
             exceptions.append(e)
             _emit("log", message=f"Attempt {attempt + 1} failed.\n")
-            time.sleep(2)
+            time.sleep(10)
             continue
 
     _emit(
