@@ -18,7 +18,7 @@ def scrape_daen_sb(
     output_dir: str = "data/daen",
     callback: Callable[[dict], None] | None = None,
     headless: bool = True,
-    fallback_wait: int = 120,
+    fallback_wait: int = 240,
     num_retries: int = 3,
 ) -> pd.DataFrame:  # pragma: no cover
     """
