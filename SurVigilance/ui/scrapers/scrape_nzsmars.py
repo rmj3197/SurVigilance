@@ -21,7 +21,7 @@ def scrape_medsafe_sb(
     output_dir: str = "data/nzmedsafe",
     callback: Callable[[dict], None] | None = None,
     headless: bool = True,
-    num_retries: int = 3,
+    num_retries: int = 5,
 ) -> pd.DataFrame:
     """
     Scrapes NZ Medsafe database for a given medicine or vaccine, for System Organ Class (SOC), PTs and associated count.
@@ -43,6 +43,9 @@ def scrape_medsafe_sb(
 
     headless : bool
         Run the browser headless (default True).
+
+    num_retries: int
+        Number of retries for data scraping after which error is thrown (default 5).
 
     Returns
     --------
@@ -226,7 +229,7 @@ def scrape_medsafe_sb(
         except Exception as e:  # pragma: no cover
             exceptions.append(e)
             _emit("log", message=f"Attempt {attempt + 1} failed.\n")
-            time.sleep(10)
+            time.sleep(20)
             continue
 
     _emit(

@@ -19,7 +19,7 @@ def scrape_lareb_sb(
     output_dir: str = "data/lareb",
     callback: Callable[[dict], None] | None = None,
     headless: bool = True,
-    num_retries: int = 3,
+    num_retries: int = 5,
 ) -> pd.DataFrame:
     """
     Scrapes the reported MedDRA Preferred Terms and counts for a given medicine from Lareb.
@@ -40,7 +40,7 @@ def scrape_lareb_sb(
         Run the browser in headless mode (default True).
 
     num_retries: int
-        Number of retries for data scraping after which error is thrown (default 3).
+        Number of retries for data scraping after which error is thrown (default 5).
 
     Returns
     --------
@@ -205,7 +205,7 @@ def scrape_lareb_sb(
         except Exception as e:  # pragma: no cover
             exceptions.append(e)
             _emit("log", message=f"Attempt {attempt + 1} failed.\n")
-            time.sleep(10)
+            time.sleep(20)
             continue
 
     _emit(

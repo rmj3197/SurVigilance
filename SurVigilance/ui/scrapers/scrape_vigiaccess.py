@@ -19,7 +19,7 @@ def scrape_vigiaccess_sb(
     output_dir: str = "data/vigiaccess",
     callback: Callable[[dict], None] | None = None,
     headless: bool = True,
-    num_retries: int = 3,
+    num_retries: int = 5,
 ) -> pd.DataFrame:
     """
     Scrapes the reported MedDRA Preferred Terms and counts for a given medicine from VigiAccess.
@@ -38,6 +38,9 @@ def scrape_vigiaccess_sb(
 
     headless: bool
         Run the browser in headless mode (default True).
+
+    num_retries: int
+        Number of retries for data scraping after which error is thrown (default 5).
 
     Returns
     --------
@@ -217,7 +220,7 @@ def scrape_vigiaccess_sb(
 
         except Exception:  # pragma: no cover
             _emit("log", message=f"Attempt {attempt + 1} failed.\n")
-            time.sleep(10)
+            time.sleep(20)
             continue
 
     _emit(

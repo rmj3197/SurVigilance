@@ -19,7 +19,7 @@ def scrape_daen_sb(
     callback: Callable[[dict], None] | None = None,
     headless: bool = True,
     fallback_wait: int = 240,
-    num_retries: int = 3,
+    num_retries: int = 5,
 ) -> pd.DataFrame:  # pragma: no cover
     """
     Scrapes the reported MedDRA Preferred Terms and counts for a given medicine
@@ -45,7 +45,7 @@ def scrape_daen_sb(
         folder before attempting to move it to `output_dir`.
 
     num_retries: int
-        Number of retries for data scraping after which error is thrown (default 3).
+        Number of retries for data scraping after which error is thrown (default 5).
 
     Returns
     --------
@@ -192,7 +192,7 @@ def scrape_daen_sb(
         except Exception as e:  # pragma: no cover
             exceptions.append(e)
             _emit("log", message=f"Attempt {attempt + 1} failed with error: {e}.\n")
-            time.sleep(10)
+            time.sleep(20)
             continue
 
     _emit(
