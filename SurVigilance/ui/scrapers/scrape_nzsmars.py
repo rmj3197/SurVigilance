@@ -95,10 +95,13 @@ def scrape_medsafe_sb(
                 )
                 sb.activate_cdp_mode(url)
 
+                sb.wait_for_ready_state_complete()
+
                 try:
                     if sb.cdp.is_element_present('//*[@id="Accept"]'):
                         sb.cdp.click('//*[@id="Accept"]')
                         sb.sleep(2)
+                        sb.wait_for_ready_state_complete()
                 except Exception as e:  # pragma: no cover
                     _emit("log", message=f"Cookie/terms click skipped or failed: {e}")
 
@@ -109,10 +112,12 @@ def scrape_medsafe_sb(
                         sb.cdp.select_if_unselected(
                             '//*[@id="MainContent_MedicineType_0"]'
                         )
+                        sb.wait_for_ready_state_complete()
                     else:
                         sb.cdp.select_if_unselected(
                             '//*[@id="MainContent_MedicineType_1"]'
                         )
+                        sb.wait_for_ready_state_complete()
                     sb.sleep(5)
                 except Exception as e:  # pragma: no cover
                     _emit("log", message=f"Failed setting medicine type: {e}")
@@ -127,6 +132,7 @@ def scrape_medsafe_sb(
                         sb.sleep(0.4)
                         sb.cdp.click('//*[@id="MainContent_ButtonFind"]')
                         sb.sleep(0.6)
+                        sb.wait_for_ready_state_complete()
                 except Exception as e:  # pragma: no cover
                     _emit("error", message=f"Failed typing/searching for term: {e}")
                     raise  # pragma: no cover
@@ -146,6 +152,7 @@ def scrape_medsafe_sb(
                     sb.cdp.select_if_unselected('//*[@id="MainContent_ReportType_1"]')
                     sb.cdp.click('//*[@id="MainContent_ButtonSearch"]')
                     sb.sleep(1)
+                    sb.wait_for_ready_state_complete()
                 except Exception as e:  # pragma: no cover
                     _emit("error", message=f"Failed to initiate results search: {e}")
                     raise  # pragma: no cover
@@ -187,6 +194,7 @@ def scrape_medsafe_sb(
                                 f'//*[@id="MainContent_GridSummary"]/tbody/tr[last()]/td/table/tbody/tr/td[{page}]/a'
                             )
                             sb.sleep(0.8)
+                            sb.wait_for_ready_state_complete()
                         data_rows.extend(scrape_current_page())
                         _emit("progress", delta=delta)
                     except Exception as e:  # pragma: no cover
