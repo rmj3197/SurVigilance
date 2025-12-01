@@ -89,7 +89,7 @@ def scrape_medsafe_sb(
 
             url = "https://www.medsafe.govt.nz/Projects/B1/ADRSearch.asp"
 
-            with SB(uc=True, headless=headless) as sb:
+            with SB(uc=True, headless=headless, xvfb=True) as sb:
                 _emit(
                     "log", message=f"Parsing medsafe.govt.nz (Attempt {attempt + 1})\n"
                 )
@@ -129,9 +129,9 @@ def scrape_medsafe_sb(
                         sb.cdp.type(
                             '//*[@id="MainContent_TextToFind"]', str(drug_vaccine)
                         )
-                        sb.sleep(0.4)
+                        sb.sleep(1.5)
                         sb.cdp.click('//*[@id="MainContent_ButtonFind"]')
-                        sb.sleep(0.6)
+                        sb.sleep(2.0)
                         sb.wait_for_ready_state_complete()
                 except Exception as e:  # pragma: no cover
                     _emit("error", message=f"Failed typing/searching for term: {e}")
