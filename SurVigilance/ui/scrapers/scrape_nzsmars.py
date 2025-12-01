@@ -89,7 +89,7 @@ def scrape_medsafe_sb(
 
             url = "https://www.medsafe.govt.nz/Projects/B1/ADRSearch.asp"
 
-            with SB(uc=True, headless=headless, xvfb=True) as sb:
+            with SB(uc=True, headless=headless) as sb:
                 _emit(
                     "log", message=f"Parsing medsafe.govt.nz (Attempt {attempt + 1})\n"
                 )
