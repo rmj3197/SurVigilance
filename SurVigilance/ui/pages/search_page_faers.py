@@ -34,16 +34,15 @@ st.set_page_config(
 )
 
 
-st.session_state.setdefault(
-    "data_root", "data"
-)  # Where we keep downloaded data by default
+st.session_state.setdefault("data_root", "data")
 faers_dir = os.path.join(
-    os.path.expanduser(st.session_state["data_root"]), "faers"
-)  # Subfolder for FAERS
+    os.path.expanduser(st.session_state.get("data_root", "data")), "faers"
+)
 faers_dir_display = os.path.abspath(faers_dir)
 
 
 st.session_state.setdefault("selected_database", "USA FAERS")
+st.session_state.setdefault("faers_log_messages", [])
 
 
 heading = f"Download Page for {st.session_state['selected_database']} Database"
@@ -64,26 +63,20 @@ fetch = st.button("List all FAERS years and available quarters", width="stretch"
 st.divider()
 
 
-progress = st.empty()  # Progress bar area
-log_box = st.empty()  # Streaming logs and/or info
-error_box = st.empty()  # For any errors encountered
-status_box = st.empty()  # Overall status messages
-checkboxes_box = st.empty()  # Place where the quarter selection checkboxes live
+progress = st.empty()
+log_box = st.empty()
+error_box = st.empty()
+status_box = st.empty()
+checkboxes_box = st.empty()
 
 
-st.session_state.setdefault(
-    "faers_df", None
-)  # Holds the dataframe of available year/quarter rows
+st.session_state.setdefault("faers_df", None)
 
 
-_progress_state = {"value": 0.0}  # Track progress across events in a simple dict
+_progress_state = {"value": 0.0}
 
 
 def streamlit_callback(event: dict) -> None:  # pragma: no cover
-    """Simple callback used by the scraper to update the UI.
-
-    It handles progress updates, logs, and errors in a user-friendly way.
-    """
     etype = event.get("type")
     if etype == "progress":
         delta = float(event.get("delta", 0.0))
@@ -91,18 +84,26 @@ def streamlit_callback(event: dict) -> None:  # pragma: no cover
         progress.progress(int(_progress_state["value"]))
     elif etype == "log":
         msg = event.get("message", "")
-        log_box.info(msg)
+        st.session_state.faers_log_messages.append(("log", msg))
     elif etype == "error":
         msg = event.get("message", "Unknown error")
-        error_box.error(msg)
+        st.session_state.faers_log_messages.append(("error", msg))
+
+    if etype in ("log", "error"):
+        with log_box.container():
+            for mtype, m in st.session_state.faers_log_messages:
+                if mtype == "log":
+                    st.info(m)
+                else:
+                    st.error(m)
     elif etype == "done":
         status_box.success("Data Fetching Complete!")
 
 
 if fetch:
-    # Reset UI areas and start the scraping process to list years and quarters.
     _progress_state["value"] = 0.0
     progress.progress(0)
+    st.session_state.faers_log_messages = []
     log_box.empty()
     error_box.empty()
     status_box.info("Parsing the FAERS webpage")
