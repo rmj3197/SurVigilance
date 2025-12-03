@@ -226,6 +226,7 @@ def scrape_vigiaccess_sb(
             _emit("done")
             return df
 
+        except Exception as e:  # pragma: no cover
             exceptions.append(e)
             _emit("log", message=f"Attempt {attempt + 1} failed.\n")
             time.sleep(20)
