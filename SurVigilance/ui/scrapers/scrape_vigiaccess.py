@@ -83,6 +83,7 @@ def scrape_vigiaccess_sb(
                     sb.activate_cdp_mode(url)
                     sb.sleep(0.5)
                 except Exception as e:  # pragma: no cover
+                    exceptions.append(e)
                     _emit("error", message=f"Failed to open site: {e}")
                     raise  # pragma: no cover
 
@@ -107,6 +108,7 @@ def scrape_vigiaccess_sb(
                     sb.click(".button")
                     sb.sleep(1)
                 except Exception as e:  # pragma: no cover
+                    exceptions.append(e)
                     _emit("log", message=f"Search actions failed: {e}")
                     raise  # pragma: no cover
 
@@ -115,13 +117,16 @@ def scrape_vigiaccess_sb(
                     rows = sb.find_elements("tr")
                     row_text_list = [row.text for row in rows]
                     results = extract_clean_text(row_text_list)
-                    index = results.index(medicine.lower())
+                    try:
+                        index = results.index(medicine.lower())
+                    except ValueError:
+                        index = 0  # Default to the first index if no match is found
 
                     sb.cdp.scroll_into_view(
-                        f'//*[@id="elmish-app"]/div/section[1]/div/div/div[1]/div[2]/section/table/tbody/tr[{index+1}]/td'
+                        f'//*[@id="elmish-app"]/div/section[1]/div/div/div[1]/div[2]/section/table/tbody/tr[{index + 1}]/td'
                     )
                     sb.cdp.click(
-                        f'//*[@id="elmish-app"]/div/section[1]/div/div/div[1]/div[2]/section/table/tbody/tr[{index+1}]/td'
+                        f'//*[@id="elmish-app"]/div/section[1]/div/div/div[1]/div[2]/section/table/tbody/tr[{index + 1}]/td'
                     )
 
                     sb.sleep(1.5)
@@ -131,6 +136,7 @@ def scrape_vigiaccess_sb(
                     )
                     sb.sleep(1.5)
                 except Exception as e:  # pragma: no cover
+                    exceptions.append(e)
                     _emit("error", message=f"Failed entering results view: {e}")
                     raise  # pragma: no cover
 
@@ -139,6 +145,7 @@ def scrape_vigiaccess_sb(
                     sb.cdp.wait_for_element_visible(groups_xpath, timeout=20)
                     sb.sleep(0.5)
                 except Exception as e:  # pragma: no cover
+                    exceptions.append(e)
                     _emit("error", message=f"Reaction groups list not found: {e}")
                     raise  # pragma: no cover
 
@@ -184,6 +191,7 @@ def scrape_vigiaccess_sb(
                         sb.sleep(0.5)
 
                     except Exception as e:  # pragma: no cover
+                        exceptions.append(e)
                         _emit("log", message=f"Group {i}: skipping due to error: {e}")
 
                     _emit("progress", delta=100.0 / MAX_GROUPS)
@@ -218,7 +226,7 @@ def scrape_vigiaccess_sb(
             _emit("done")
             return df
 
-        except Exception:  # pragma: no cover
+            exceptions.append(e)
             _emit("log", message=f"Attempt {attempt + 1} failed.\n")
             time.sleep(20)
             continue
@@ -235,5 +243,13 @@ def scrape_vigiaccess_sb(
             "for assistance.\n\n"
         ),
     )
-    if exceptions:
-        raise exceptions[-1]
+
+    raise RuntimeError(
+        f"All {num_retries} attempt(s) to scrape data for {medicine} failed. "
+        "Please check the following:\n"
+        "1. Ensure you have a stable internet connection.\n"
+        "2. Verify that 'https://www.vigiaccess.org/' opens correctly in your Chrome browser.\n"
+        "3. If these steps do not resolve the issue, please wait a while and retry. \n"
+        "If problems persist, contact the developer at https://github.com/rmj3197/SurVigilance/issues "
+        "for assistance.\n\n"
+    )
