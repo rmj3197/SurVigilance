@@ -39,8 +39,14 @@ def check_all_scraper_sites(st_object=None):
     """
     Checks connectivity for all external websites required by the scrapers.
 
+    Parameters
+    -----------
+    st_object: Streamlit Object
+        Streamlit object in which the connectivity status for the
+        various databases are shown.
+
     Returns
-    --------
+    ---------
     tuple: A tuple containing:
         - bool: True if all sites are reachable, False otherwise.
         - list: A list of detailed messages for each site's connectivity.
@@ -64,7 +70,3 @@ def check_all_scraper_sites(st_object=None):
             all_ok = False
 
     return all_ok, all_messages
-
-
-if __name__ == "__main__":
-    check_all_scraper_sites()

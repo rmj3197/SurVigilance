@@ -51,7 +51,7 @@ with st.spinner("Checking connectivity to data sources..."):
     with connectivity_expander:
         all_sites_ok, all_messages = check_all_scraper_sites(
             st_object=connectivity_expander
-        )  # Pass st_object for direct writing to expander
+        )  # Passing st_object for direct writing to expander
 
 
 if not all_sites_ok:
