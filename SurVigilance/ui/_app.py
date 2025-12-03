@@ -44,17 +44,32 @@ st.markdown(
 
 st.divider()
 
-with st.spinner("Checking connectivity to data sources..."):
-    connectivity_expander = st.expander(
-        "Connectivity Check", expanded=True
-    )  # Expanded to show details by default
+if "connectivity_checked" not in st.session_state:
+    st.session_state["connectivity_checked"] = False
+    st.session_state["all_sites_ok"] = True  # Default to True
+    st.session_state["all_messages"] = []
+
+if not st.session_state.connectivity_checked:
+    with st.spinner("Checking connectivity to data sources..."):
+        connectivity_expander = st.expander("Connectivity Check", expanded=True)
+        with connectivity_expander:
+            all_sites_ok_result, all_messages_result = check_all_scraper_sites(
+                st_object=connectivity_expander
+            )
+            st.session_state.all_sites_ok = all_sites_ok_result
+            st.session_state.all_messages = all_messages_result
+    st.session_state.connectivity_checked = True
+else:
+    connectivity_expander = st.expander("Connectivity Check", expanded=False)
     with connectivity_expander:
-        all_sites_ok, all_messages = check_all_scraper_sites(
-            st_object=connectivity_expander
-        )  # Passing st_object for direct writing to expander
+        if st.session_state.all_sites_ok:
+            st.write("Connectivity check performed. All sites are reachable.")
+        else:
+            st.write("Connectivity check performed. Some sites are unreachable:")
+            for msg in st.session_state.all_messages:
+                st.markdown(f"- {msg}")
 
-
-if not all_sites_ok:
+if not st.session_state.all_sites_ok:
     st.error(
         "One or more of the data source sites are unreachable. There might be functionality issues due to this. "
         "Please make sure your internet connectivity is working and try again."
