@@ -252,5 +252,13 @@ def scrape_medsafe_sb(
             "for assistance.\n\n"
         ),
     )
-    if exceptions:
-        raise exceptions[-1]
+
+    raise RuntimeError(
+        f"All {num_retries} attempt(s) to scrape data for {drug_vaccine} failed. "
+        "Please check the following:\n"
+        "1. Ensure you have a stable internet connection.\n"
+        "2. Verify that 'https://www.medsafe.govt.nz/Projects/B1/ADRSearch.asp' opens correctly in your Chrome browser.\n"
+        "3. If these steps do not resolve the issue, please wait a while and retry. \n"
+        "If problems persist, contact the developer at https://github.com/rmj3197/SurVigilance/issues "
+        "for assistance.\n\n"
+    )

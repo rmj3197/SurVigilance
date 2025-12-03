@@ -61,3 +61,4 @@ extracted_files/*
 Dockerfile
 /docs/source/user_guide/dma_out
 /docs/source/user_guide/vigi_out
+docs/source/user_guide/nzsmars_out/atorvastatin_nzsmars_adrs.csv
