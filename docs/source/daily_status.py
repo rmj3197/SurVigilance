@@ -28,7 +28,7 @@ def main():
         f.write("Daily Status\n")
         f.write("============\n\n")
         f.write(
-            "This page displays the execution status of the `coverage.yml` workflow, located at `https://github.com/rmj3197/SurVigilance/blob/master/.github/workflows/coverage.yml`. It runs daily at 12:00 AM UTC and provides an overview of the tool's operational status and potential issues."
+            "This page displays the execution status of the `coverage.yml` workflow, located at `https://github.com/rmj3197/SurVigilance/blob/master/.github/workflows/coverage.yml`. It runs daily at 12:00 AM UTC and provides an overview of the tool's operational status and potential issues.\n\n"
         )
         f.write(".. list-table:: Workflow Runs\n")
         f.write("   :header-rows: 1\n\n")
