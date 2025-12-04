@@ -146,6 +146,7 @@ if submitted:
                 output_dir=daen_dir,
                 callback=streamlit_callback,
                 headless=True,
+                num_retries=st.session_state.get("num_retries", 5),
             )
             if isinstance(result_df, pd.DataFrame):
                 download_box.info(

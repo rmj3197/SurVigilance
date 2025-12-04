@@ -88,6 +88,9 @@ Documentation
 The documentation is hosted on Netlify at -
 https://survigilance.netlify.app/
 
+A daily status of the tool's health can be found at the `Daily Status <https://survigilance.netlify.app/daily_status.html>`__ page.
+
+
 Community
 ---------
 

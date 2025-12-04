@@ -111,7 +111,10 @@ if fetch:
 
     try:
         df = scrape_faers_sb(
-            output_dir=faers_dir, headless=True, callback=streamlit_callback
+            output_dir=faers_dir,
+            headless=True,
+            callback=streamlit_callback,
+            num_retries=st.session_state.get("num_retries", 5),
         )
 
         try:
@@ -317,6 +320,9 @@ if df is not None:
                                         url=url,
                                         download_dir=faers_dir,
                                         callback=per_file_callback,
+                                        num_retries=st.session_state.get(
+                                            "num_retries", 5
+                                        ),
                                     )
                                     successes.append(path)
                                 except Exception as _e:  # pragma: no cover

@@ -169,6 +169,17 @@ except Exception:  # pragma: no cover
     raise  # pragma: no cover
 
 
+st.subheader("Retries")
+st.session_state.setdefault("num_retries", 5)
+st.number_input(
+    "Number of retries",
+    help="Number of retries for the scrapers. Defaults to 5.",
+    key="num_retries",
+    min_value=0,
+    step=1,
+)
+
+
 st.subheader("Please select a Database to Search")
 
 row1 = st.columns(2)

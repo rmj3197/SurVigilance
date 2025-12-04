@@ -118,6 +118,7 @@ if submitted:
                 output_dir=lareb_dir,
                 callback=streamlit_callback,
                 headless=True,
+                num_retries=st.session_state.get("num_retries", 5),
             )
             if results is not None and not results.empty:
                 table_box.dataframe(results, width="stretch")

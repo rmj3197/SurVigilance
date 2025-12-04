@@ -11,51 +11,57 @@ def setup_app():
     return at
 
 
+def test_num_retries_input():
+    at = setup_app()
+    at.run()
+    assert at.number_input(key="num_retries").value == 5
+
+
 def test_who_vigiaccess_selection():
     at = setup_app()
     at.run()
 
-    at.button[7].click().run()
+    at.button(key="vigiaccess").click().run()
     assert at.session_state["selected_database"] == "WHO VIGIACCESS"
 
 
 def test_faers_selection():
     at = setup_app()
     at.run()
-    at.button[5].click().run()
+    at.button(key="faers").click().run()
     assert at.session_state["selected_database"] == "USA FAERS"
 
 
 def test_vaers_selection():
     at = setup_app()
     at.run()
-    at.button[6].click().run()
+    at.button(key="vaers").click().run()
     assert at.session_state["selected_database"] == "USA VAERS"
 
 
 def test_lareb_selection():
     at = setup_app()
     at.run()
-    at.button[3].click().run()
+    at.button(key="lareb").click().run()
     assert at.session_state["selected_database"] == "NL LAREB"
 
 
 def test_nz_medsafe_selection():
     at = setup_app()
     at.run()
-    at.button[4].click().run()
+    at.button(key="nzsmars").click().run()
     assert at.session_state["selected_database"] == "NZ MEDSAFE"
 
 
 def test_dma_selection():
     at = setup_app()
     at.run()
-    at.button[2].click().run()
+    at.button(key="dma").click().run()
     assert at.session_state["selected_database"] == "DK DMA"
 
 
 def test_daen_selection():
     at = setup_app()
     at.run()
-    at.button[1].click().run()
+    at.button(key="daen").click().run()
     assert at.session_state["selected_database"] == "AU DAEN"

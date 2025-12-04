@@ -94,8 +94,14 @@ latex_documents = [
 ]
 
 
+def run_daily_status(app):
+    daily_status_path = os.path.join(os.path.dirname(__file__), "daily_status.py")
+    os.system(f"python {daily_status_path}")
+
+
 # Version warning to display on Read the Docs, this is taken from
 # https://github.com/qucontrol/krotov/blob/969fc980346e6411903de854118c48c51208a810/docs/conf.py#L321
 # Krotov Package
 def setup(app):
+    app.connect("builder-inited", run_daily_status)
     app.add_js_file("js/version_warning.js")  # Custom JS file for version warning
