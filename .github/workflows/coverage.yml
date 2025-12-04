@@ -50,8 +50,8 @@ jobs:
       - name: Run tests and collect coverage
         working-directory: .
         run: |
-          coverage run -m pytest .
-          coverage xml
+          coverage run --rcfile=ci.coveragerc -m pytest .
+          coverage xml --rcfile=ci.coveragerc
         shell: bash
 
       - name: Upload coverage reports to Codecov
