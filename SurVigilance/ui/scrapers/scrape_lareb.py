@@ -68,7 +68,7 @@ def scrape_lareb_sb(
                 _emit("log", message=f"Retrying... ({attempt + 1}/{num_retries})\n")
 
             with SB(uc=True, headless=headless) as sb:
-                _emit("log", message=f"Parsing lareb.nl (Attempt {attempt+1})\n")
+                _emit("log", message=f"Parsing lareb.nl (Attempt {attempt + 1})\n")
                 try:
                     url = "https://www.lareb.nl/en"
                     sb.activate_cdp_mode(url)
@@ -220,5 +220,12 @@ def scrape_lareb_sb(
             "for assistance.\n\n"
         ),
     )
-    if exceptions:
-        raise exceptions[-1]
+    raise RuntimeError(
+        f"All {num_retries} attempt(s) to scrape data for {medicine} failed. "
+        "Please check the following:\n"
+        "1. Ensure you have a stable internet connection.\n"
+        "2. Verify that 'https://www.lareb.nl/en' opens correctly in your Chrome browser.\n"
+        "3. If these steps do not resolve the issue, please wait a while and retry. \n"
+        "If problems persist, contact the developer at https://github.com/rmj3197/SurVigilance/issues "
+        "for assistance.\n\n"
+    )

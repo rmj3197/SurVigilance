@@ -37,6 +37,9 @@ def scrape_faers_sb(
         Callable to receive UI/status events, called with a dict.
         This is essential to show progress to user.
 
+    num_retries: int
+        Number of retries for data scraping after which error is thrown (default 5).
+
     Returns
     --------
     A DataFrame with columns ["Year", "Quarter"], representing the
@@ -69,7 +72,7 @@ def scrape_faers_sb(
             with SB(uc=True, headless=headless) as sb:
                 _emit(
                     "log",
-                    message=(f"Parsing FAERS website " f"(Attempt {attempt + 1})\n"),
+                    message=(f"Parsing FAERS website (Attempt {attempt + 1})\n"),
                 )
                 try:
                     sb.activate_cdp_mode(url)
@@ -210,8 +213,16 @@ def scrape_faers_sb(
             "for assistance.\n\n"
         ),
     )
-    if exceptions:
-        raise exceptions[-1]
+
+    raise RuntimeError(
+        f"All {num_retries} attempt(s) to scrape data failed. "
+        "Please check the following:\n"
+        "1. Ensure you have a stable internet connection.\n"
+        "2. Verify that 'https://fis.fda.gov/' opens correctly in your browser.\n"
+        "3. If these steps do not resolve the issue, please wait a while and retry. \n"
+        "If problems persist, contact the developer at https://github.com/rmj3197/SurVigilance/issues "
+        "for assistance.\n\n"
+    )
 
 
 def download_file(
@@ -240,7 +251,7 @@ def download_file(
         This is essential to show progress to user.
 
     num_retries: int
-        Number of retries for data scraping after which error is thrown (default 5).
+        Number of retries for data download after which error is thrown (default 5).
 
     Returns
     --------
