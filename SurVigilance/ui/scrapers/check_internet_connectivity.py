@@ -14,7 +14,22 @@ SITES_TO_CHECK = [
 
 
 def check_site_connectivity(url, timeout=5):
-    """Checks if a given URL is reachable by making a HEAD request."""
+    """
+    Checks if a given URL is reachable by making a HEAD request.
+
+    Parameters
+    -----------
+    url: string
+        The URL to check for connectivity.
+    timeout: int, optional
+        The maximum time (in seconds) to wait for a connection. Defaults to 5 seconds.
+
+    Returns
+    --------
+    tuple: A tuple containing:
+        - bool: True if the site is reachable, False otherwise.
+        - str: A message indicating the connectivity status.
+    """
     try:
         parsed_url = urlparse(url)
         if parsed_url.scheme == "https":

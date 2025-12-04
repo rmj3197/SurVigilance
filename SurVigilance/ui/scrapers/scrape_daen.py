@@ -177,6 +177,11 @@ def scrape_daen_sb(
                     else:
                         shutil.move(last_candidate, target_path)
 
+                    _emit(
+                        "log",
+                        message=f"Data saved to: {os.path.abspath(target_path)}",
+                    )
+
                     _emit("download_complete", path=target_path, filename=target_name)
 
                     try:

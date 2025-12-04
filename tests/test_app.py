@@ -10,6 +10,7 @@ def setup_app():
     at = AppTest.from_file("../SurVigilance/ui/_app.py", default_timeout=30)
     return at
 
+
 def test_who_vigiaccess_selection():
     at = setup_app()
     at.run()

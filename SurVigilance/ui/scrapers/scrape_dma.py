@@ -91,6 +91,7 @@ def scrape_dma_sb(
                     message=f"Opening laegemiddelstyrelsen.dk (DMA) (Attempt {attempt + 1})\n",
                 )
                 sb.activate_cdp_mode(url)
+                _emit("progress", delta=20.0)
 
                 sb.sleep(1)
                 try:
@@ -138,6 +139,7 @@ def scrape_dma_sb(
                 )
                 sb.wait_for_element_visible(drugs_table_xpath, timeout=30)
                 sb.sleep(2)
+                _emit("progress", delta=20.0)
                 table_text = sb.cdp.get_text(drugs_table_xpath) or ""
                 if med.lower() not in table_text.lower():
                     _emit("error", message=f"Drug '{med}' not found in DMA list")
@@ -160,6 +162,7 @@ def scrape_dma_sb(
                     print("No tab without a URL was found.")
 
                 sb.wait_for_ready_state_complete()
+                _emit("progress", delta=20.0)
 
                 outer_iframe = 'iframe[src*="/upload/dap/dap.html?drug=./DK_EXTERNAL/NONCOMBINED/"]'
                 sb.wait_for_element_visible(outer_iframe, timeout=30)
@@ -197,6 +200,8 @@ def scrape_dma_sb(
 
                             df = df.reset_index(drop=True)
 
+                            _emit("progress", delta=20.0)
+
                             target_name = f"{med}_dma_adrs.csv"
                             out_path = os.path.join(output_dir, target_name)
 
@@ -211,6 +216,7 @@ def scrape_dma_sb(
                                     path=out_path,
                                     filename=target_name,
                                 )
+                                _emit("progress", delta=20.0)
                             except Exception as e:  # pragma: no cover
                                 _emit("error", message=f"Failed to save CSV: {e}")
                                 raise  # pragma: no cover
