@@ -107,3 +107,15 @@ WHO VigiAccess
    :toctree: generated/
 
    scrape_vigiaccess_sb
+
+Internet Connectivity
+---------------------
+
+.. automodule:: SurVigilance.ui.scrapers
+
+.. currentmodule:: SurVigilance.ui.scrapers
+
+.. autosummary::
+   :toctree: generated/
+
+   check_site_connectivity

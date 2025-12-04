@@ -1,9 +1,11 @@
 import os
-import requests
 from collections import defaultdict
+
+import requests
 
 URL = "https://api.github.com/repos/rmj3197/SurVigilance/actions/workflows/coverage.yml/runs?per_page=100"
 OUTPUT_FILE = os.path.join(os.path.dirname(__file__), "daily_status.rst")
+
 
 def main():
     try:
@@ -25,7 +27,9 @@ def main():
         f.write("============\n")
         f.write("Daily Status\n")
         f.write("============\n\n")
-        f.write("This page displays the execution status of the `coverage.yml` workflow, located at `https://github.com/rmj3197/SurVigilance/blob/master/.github/workflows/coverage.yml`. It runs daily at 12:00 AM UTC and provides an overview of the tool's operational status and potential issues.")
+        f.write(
+            "This page displays the execution status of the `coverage.yml` workflow, located at `https://github.com/rmj3197/SurVigilance/blob/master/.github/workflows/coverage.yml`. It runs daily at 12:00 AM UTC and provides an overview of the tool's operational status and potential issues."
+        )
         f.write(".. list-table:: Workflow Runs\n")
         f.write("   :header-rows: 1\n\n")
         f.write("   * - Date\n")
@@ -33,8 +37,10 @@ def main():
         f.write("     - Details\n")
 
         for date in sorted(daily_runs.keys(), reverse=True):
-            latest = sorted(daily_runs[date], key=lambda x: x['created_at'], reverse=True)[0]
-            
+            latest = sorted(
+                daily_runs[date], key=lambda x: x["created_at"], reverse=True
+            )[0]
+
             conclusion = latest["conclusion"]
             link = latest["html_url"]
 
@@ -50,6 +56,7 @@ def main():
             f.write(f"   * - {date}\n")
             f.write(f"     - {icon}\n")
             f.write(f"     - `View Log <{link}>`_\n")
+
 
 if __name__ == "__main__":
     main()

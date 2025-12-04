@@ -5,7 +5,7 @@ on:
   pull_request:
   schedule:
     # Every 14 days at 00:00 UTC
-    - cron: "0 0 */14 * *"
+    - cron: "0 0 * * *"
 
 jobs:
   build:
