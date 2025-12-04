@@ -35,6 +35,7 @@ st.set_page_config(
 
 
 st.session_state.setdefault("data_root", "data")
+st.session_state.setdefault("num_retries", 5)
 faers_dir = os.path.join(
     os.path.expanduser(st.session_state.get("data_root", "data")), "faers"
 )
@@ -56,6 +57,15 @@ st.info(
     """
 )
 st.divider()
+
+st.subheader("Retries")
+st.number_input(
+    "Number of retries",
+    help="Number of retries for the scrapers. Defaults to 5.",
+    key="num_retries",
+    min_value=0,
+    step=1,
+)
 
 
 fetch = st.button("List all FAERS years and available quarters", width="stretch")

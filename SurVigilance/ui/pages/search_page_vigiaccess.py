@@ -27,6 +27,7 @@ st.set_page_config(
 
 
 st.session_state.setdefault("data_root", "data")
+st.session_state.setdefault("num_retries", 5)
 vigi_dir = os.path.join(
     os.path.expanduser(st.session_state.get("data_root", "data")), "vigiaccess"
 )
@@ -52,7 +53,16 @@ st.info(
 
 st.divider()
 
+st.subheader("Retries")
+st.number_input(
+    "Number of retries",
+    help="Number of retries for the scrapers. Defaults to 5.",
+    key="num_retries",
+    min_value=0,
+    step=1,
+)
 
+st.subheader("Input")
 with st.form("search_form", clear_on_submit=False):
     st.text_input(
         "Please input a drug for which you want the data",
