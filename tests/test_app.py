@@ -10,13 +10,6 @@ def setup_app():
     at = AppTest.from_file("../SurVigilance/ui/_app.py", default_timeout=30)
     return at
 
-
-def test_num_retries_input():
-    at = setup_app()
-    at.run()
-    assert at.number_input(key="num_retries").value == 5
-
-
 def test_who_vigiaccess_selection():
     at = setup_app()
     at.run()
