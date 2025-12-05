@@ -1,4 +1,11 @@
 SurVigilance Version 1.0.1
-============================
+===========================
 
-This version is currently under active development.
+Improvements
+------------
+
+*   **Scrapers:** Introduced a new `num_retries` parameter across all scraper functions (e.g., `scrape_daen_sb`, `scrape_dma_sb`) to enhance robustness against temporary network issues.
+*   **Connectivity:** Added a new utility function, `check_site_connectivity`, to verify the accessibility of target websites before initiating scraping operations.
+*   **Documentation:** Updated the project documentation to include daily status reports for `SurVigilance` operations, providing better monitoring.
+*   **User Interface (GUI):** The graphical user interface has been enhanced to allow users to input the `num_retries` parameter directly, offering greater control over scraping attempts.
+*   **Error Handling:** Improved the clarity and detail of error messages displayed to the user, facilitating easier troubleshooting and a better user experience.
