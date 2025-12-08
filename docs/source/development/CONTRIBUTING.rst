@@ -65,7 +65,7 @@ The API documentation is built automatically from the docstrings of classes, fun
 
 - Go to ``SurVigilance/`` directory in the `code repository <repo>`_.
 - Look for the file with the name of the function.
-- `Propose a file change <https://help.github.com/articles/editing-files-in-another-user-s-repository/>`_ to update the function documentation in the roxygen comments (starting with ``#'``).
+- `Propose a file change <https://help.github.com/articles/editing-files-in-another-user-s-repository/>`_ to update the function documentation in the docstring.
 
 Contribute code 📝
 ~~~~~~~~~~~~~~~~~~

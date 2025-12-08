@@ -16,8 +16,8 @@ class UI:
 
     Examples
     ---------
-        >>> from SurVigilance.ui import UI
-        >>> UI().run()
+    >>> from SurVigilance.ui import UI
+    >>> UI().run()
     """
 
     def __init__(self) -> None:

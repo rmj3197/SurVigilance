@@ -15,3 +15,19 @@ def test_check_all_scraper_sites():
     all_ok, _messages = check_all_scraper_sites()
     assert all_ok is True
     assert len(_messages) == len(SITES_TO_CHECK)
+
+
+def test_check_site_connectivity_list():
+    results = check_site_connectivity(SITES_TO_CHECK)
+    assert isinstance(results, list)
+    assert len(results) == len(SITES_TO_CHECK)
+    for reachable, _message in results:
+        assert reachable is True
+
+
+def test_check_site_connectivity_default():
+    results = check_site_connectivity()
+    assert isinstance(results, list)
+    assert len(results) == len(SITES_TO_CHECK)
+    for reachable, _message in results:
+        assert reachable is True
