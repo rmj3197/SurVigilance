@@ -1,0 +1,875 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Daily Status &#8212; SurVigilance 1.0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="_static/documentation_options.js?v=423d4ce3"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/version_warning.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'daily_status';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SurVigilance 1.0.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="getting_started/index.html">Getting Started</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/installation.html">Installation</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_reference/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/generated/SurVigilance.ui.UI.html">UI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/generated/SurVigilance.ui.scrapers.scrape_daen_sb.html">scrape_daen_sb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/generated/SurVigilance.ui.scrapers.scrape_dma_sb.html">scrape_dma_sb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/generated/SurVigilance.ui.scrapers.scrape_lareb_sb.html">scrape_lareb_sb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/generated/SurVigilance.ui.scrapers.scrape_medsafe_sb.html">scrape_medsafe_sb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/generated/SurVigilance.ui.scrapers.scrape_faers_sb.html">scrape_faers_sb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/generated/SurVigilance.ui.scrapers.download_file.html">download_file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/generated/SurVigilance.ui.scrapers.download_vaers_zip_sb.html">download_vaers_zip_sb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/generated/SurVigilance.ui.scrapers.scrape_vigiaccess_sb.html">scrape_vigiaccess_sb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference/generated/SurVigilance.ui.scrapers.check_site_connectivity.html">check_site_connectivity</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="user_guide/index.html">User Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/programmatic.html">Programmatic Scraping (without using the Graphical User Interface)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/DAEN_GUI.html">Usage Instructions for Downloading Data from DAEN using SurVigilance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/DMA_GUI.html">Usage Instructions for Downloading Data from DMA using SurVigilance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/FAERS_GUI.html">Usage Instructions for Downloading Data from FAERS using SurVigilance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/Lareb_GUI.html">Usage Instructions for Downloading Data from Lareb database using SurVigilance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/Medsafe_GUI.html">Usage Instructions for Downloading Data from Medsafe using SurVigilance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/VAERS_GUI.html">Usage Instructions for Downloading Data from VAERS using SurVigilance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/VigiAccess_GUI.html">Usage Instructions for Downloading Data from VigiAccess using SurVigilance</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="development/index.html">Development</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="development/CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development/CONTRIBUTING.html">Contributing to SurVigilance</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="changelog/index.html">Changelog</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog/v1.0.0.html">SurVigilance Version 1.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog/v1.0.1.html">SurVigilance Version 1.0.1</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/daily_status.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Daily Status</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="daily-status">
+<h1>Daily Status<a class="headerlink" href="#daily-status" title="Link to this heading">#</a></h1>
+<p>This page displays the execution status of the <cite>coverage.yml</cite> workflow, located at <cite>https://github.com/rmj3197/SurVigilance/blob/master/.github/workflows/coverage.yml</cite>. It runs daily at 12:00 AM UTC and provides an overview of the tool’s operational status and potential issues.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="id100">
+<caption><span class="caption-text">Workflow Runs</span><a class="headerlink" href="#id100" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Date</p></th>
+<th class="head"><p>Result</p></th>
+<th class="head"><p>Details</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2026-09-01</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/33465484280">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-08-31</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/33352933025">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-08-30</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/33289814444">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-08-29</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/33235925842">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-08-28</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/33156432485">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-08-27</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/33047613315">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-08-26</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/32917268620">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-08-25</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/32795736486">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-08-24</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/32678328875">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-08-23</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/32609333427">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-08-22</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/32541933350">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-08-21</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/32434743380">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-08-20</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/32319182707">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-08-19</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/32203138479">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-08-18</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/32086358283">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-08-17</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/31983526907">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-08-16</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/31918549970">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-08-15</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/31855109474">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-08-14</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/31760614404">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-08-13</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/31657751821">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-08-12</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/31553561080">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-08-11</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/31448847079">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-08-10</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/31346793502">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-08-09</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/31287970216">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-08-08</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/31232113357">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-08-07</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/31141154910">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-08-06</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/31064633980">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-08-05</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/30968175216">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-08-04</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/30870621171">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-08-03</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/30779162450">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-08-02</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/30728688612">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-08-01</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/30679907473">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-07-31</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/30598798305">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-07-30</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/30507092715">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-07-29</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/30415988723">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-07-28</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/30322054761">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-07-27</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/30232290337">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-07-26</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/30184439959">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-07-25</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/30139957824">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-07-24</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/30060984729">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-07-23</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/29974166535">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-07-22</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/29885035913">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-07-21</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/29795145636">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-07-20</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/29712783186">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-07-19</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/29669816528">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-07-18</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/29626274283">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-07-17</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/29549308001">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-07-16</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/29465848780">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-07-15</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/29382934800">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-07-14</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/29300022475">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-07-13</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/29219349334">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-07-12</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/29176469509">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-07-11</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/29135881614">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-07-10</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/29064912036">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-07-09</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/28989884553">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-07-08</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/28912487497">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-07-07</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/28837595161">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-07-06</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/28764374433">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-07-05</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/28727173880">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-07-04</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/28692170353">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-07-03</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/28634533178">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-07-02</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/28561830471">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-07-01</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/28490377371">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-06-30</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/28416977348">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-06-29</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/28346647109">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-06-28</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/28309437424">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-06-27</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/28276231483">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-06-26</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/28214085206">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-06-25</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/28143510525">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-06-24</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/28071652221">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-06-23</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/27998676350">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-06-22</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/27928096829">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-06-21</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/27892458416">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-06-20</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/27858031214">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-06-19</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/27804219331">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-06-18</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/27734777707">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-06-17</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/27664060400">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-06-16</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/27592418583">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-06-15</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/27522625537">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-06-14</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/27487216359">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-06-13</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/27454481424">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-06-12</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/27392602217">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-06-11</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/27321859902">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-06-10</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/27249985201">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-06-09</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/27180457101">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-06-08</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/27114403296">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-06-07</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/27081486488">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-06-06</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/27050397505">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-06-05</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/26992529218">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-06-04</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/26928775404">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-06-03</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/26862199252">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-06-02</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/26796610745">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-06-01</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/26733720841">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-05-31</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/26701599584">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-05-30</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/26672263875">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-05-29</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/26614921307">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-05-28</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/26551405376">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-05-27</p></td>
+<td><p>✅ Pass</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/26487953236">View Log</a></p></td>
+</tr>
+<tr class="row-even"><td><p>2026-05-26</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/26429290748">View Log</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>2026-05-25</p></td>
+<td><p>❌ Fail</p></td>
+<td><p><a class="reference external" href="https://github.com/rmj3197/SurVigilance/actions/runs/26380816719">View Log</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Raktim Mukhopadhyay, Marianthi Markatou
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Raktim Mukhopadhyay, Marianthi Markatou.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
