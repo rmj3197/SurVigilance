@@ -9,8 +9,9 @@ line-length = 88 # same as black
 
 [tool.ruff.lint]
 extend-select = [
-  "I",   # isort
-  "PGH", # pygrep-hooks
-  "RUF", # Ruff-specific
-  "UP",  # pyupgrade
+    "I", # isort
+    "PGH", # pygrep-hooks
+    "RUF", # Ruff-specific
+    "UP", # pyupgrade
 ]
+ignore = ["BLE001", "S110", "TRY203", "N999", "B023", "PLC0206", "PLE0604", "SIM114", "SIM118"]
