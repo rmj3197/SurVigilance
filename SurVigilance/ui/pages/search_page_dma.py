@@ -36,7 +36,7 @@ dma_dir_display = os.path.abspath(dma_dir)
 
 
 st.session_state.setdefault("selected_database", "DK DMA")
-st.session_state.setdefault("dma_drug", "Paracetamol")
+st.session_state.setdefault("dma_drug", "Paracetamolum")
 st.session_state.setdefault("dma_log_messages", [])
 
 
