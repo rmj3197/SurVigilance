@@ -14,4 +14,5 @@ extend-select = [
     "RUF", # Ruff-specific
     "UP", # pyupgrade
 ]
-ignore = ["BLE001", "S110", "TRY203", "N999", "B023", "PLC0206", "PLE0604", "SIM114", "SIM118"]
+ignore = ["BLE001", "S110", "TRY203", "N999", "B023", "PLC0206", "PLE0604",
+    "SIM114", "SIM118", "FURB192", "FURB167", "C405"]
