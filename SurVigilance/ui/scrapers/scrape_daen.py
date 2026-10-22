@@ -58,6 +58,10 @@ def scrape_daen_sb(
                 callback({"type": event_type, **kw})
             except Exception:  # pragma: no cover
                 raise  # pragma: no cover
+        else:
+            msg = kw.get("message", "")
+            if msg:
+                print(f"[{event_type}] {msg}", flush=True)
 
     med = (medicine or "").strip()
     if not med:
@@ -114,14 +118,27 @@ def scrape_daen_sb(
 
                         options_menu = '//*[@id="pvExplorationHost"]/div/div/exploration/div/explore-canvas/div/div[2]/div/div[2]/div[2]/visual-container-repeat/visual-container[34]/transform/div/visual-container-header/div/div/div/visual-container-options-menu'
                         sb.click(options_menu)
-                        sb.sleep(1)
 
-                        export_btn = '//*[@id="0"]'
-                        sb.click(export_btn)
-                        sb.sleep(1)
+                        export_btn = 'button[data-testid="pbimenu-item.Export data"]'
+                        try:
+                            sb.wait_for_element_visible(export_btn, timeout=10)
+                            sb.click(export_btn)
+                        except Exception:
+                            try:
+                                sb.wait_for_element_visible('button[title="Export data"]', timeout=5)
+                                sb.click('button[title="Export data"]')
+                            except Exception:
+                                sb.click('//*[@id="1"]')
 
-                        confirm_btn = '//*[@id="mat-mdc-dialog-0"]/div/div/export-data-dialog/mat-dialog-actions/button[1]'
-                        sb.click(confirm_btn)
+                        confirm_btn = 'button[data-testid="export-btn"]'
+                        try:
+                            sb.wait_for_element_visible(confirm_btn, timeout=10)
+                            sb.click(confirm_btn)
+                        except Exception:
+                            try:
+                                sb.click('//*[@id="mat-mdc-dialog-0"]/div/div/export-data-dialog/mat-dialog-actions/button[1]')
+                            except Exception:
+                                sb.click('//mat-dialog-actions//button[contains(., "Export")]')
                     except Exception as e:  # pragma: no cover  # pragma: no cover
                         _emit("log", message=f"Export initiation failed: {e}")
                         raise  # pragma: no cover
