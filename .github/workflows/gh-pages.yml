@@ -44,14 +44,11 @@ jobs:
           # Fallbacks if not using a requirements file (optional)
 
           python - <<'PY'
+          from importlib.util import find_spec
+          import subprocess, sys
 
-          import importlib, sys
-
-          missing = [m for m in ("sphinx",) if not importlib.util.find_spec(m)]
-
-          if missing:
-              print("Installing:", missing)
-              import subprocess; subprocess.check_call([sys.executable, "-m", "pip", "install", *missing])
+          if not find_spec("sphinx"):
+              subprocess.check_call([sys.executable, "-m", "pip", "install", "sphinx"])
           PY
       - name: Install Pandoc
         run: sudo apt-get install -y pandoc
