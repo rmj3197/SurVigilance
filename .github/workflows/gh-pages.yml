@@ -1,19 +1,24 @@
 name: Build Documentation
+
 on:
   push:
     branches:
       - master
   schedule:
     - cron: "0 2 * * *"
-  workflow_dispatch: null
+  workflow_dispatch:
+
 permissions:
   contents: write
+
 concurrency:
   group: docs-deploy
   cancel-in-progress: true
+
 env:
   PYTHON_VERSION: "3.11"
   DOCS_OUTPUT_DIR: docs/build/html
+
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
@@ -22,10 +27,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
+
       - name: Cache pip
         uses: actions/cache@v4
         with:
@@ -33,33 +40,29 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
+
       - name: Install doc build deps
-        run: >
+        run: |
           python -m pip install -U pip
+          if [ -f docs/requirements.txt ]; then
+            pip install -r docs/requirements.txt
+          else
+            pip install sphinx
+          fi
 
-          # Adjust if you use a different requirements file
-
-          if [ -f docs/requirements.txt ]; then pip install -r docs/requirements.txt; fi
-
-          # Fallbacks if not using a requirements file (optional)
-
-          python - <<'PY'
-          from importlib.util import find_spec
-          import subprocess, sys
-
-          if not find_spec("sphinx"):
-              subprocess.check_call([sys.executable, "-m", "pip", "install", "sphinx"])
-          PY
       - name: Install Pandoc
-        run: sudo apt-get install -y pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+
       - name: Setup Chrome
         id: setup-chrome
         uses: browser-actions/setup-chrome@v2
         with:
           chrome-version: stable
           install-chromedriver: true
+
       - name: Build documentation (make html)
         run: make -C docs html
+
       - name: Publish HTML to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
